@@ -1,0 +1,100 @@
+grammar MiniPascal;
+
+// Reglas del Parser
+program : 'program' ID ';' block '.';
+block : declaration_part statement_part;
+declaration_part : (variable_declaration_part | function_declaration_part | procedure_declaration_part);
+variable_declaration_part : VAR variable_declaration_list SEMICOLON;
+variable_declaration_list : variable_declaration | variable_declaration COMMA variable_declaration_list;
+variable_declaration : ID (COLON type_specifier | COLON ARRAY LBRACK index_range RBRACK OF type_specifier);
+index_range : INTEGER '..' INTEGER;
+type_specifier : primitive_type | ARRAY LBRACK index_range RBRACK OF primitive_type;
+primitive_type : INTEGER | CHAR | STRING | BOOLEAN;
+function_declaration_part : (FUNCTION ID arguments COLON type_specifier SEMICOLON block SEMICOLON)*;
+procedure_declaration_part : (PROCEDURE ID arguments SEMICOLON block SEMICOLON)*;
+arguments : LPAREN (argument_list)? RPAREN;
+argument_list : argument | argument SEMICOLON argument_list;
+argument : (VAR)? ID COLON type_specifier;
+statement_part : compound_statement;
+compound_statement : BEGIN statement_list END;
+statement_list : statement | statement SEMICOLON statement_list;
+statement : simple_statement | structured_statement;
+simple_statement : assignment_statement | procedure_call | writeln_statement | readln_statement;
+assignment_statement : ID ASSIGN expression;
+procedure_call : ID (LPAREN (expression_list)? RPAREN)?;
+writeln_statement : WRITELN LPAREN expression_list RPAREN;
+readln_statement : READLN LPAREN ID RPAREN;
+structured_statement : compound_statement | conditional_statement | while_statement | repeat_statement | for_statement;
+conditional_statement : IF expression THEN statement (ELSE statement)?;
+while_statement : WHILE expression DO statement;
+repeat_statement : REPEAT statement_list UNTIL expression;
+for_statement : FOR ID ASSIGN expression (TO | DOWNTO) expression DO statement;
+expression_list : expression | expression COMMA expression_list;
+expression : simple_expression (relational_operator simple_expression)?;
+simple_expression : term (adding_operator term)*;
+term : factor (multiplying_operator factor)*;
+factor : variable | constant | function_call | LPAREN expression RPAREN | NOT factor;
+variable : ID | ID LBRACK expression_list RBRACK;
+constant : INTEGER | CHAR | STRING | TRUE | FALSE;
+function_call : ID (LPAREN (expression_list)? RPAREN)?;
+relational_operator : EQUAL | NOT_EQUAL | LESS | GREATER | LESS_EQUAL | GREATER_EQUAL;
+adding_operator : PLUS | MINUS | OR;
+multiplying_operator : MULTIPLY | DIVIDE | DIV | MOD | AND;
+
+
+
+
+// Reglas del Lexer
+WS : [ \t\r\n]+ -> skip; // Ignorar espacios en blanco
+COMMENT : '{' ~'}'* '}'; // Comentarios
+INTEGER : ('0'..'9')+;
+CHAR : '\'' . '\'';
+STRING : '\'' (~'\'' | '\'\'')* '\'';
+BOOLEAN : 'boolean';
+TRUE : 'true';
+FALSE : 'false';
+ARRAY : 'array';
+OF : 'of';
+VAR : 'var';
+CONST : 'const';
+PROCEDURE : 'procedure';
+FUNCTION : 'function';
+BEGIN : 'begin';
+END : 'end';
+IF : 'if';
+THEN : 'then';
+ELSE : 'else';
+WHILE : 'while';
+DO : 'do';
+FOR : 'for';
+TO : 'to';
+DOWNTO : 'downto';
+REPEAT : 'repeat';
+UNTIL : 'until';
+WRITELN : 'writeln';
+READLN : 'readln';
+PLUS : '+';
+MINUS : '-';
+MULTIPLY : '*';
+DIVIDE : '/';
+DIV : 'div';
+MOD : 'mod';
+ASSIGN : ':=';
+EQUAL : '=';
+NOT_EQUAL : '<>';
+LESS : '<';
+GREATER : '>';
+LESS_EQUAL : '<=';
+GREATER_EQUAL : '>=';
+AND : 'and';
+OR : 'or';
+NOT : 'not';
+COMMA : ',';
+COLON : ':';
+SEMICOLON : ';';
+DOT : '.';
+LPAREN : '(';
+RPAREN : ')';
+LBRACK : '[';
+RBRACK : ']';
+ID : [a-zA-Z_] [a-zA-Z_0-9]*;
