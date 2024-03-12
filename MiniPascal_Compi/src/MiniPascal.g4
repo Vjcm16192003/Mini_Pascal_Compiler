@@ -1,100 +1,164 @@
 grammar MiniPascal;
 
-// Reglas del Parser
-program : 'program' ID ';' block '.';
-block : declaration_part statement_part;
-declaration_part : (variable_declaration_part | function_declaration_part | procedure_declaration_part);
-variable_declaration_part : VAR variable_declaration_list SEMICOLON;
-variable_declaration_list : variable_declaration | variable_declaration COMMA variable_declaration_list;
-variable_declaration : ID (COLON type_specifier | COLON ARRAY LBRACK index_range RBRACK OF type_specifier);
-index_range : INTEGER '..' INTEGER;
-type_specifier : primitive_type | ARRAY LBRACK index_range RBRACK OF primitive_type;
-primitive_type : INTEGER | CHAR | STRING | BOOLEAN;
-function_declaration_part : (FUNCTION ID arguments COLON type_specifier SEMICOLON block SEMICOLON)*;
-procedure_declaration_part : (PROCEDURE ID arguments SEMICOLON block SEMICOLON)*;
-arguments : LPAREN (argument_list)? RPAREN;
-argument_list : argument | argument SEMICOLON argument_list;
-argument : (VAR)? ID COLON type_specifier;
-statement_part : compound_statement;
-compound_statement : BEGIN statement_list END;
-statement_list : statement | statement SEMICOLON statement_list;
-statement : simple_statement | structured_statement;
-simple_statement : assignment_statement | procedure_call | writeln_statement | readln_statement;
-assignment_statement : ID ASSIGN expression;
-procedure_call : ID (LPAREN (expression_list)? RPAREN)?;
-writeln_statement : WRITELN LPAREN expression_list RPAREN;
-readln_statement : READLN LPAREN ID RPAREN;
-structured_statement : compound_statement | conditional_statement | while_statement | repeat_statement | for_statement;
-conditional_statement : IF expression THEN statement (ELSE statement)?;
-while_statement : WHILE expression DO statement;
-repeat_statement : REPEAT statement_list UNTIL expression;
-for_statement : FOR ID ASSIGN expression (TO | DOWNTO) expression DO statement;
-expression_list : expression | expression COMMA expression_list;
-expression : simple_expression (relational_operator simple_expression)?;
-simple_expression : term (adding_operator term)*;
-term : factor (multiplying_operator factor)*;
-factor : variable | constant | function_call | LPAREN expression RPAREN | NOT factor;
-variable : ID | ID LBRACK expression_list RBRACK;
-constant : INTEGER | CHAR | STRING | TRUE | FALSE;
-function_call : ID (LPAREN (expression_list)? RPAREN)?;
-relational_operator : EQUAL | NOT_EQUAL | LESS | GREATER | LESS_EQUAL | GREATER_EQUAL;
-adding_operator : PLUS | MINUS | OR;
-multiplying_operator : MULTIPLY | DIVIDE | DIV | MOD | AND;
 
 
+program: PROGRAM ID ';' block '.' (decl | function_decl | procedure_decl | statement | function_call | procedure_call)+ EOF
+       ;
 
+block: BEGIN (decl | function_decl | procedure_decl | statement | function_call | procedure_call)* END
+     ;
 
-// Reglas del Lexer
-WS : [ \t\r\n]+ -> skip; // Ignorar espacios en blanco
-COMMENT : '{' ~'}'* '}'; // Comentarios
-INTEGER : ('0'..'9')+;
-CHAR : '\'' . '\'';
-STRING : '\'' (~'\'' | '\'\'')* '\'';
-BOOLEAN : 'boolean';
-TRUE : 'true';
-FALSE : 'false';
-ARRAY : 'array';
-OF : 'of';
-VAR : 'var';
-CONST : 'const';
-PROCEDURE : 'procedure';
-FUNCTION : 'function';
-BEGIN : 'begin';
-END : 'end';
-IF : 'if';
-THEN : 'then';
-ELSE : 'else';
-WHILE : 'while';
-DO : 'do';
-FOR : 'for';
-TO : 'to';
-DOWNTO : 'downto';
-REPEAT : 'repeat';
-UNTIL : 'until';
-WRITELN : 'writeln';
-READLN : 'readln';
-PLUS : '+';
-MINUS : '-';
-MULTIPLY : '*';
-DIVIDE : '/';
-DIV : 'div';
-MOD : 'mod';
-ASSIGN : ':=';
-EQUAL : '=';
-NOT_EQUAL : '<>';
-LESS : '<';
-GREATER : '>';
-LESS_EQUAL : '<=';
-GREATER_EQUAL : '>=';
-AND : 'and';
-OR : 'or';
-NOT : 'not';
-COMMA : ',';
-COLON : ':';
-SEMICOLON : ';';
-DOT : '.';
-LPAREN : '(';
-RPAREN : ')';
-LBRACK : '[';
-RBRACK : ']';
-ID : [a-zA-Z_] [a-zA-Z_0-9]*;
+decl: variable_decl
+    | array_decl
+    ;
+
+variable_decl:  ID (',' ID)* ':' type (ASSIGN value)? ';'
+    ;
+
+array_decl: ID ':' array_type '=' array_value
+    ;
+
+statement: expr ';'                 # exprStatement
+         | if_statement            # ifStatement
+         | while_statement         # whileStatement
+         | for_statement           # forStatement
+         | repeat_statement        # repeatStatement
+         | function_call ';'      # functionCallStatement
+         | procedure_call ';'     # procedureCallStatement
+         ;
+
+if_statement: IF expr THEN program (ELSE program)? END ';'      # ifStatementRule
+            ;
+
+while_statement: WHILE expr DO program END ';'        # whileStatementRule
+               ;
+
+for_statement: FOR ID ':' expr TO expr DO program END ';'        # forStatementRule
+             ;
+
+repeat_statement: REPEAT program UNTIL expr ';'        # repeatStatementRule
+                ;
+
+/* Expressions */
+
+expr: expr AND expr           # andExpr
+    | expr OR expr            # orExpr
+    | NOT expr                # notExpr
+    | expr '>' expr           # greaterThanExpr
+    | expr '<' expr           # lessThanExpr
+    | expr '>=' expr          # greaterThanOrEqualExpr
+    | expr '<=' expr          # lessThanOrEqualExpr
+    | expr '=' expr           # equalToExpr
+    | expr '<>' expr          # notEqualToExpr
+    | expr '*' expr           # mulExpr
+    | expr '/' expr           # divExpr
+    | expr '+' expr           # addExpr
+    | expr '-' expr           # subExpr
+    | expr 'div' expr         # divExpr
+    | expr 'mod' expr         # modExpr
+    | '(' expr ')'            # parenthesesExpr
+    | ID                      # idExpr
+    | NUM                     # numExpr
+    | CONSTCHAR               # constCharExpr
+    | STRING_LITERAL          # stringLiteralExpr
+    | BOOLEAN                 # booleanExpr
+    | array_access            # arrayAccessExpr
+    ;
+
+array_access: ID '[' index_expr ']' ('[' index_expr ']')?
+    ;
+
+index_expr: expr
+    ;
+
+/* Types */
+
+type: INT_TYPE
+    | CHAR_TYPE
+    | STRING_TYPE
+    | BOOLEAN_TYPE
+    | ARRAY_TYPE
+    ;
+
+array_type: type ('[' NUM ']')+
+    ;
+
+/* Values */
+
+value: NUM
+    | CONSTCHAR
+    | STRING_LITERAL
+    | BOOLEAN
+    ;
+
+array_value: '[' value (',' value)* ']' ((',' value)+)+
+    ;
+
+/* Functions */
+
+function_decl: FUNCTION ID '(' params ')' ':' type ';' program END ';'
+             ;
+
+params: (param (',' param)*)?
+      ;
+
+param: VAR? ID ':' type
+     ;
+
+function_call: ID '(' args ')'
+             ;
+
+args: (expr (',' expr)*)?
+    ;
+
+/* Procedures */
+
+procedure_decl: PROCEDURE ID '(' params ')' ';' program END ';'
+              ;
+
+procedure_call: ID '(' args ')'
+              ;
+
+/* Main */
+
+main: MAIN ';' program END ';'
+    ;
+
+/* Tokens */
+
+PROGRAM: 'program';
+FUNCTION: 'function';
+PROCEDURE: 'procedure';
+BEGIN: 'begin';
+MAIN: 'main';
+VAR: 'var';
+ASSIGN: ':=';
+END: 'end';
+READ: 'read';
+WRITE: 'write';
+CONSTSTR: 'conststr';
+AND: 'and';
+OR: 'or';
+NOT: 'not';
+IF: 'if';
+THEN: 'then';
+ELSE: 'else';
+WHILE: 'while';
+DO: 'do';
+FOR: 'for';
+TO: 'to';
+REPEAT: 'repeat';
+UNTIL: 'until';
+ID: [a-zA-Z][a-zA-Z0-9_]*;
+NUM: '0' | '-'?[1-9][0-9]*;
+CONSTCHAR: '\'' ~'\'' '\'';
+STRING_LITERAL: '"' ~'"'* '"';
+BOOLEAN: 'true' | 'false';
+INT_TYPE: 'Integer';
+CHAR_TYPE: 'Char';
+STRING_TYPE: 'String';
+BOOLEAN_TYPE: 'Boolean';
+ARRAY_TYPE: 'Array';
+WS: [ \t\r\n]+ -> skip; // Ignore whitespace characters
+COMMENT: '{' ~[\r\n]* '}' -> skip;
+

@@ -1,15 +1,50 @@
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+
+import java.io.IOException;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        if(args.length != 1){
+            System.err.print("Uso: file name");
+        }else{
+            String fileName = args[0];
+            MiniPascalParser parser = getParser(fileName);
+            ParseTree antlrAST=parser.program();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+            AntlrToProgram progVisitor = new AntlrToProgram();
+            Program prog = progVisitor.visit(antlrAST);
+
+            if (progVisitor.erroresSemanticos.isEmpty()){
+                ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
+                for (String evaluation: ep.getEvaluationResults()){
+                    System.out.println(evaluation);
+                }
+            }else{
+                for(String err: progVisitor.erroresSemanticos){
+                    System.out.println(err);
+                }
+            }
         }
     }
+
+    private static MiniPascalParser getParser(String fileName){
+        MiniPascalParser parser = null;
+
+        try {
+            CharStream input = CharStreams.fromFileName(fileName);
+            MiniPascalLexer lexer = new MiniPascalLexer(input);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            parser = new MiniPascalParser(tokens);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return parser;
+    }
+
 }
