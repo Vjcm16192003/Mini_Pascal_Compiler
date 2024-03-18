@@ -9,10 +9,20 @@ public class AntlrToExpression extends MiniPascalBaseVisitor<Expression> {
     public List<String> vars;
     public List<String> erroresSemanticos;
     public List<String> mensajes;
-    public AntlrToExpression(List<String> erroresSemanticos,List<String>vars,List<String>mensajes){
-        this.vars=vars;
-        this.erroresSemanticos=erroresSemanticos;
-        this.mensajes=mensajes;
+    public List<String> for_loop;
+    public List<String> while_loop;
+    public List<String> if_state;
+    public List<String> repeat_loop;
+
+    public AntlrToExpression(List<String> erroresSemanticos, List<String> vars, List<String> mensajes,
+                             List<String> for_loop, List<String> while_loop, List<String> if_state, List<String> repeat_loop) {
+        this.vars = vars;
+        this.erroresSemanticos = erroresSemanticos;
+        this.mensajes = mensajes;
+        this.for_loop = for_loop;
+        this.while_loop = while_loop;
+        this.if_state = if_state;
+        this.repeat_loop = repeat_loop; // Inicializamos el nuevo array
     }
     @Override
     public Expression visitBlock(MiniPascalParser.BlockContext ctx) {
@@ -56,7 +66,7 @@ public class AntlrToExpression extends MiniPascalBaseVisitor<Expression> {
 
     @Override
     public Expression visitFunctionDeclaration(MiniPascalParser.FunctionDeclarationContext ctx) {
-        String id = ctx.getChild(1).getChild(0).getText();
+        String id = ctx.getChild(1).getText();
         vars.add(id);
         return new Variable(id);
     }
@@ -160,22 +170,53 @@ public class AntlrToExpression extends MiniPascalBaseVisitor<Expression> {
 
     @Override
     public Expression visitIfStatement(MiniPascalParser.IfStatementContext ctx) {
-        return super.visitIfStatement(ctx);
+        Expression condition = visit(ctx.expression());
+        if_state.add(ctx.expression().getText());
+        visit(ctx.statement(0));
+        if (ctx.statement().size() > 1) {
+            visit(ctx.statement(1));
+        }
+
+        return null;
     }
 
     @Override
     public Expression visitWhileStatement(MiniPascalParser.WhileStatementContext ctx) {
-        return super.visitWhileStatement(ctx);
+        Expression condition = visit(ctx.expression());
+        while_loop.add(ctx.expression().getText());
+        visit(ctx.statement());
+        return null;
     }
 
     @Override
     public Expression visitForStatement(MiniPascalParser.ForStatementContext ctx) {
-        return super.visitForStatement(ctx);
+        String id = ctx.identifier().getText();
+        int initial = Integer.parseInt(ctx.expression(0).getText());
+        int finalValue = Integer.parseInt(ctx.expression(1).getText());
+
+        // Guardar información del bucle for
+        for_loop.add("For " + id + " from " + initial + " to " + finalValue);
+
+        for (int i = initial; i <= finalValue; i++) {
+            vars.add(id); // Agregar la variable del bucle al contexto
+            // Visitar el bloque de código del bucle for
+            visit(ctx.statement());
+        }
+        return null;
     }
 
     @Override
     public Expression visitRepeatStatement(MiniPascalParser.RepeatStatementContext ctx) {
-        return super.visitRepeatStatement(ctx);
+        // Visita la expresión condicional del repeat
+        Expression condition = visit(ctx.expression());
+
+        // Almacena la expresión del repeat en la lista repeat_loop
+        repeat_loop.add(ctx.expression().getText());
+
+        // Visita el bloque de código del repeat
+        //visit(ctx.statement());
+
+        return null;
     }
 
     @Override
@@ -238,7 +279,8 @@ public class AntlrToExpression extends MiniPascalBaseVisitor<Expression> {
 
     @Override
     public Expression visitFactor(MiniPascalParser.FactorContext ctx) {
-        return super.visitFactor(ctx);
+
+        return null;
     }
 
     @Override
