@@ -27,557 +27,443 @@ public interface MiniPascalListener extends ParseTreeListener {
 	 */
 	void exitBlock(MiniPascalParser.BlockContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#decl}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#variableDeclarationPart}.
 	 * @param ctx the parse tree
 	 */
-	void enterDecl(MiniPascalParser.DeclContext ctx);
+	void enterVariableDeclarationPart(MiniPascalParser.VariableDeclarationPartContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#decl}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#variableDeclarationPart}.
 	 * @param ctx the parse tree
 	 */
-	void exitDecl(MiniPascalParser.DeclContext ctx);
+	void exitVariableDeclarationPart(MiniPascalParser.VariableDeclarationPartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#variable_decl}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable_decl(MiniPascalParser.Variable_declContext ctx);
+	void enterVariableDeclaration(MiniPascalParser.VariableDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#variable_decl}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#variableDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable_decl(MiniPascalParser.Variable_declContext ctx);
+	void exitVariableDeclaration(MiniPascalParser.VariableDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#array_decl}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#procedureAndFunctionDeclarationPart}.
 	 * @param ctx the parse tree
 	 */
-	void enterArray_decl(MiniPascalParser.Array_declContext ctx);
+	void enterProcedureAndFunctionDeclarationPart(MiniPascalParser.ProcedureAndFunctionDeclarationPartContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#array_decl}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#procedureAndFunctionDeclarationPart}.
 	 * @param ctx the parse tree
 	 */
-	void exitArray_decl(MiniPascalParser.Array_declContext ctx);
+	void exitProcedureAndFunctionDeclarationPart(MiniPascalParser.ProcedureAndFunctionDeclarationPartContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code exprStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#procedureDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterExprStatement(MiniPascalParser.ExprStatementContext ctx);
+	void enterProcedureDeclaration(MiniPascalParser.ProcedureDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code exprStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#procedureDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitExprStatement(MiniPascalParser.ExprStatementContext ctx);
+	void exitProcedureDeclaration(MiniPascalParser.ProcedureDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#resultType}.
+	 * @param ctx the parse tree
+	 */
+	void enterResultType(MiniPascalParser.ResultTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#resultType}.
+	 * @param ctx the parse tree
+	 */
+	void exitResultType(MiniPascalParser.ResultTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#functionDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionDeclaration(MiniPascalParser.FunctionDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#functionDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionDeclaration(MiniPascalParser.FunctionDeclarationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#formalParameterList}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormalParameterList(MiniPascalParser.FormalParameterListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#formalParameterList}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormalParameterList(MiniPascalParser.FormalParameterListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#formalParameterSection}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormalParameterSection(MiniPascalParser.FormalParameterSectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#formalParameterSection}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormalParameterSection(MiniPascalParser.FormalParameterSectionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#typeIdentifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeIdentifier(MiniPascalParser.TypeIdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#typeIdentifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeIdentifier(MiniPascalParser.TypeIdentifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayType(MiniPascalParser.ArrayTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#arrayType}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayType(MiniPascalParser.ArrayTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#constant}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstant(MiniPascalParser.ConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#constant}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstant(MiniPascalParser.ConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#sign}.
+	 * @param ctx the parse tree
+	 */
+	void enterSign(MiniPascalParser.SignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#sign}.
+	 * @param ctx the parse tree
+	 */
+	void exitSign(MiniPascalParser.SignContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#constantChr}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantChr(MiniPascalParser.ConstantChrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#constantChr}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantChr(MiniPascalParser.ConstantChrContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#unsignedNumber}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnsignedNumber(MiniPascalParser.UnsignedNumberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#unsignedNumber}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnsignedNumber(MiniPascalParser.UnsignedNumberContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#unsignedInteger}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnsignedInteger(MiniPascalParser.UnsignedIntegerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#unsignedInteger}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnsignedInteger(MiniPascalParser.UnsignedIntegerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#unsignedReal}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnsignedReal(MiniPascalParser.UnsignedRealContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#unsignedReal}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnsignedReal(MiniPascalParser.UnsignedRealContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void enterString(MiniPascalParser.StringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#string}.
+	 * @param ctx the parse tree
+	 */
+	void exitString(MiniPascalParser.StringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#compoundStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompoundStatement(MiniPascalParser.CompoundStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#compoundStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompoundStatement(MiniPascalParser.CompoundStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#blockEnd}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlockEnd(MiniPascalParser.BlockEndContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#blockEnd}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlockEnd(MiniPascalParser.BlockEndContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#statements}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatements(MiniPascalParser.StatementsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#statements}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatements(MiniPascalParser.StatementsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(MiniPascalParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(MiniPascalParser.StatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#writelnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWritelnStatement(MiniPascalParser.WritelnStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#writelnStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWritelnStatement(MiniPascalParser.WritelnStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#assignmentStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignmentStatement(MiniPascalParser.AssignmentStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#assignmentStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignmentStatement(MiniPascalParser.AssignmentStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#procedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterProcedureStatement(MiniPascalParser.ProcedureStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#procedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitProcedureStatement(MiniPascalParser.ProcedureStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#actualParameterList}.
+	 * @param ctx the parse tree
+	 */
+	void enterActualParameterList(MiniPascalParser.ActualParameterListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#actualParameterList}.
+	 * @param ctx the parse tree
+	 */
+	void exitActualParameterList(MiniPascalParser.ActualParameterListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#actualParameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterActualParameter(MiniPascalParser.ActualParameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#actualParameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitActualParameter(MiniPascalParser.ActualParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
 	void enterIfStatement(MiniPascalParser.IfStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ifStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#ifStatement}.
 	 * @param ctx the parse tree
 	 */
 	void exitIfStatement(MiniPascalParser.IfStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code whileStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#whileStatement}.
 	 * @param ctx the parse tree
 	 */
 	void enterWhileStatement(MiniPascalParser.WhileStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code whileStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#whileStatement}.
 	 * @param ctx the parse tree
 	 */
 	void exitWhileStatement(MiniPascalParser.WhileStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#forStatement}.
 	 * @param ctx the parse tree
 	 */
 	void enterForStatement(MiniPascalParser.ForStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code forStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#forStatement}.
 	 * @param ctx the parse tree
 	 */
 	void exitForStatement(MiniPascalParser.ForStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code repeatStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#repeatStatement}.
 	 * @param ctx the parse tree
 	 */
 	void enterRepeatStatement(MiniPascalParser.RepeatStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code repeatStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#repeatStatement}.
 	 * @param ctx the parse tree
 	 */
 	void exitRepeatStatement(MiniPascalParser.RepeatStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code functionCallStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#writeStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionCallStatement(MiniPascalParser.FunctionCallStatementContext ctx);
+	void enterWriteStatement(MiniPascalParser.WriteStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code functionCallStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#writeStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionCallStatement(MiniPascalParser.FunctionCallStatementContext ctx);
+	void exitWriteStatement(MiniPascalParser.WriteStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code procedureCallStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#readStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterProcedureCallStatement(MiniPascalParser.ProcedureCallStatementContext ctx);
+	void enterReadStatement(MiniPascalParser.ReadStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code procedureCallStatement}
-	 * labeled alternative in {@link MiniPascalParser#statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#readStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitProcedureCallStatement(MiniPascalParser.ProcedureCallStatementContext ctx);
+	void exitReadStatement(MiniPascalParser.ReadStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code ifStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#if_statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterIfStatementRule(MiniPascalParser.IfStatementRuleContext ctx);
+	void enterExpression(MiniPascalParser.ExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code ifStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#if_statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitIfStatementRule(MiniPascalParser.IfStatementRuleContext ctx);
+	void exitExpression(MiniPascalParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code whileStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#while_statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#relationaloperator}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhileStatementRule(MiniPascalParser.WhileStatementRuleContext ctx);
+	void enterRelationaloperator(MiniPascalParser.RelationaloperatorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code whileStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#while_statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#relationaloperator}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhileStatementRule(MiniPascalParser.WhileStatementRuleContext ctx);
+	void exitRelationaloperator(MiniPascalParser.RelationaloperatorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code forStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#for_statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#simpleExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterForStatementRule(MiniPascalParser.ForStatementRuleContext ctx);
+	void enterSimpleExpression(MiniPascalParser.SimpleExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code forStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#for_statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#simpleExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitForStatementRule(MiniPascalParser.ForStatementRuleContext ctx);
+	void exitSimpleExpression(MiniPascalParser.SimpleExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code repeatStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#repeat_statement}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#additiveoperator}.
 	 * @param ctx the parse tree
 	 */
-	void enterRepeatStatementRule(MiniPascalParser.RepeatStatementRuleContext ctx);
+	void enterAdditiveoperator(MiniPascalParser.AdditiveoperatorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code repeatStatementRule}
-	 * labeled alternative in {@link MiniPascalParser#repeat_statement}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#additiveoperator}.
 	 * @param ctx the parse tree
 	 */
-	void exitRepeatStatementRule(MiniPascalParser.RepeatStatementRuleContext ctx);
+	void exitAdditiveoperator(MiniPascalParser.AdditiveoperatorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code greaterThanOrEqualExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#term}.
 	 * @param ctx the parse tree
 	 */
-	void enterGreaterThanOrEqualExpr(MiniPascalParser.GreaterThanOrEqualExprContext ctx);
+	void enterTerm(MiniPascalParser.TermContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code greaterThanOrEqualExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#term}.
 	 * @param ctx the parse tree
 	 */
-	void exitGreaterThanOrEqualExpr(MiniPascalParser.GreaterThanOrEqualExprContext ctx);
+	void exitTerm(MiniPascalParser.TermContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code stringLiteralExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#multiplicativeoperator}.
 	 * @param ctx the parse tree
 	 */
-	void enterStringLiteralExpr(MiniPascalParser.StringLiteralExprContext ctx);
+	void enterMultiplicativeoperator(MiniPascalParser.MultiplicativeoperatorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code stringLiteralExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#multiplicativeoperator}.
 	 * @param ctx the parse tree
 	 */
-	void exitStringLiteralExpr(MiniPascalParser.StringLiteralExprContext ctx);
+	void exitMultiplicativeoperator(MiniPascalParser.MultiplicativeoperatorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code lessThanOrEqualExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#factor}.
 	 * @param ctx the parse tree
 	 */
-	void enterLessThanOrEqualExpr(MiniPascalParser.LessThanOrEqualExprContext ctx);
+	void enterFactor(MiniPascalParser.FactorContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code lessThanOrEqualExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#factor}.
 	 * @param ctx the parse tree
 	 */
-	void exitLessThanOrEqualExpr(MiniPascalParser.LessThanOrEqualExprContext ctx);
+	void exitFactor(MiniPascalParser.FactorContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code modExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void enterModExpr(MiniPascalParser.ModExprContext ctx);
+	void enterVariable(MiniPascalParser.VariableContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code modExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void exitModExpr(MiniPascalParser.ModExprContext ctx);
+	void exitVariable(MiniPascalParser.VariableContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code booleanExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#identifierList}.
 	 * @param ctx the parse tree
 	 */
-	void enterBooleanExpr(MiniPascalParser.BooleanExprContext ctx);
+	void enterIdentifierList(MiniPascalParser.IdentifierListContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code booleanExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#identifierList}.
 	 * @param ctx the parse tree
 	 */
-	void exitBooleanExpr(MiniPascalParser.BooleanExprContext ctx);
+	void exitIdentifierList(MiniPascalParser.IdentifierListContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code lessThanExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#conststr}.
 	 * @param ctx the parse tree
 	 */
-	void enterLessThanExpr(MiniPascalParser.LessThanExprContext ctx);
+	void enterConststr(MiniPascalParser.ConststrContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code lessThanExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#conststr}.
 	 * @param ctx the parse tree
 	 */
-	void exitLessThanExpr(MiniPascalParser.LessThanExprContext ctx);
+	void exitConststr(MiniPascalParser.ConststrContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code orExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#identifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrExpr(MiniPascalParser.OrExprContext ctx);
+	void enterIdentifier(MiniPascalParser.IdentifierContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code orExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#identifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrExpr(MiniPascalParser.OrExprContext ctx);
+	void exitIdentifier(MiniPascalParser.IdentifierContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code notEqualToExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Enter a parse tree produced by {@link MiniPascalParser#number}.
 	 * @param ctx the parse tree
 	 */
-	void enterNotEqualToExpr(MiniPascalParser.NotEqualToExprContext ctx);
+	void enterNumber(MiniPascalParser.NumberContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code notEqualToExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
+	 * Exit a parse tree produced by {@link MiniPascalParser#number}.
 	 * @param ctx the parse tree
 	 */
-	void exitNotEqualToExpr(MiniPascalParser.NotEqualToExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code subExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterSubExpr(MiniPascalParser.SubExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code subExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitSubExpr(MiniPascalParser.SubExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code parenthesesExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterParenthesesExpr(MiniPascalParser.ParenthesesExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code parenthesesExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitParenthesesExpr(MiniPascalParser.ParenthesesExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code numExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumExpr(MiniPascalParser.NumExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code numExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumExpr(MiniPascalParser.NumExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code greaterThanExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterGreaterThanExpr(MiniPascalParser.GreaterThanExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code greaterThanExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitGreaterThanExpr(MiniPascalParser.GreaterThanExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code notExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterNotExpr(MiniPascalParser.NotExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code notExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitNotExpr(MiniPascalParser.NotExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code arrayAccessExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterArrayAccessExpr(MiniPascalParser.ArrayAccessExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code arrayAccessExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitArrayAccessExpr(MiniPascalParser.ArrayAccessExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code constCharExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterConstCharExpr(MiniPascalParser.ConstCharExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code constCharExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitConstCharExpr(MiniPascalParser.ConstCharExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code addExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAddExpr(MiniPascalParser.AddExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code addExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAddExpr(MiniPascalParser.AddExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code equalToExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterEqualToExpr(MiniPascalParser.EqualToExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code equalToExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitEqualToExpr(MiniPascalParser.EqualToExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code mulExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterMulExpr(MiniPascalParser.MulExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code mulExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitMulExpr(MiniPascalParser.MulExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code divExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterDivExpr(MiniPascalParser.DivExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code divExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitDivExpr(MiniPascalParser.DivExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code idExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdExpr(MiniPascalParser.IdExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code idExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdExpr(MiniPascalParser.IdExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code andExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterAndExpr(MiniPascalParser.AndExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code andExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitAndExpr(MiniPascalParser.AndExprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#array_access}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_access(MiniPascalParser.Array_accessContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#array_access}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_access(MiniPascalParser.Array_accessContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#index_expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterIndex_expr(MiniPascalParser.Index_exprContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#index_expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitIndex_expr(MiniPascalParser.Index_exprContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void enterType(MiniPascalParser.TypeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#type}.
-	 * @param ctx the parse tree
-	 */
-	void exitType(MiniPascalParser.TypeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#array_type}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_type(MiniPascalParser.Array_typeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#array_type}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_type(MiniPascalParser.Array_typeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void enterValue(MiniPascalParser.ValueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void exitValue(MiniPascalParser.ValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#array_value}.
-	 * @param ctx the parse tree
-	 */
-	void enterArray_value(MiniPascalParser.Array_valueContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#array_value}.
-	 * @param ctx the parse tree
-	 */
-	void exitArray_value(MiniPascalParser.Array_valueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#function_decl}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunction_decl(MiniPascalParser.Function_declContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#function_decl}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunction_decl(MiniPascalParser.Function_declContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#params}.
-	 * @param ctx the parse tree
-	 */
-	void enterParams(MiniPascalParser.ParamsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#params}.
-	 * @param ctx the parse tree
-	 */
-	void exitParams(MiniPascalParser.ParamsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#param}.
-	 * @param ctx the parse tree
-	 */
-	void enterParam(MiniPascalParser.ParamContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#param}.
-	 * @param ctx the parse tree
-	 */
-	void exitParam(MiniPascalParser.ParamContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#function_call}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunction_call(MiniPascalParser.Function_callContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#function_call}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunction_call(MiniPascalParser.Function_callContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#args}.
-	 * @param ctx the parse tree
-	 */
-	void enterArgs(MiniPascalParser.ArgsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#args}.
-	 * @param ctx the parse tree
-	 */
-	void exitArgs(MiniPascalParser.ArgsContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#procedure_decl}.
-	 * @param ctx the parse tree
-	 */
-	void enterProcedure_decl(MiniPascalParser.Procedure_declContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#procedure_decl}.
-	 * @param ctx the parse tree
-	 */
-	void exitProcedure_decl(MiniPascalParser.Procedure_declContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#procedure_call}.
-	 * @param ctx the parse tree
-	 */
-	void enterProcedure_call(MiniPascalParser.Procedure_callContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#procedure_call}.
-	 * @param ctx the parse tree
-	 */
-	void exitProcedure_call(MiniPascalParser.Procedure_callContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link MiniPascalParser#main}.
-	 * @param ctx the parse tree
-	 */
-	void enterMain(MiniPascalParser.MainContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MiniPascalParser#main}.
-	 * @param ctx the parse tree
-	 */
-	void exitMain(MiniPascalParser.MainContext ctx);
+	void exitNumber(MiniPascalParser.NumberContext ctx);
 }

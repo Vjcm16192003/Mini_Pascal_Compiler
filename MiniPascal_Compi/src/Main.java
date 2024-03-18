@@ -1,39 +1,48 @@
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.gui.TreeViewer;
+import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.IOException;
+import java.util.Arrays;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        if(args.length != 1){
-            System.err.print("Uso: file name");
-        }else{
-            String fileName = args[0];
-            MiniPascalParser parser = getParser(fileName);
-            ParseTree antlrAST=parser.program();
+        if (args.length != 1) {
+            System.err.print("Usage: file name");
+            return;
+        }
 
-            AntlrToProgram progVisitor = new AntlrToProgram();
-            Program prog = progVisitor.visit(antlrAST);
+        String fileName = args[0];
+        MiniPascalParser parser = getParser(fileName);
+        ParseTree antlrAST = parser.program();
 
-            if (progVisitor.erroresSemanticos.isEmpty()){
-                ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
-                for (String evaluation: ep.getEvaluationResults()){
-                    System.out.println(evaluation);
-                }
-            }else{
-                for(String err: progVisitor.erroresSemanticos){
-                    System.out.println(err);
-                }
+        AntlrToProgram progVisitor = new AntlrToProgram();
+        Program prog = progVisitor.visit(antlrAST);
+        if (progVisitor.erroresSemanticos.isEmpty()) {
+//            ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
+//            for (String evaluation : ep.getEvaluationResults()) {
+//                System.out.println(evaluation);
+//            }
+        } else {
+            for (String err : progVisitor.erroresSemanticos) {
+                System.out.println(err);
+            }
+            for(String mensaje : progVisitor.mensajes){
+                System.out.println(mensaje);
             }
         }
+
+        // Display the parse tree using TreeViewer
+        showParseTree(parser, antlrAST);
     }
 
-    private static MiniPascalParser getParser(String fileName){
-        MiniPascalParser parser = null;
+    private static void showParseTree(MiniPascalParser parser, ParseTree tree) {
+        TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()), tree);
+        viewer.open();
+    }
+
+    private static MiniPascalParser getParser(String fileName) {
+        MiniPascalParser parser;
 
         try {
             CharStream input = CharStreams.fromFileName(fileName);
@@ -46,5 +55,4 @@ public class Main {
 
         return parser;
     }
-
 }

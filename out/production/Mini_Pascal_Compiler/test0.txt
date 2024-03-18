@@ -1,6 +1,4 @@
 program test;
 begin
-i:i :=1
-
-j:=3
-i+j
+ writeln('hola pascal');
+end;

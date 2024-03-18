@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ExpressionProcessor {
     List<Expression> list;
-    public Map<String,Integer> values;
+    public Map<String,String> values;
 
     public ExpressionProcessor(List<Expression> list){
         this.list=list;
@@ -18,7 +18,7 @@ public class ExpressionProcessor {
         for(Expression e: list){
             if(e instanceof VariableDeclaration){
                 VariableDeclaration declaration = (VariableDeclaration) e;
-                values.put(declaration.id,declaration.value);
+                values.put(declaration.id,declaration.type);
 
             }else {
                 String input = e.toString();
@@ -34,7 +34,7 @@ public class ExpressionProcessor {
         if(e instanceof Number number){
             result = number.num;
         } else if (e instanceof Variable var) {
-            result = values.get(var.id);
+            result = Integer.parseInt(values.get(var.id));
         } else if (e instanceof Addition add) {
             int left  = getEvaluationResult(add.left);
             int right  = getEvaluationResult(add.right);

@@ -1,16 +1,18 @@
-
 import org.antlr.v4.runtime.Token;
 
 import java.util.ArrayList;
 import java.util.List;
-public class AntlrToExpression extends MiniPascalBaseVisitor<Expression>{
+import java.util.Objects;
 
-    private List<String> vars;
-    private List<String> erroresSemanticos;
+public class AntlrToExpression extends MiniPascalBaseVisitor<Expression> {
 
-    public AntlrToExpression(List<String> erroresSemanticos){
-        vars = new ArrayList<>();
-        this.erroresSemanticos = erroresSemanticos;
+    public List<String> vars;
+    public List<String> erroresSemanticos;
+    public List<String> mensajes;
+    public AntlrToExpression(List<String> erroresSemanticos,List<String>vars,List<String>mensajes){
+        this.vars=vars;
+        this.erroresSemanticos=erroresSemanticos;
+        this.mensajes=mensajes;
     }
     @Override
     public Expression visitBlock(MiniPascalParser.BlockContext ctx) {
@@ -18,34 +20,142 @@ public class AntlrToExpression extends MiniPascalBaseVisitor<Expression>{
     }
 
     @Override
-    public Expression visitDecl(MiniPascalParser.DeclContext ctx) {
-        Token idToken = ctx.ID().getSymbol();
+    public Expression visitVariableDeclarationPart(MiniPascalParser.VariableDeclarationPartContext ctx) {
+        return super.visitVariableDeclarationPart(ctx);
+    }
+
+    @Override
+    public Expression visitVariableDeclaration(MiniPascalParser.VariableDeclarationContext ctx) {
+        Token idToken = ctx.identifierList().identifier().getFirst().IDENT().getSymbol();
         int line = idToken.getLine();
-        int column = idToken.getCharPositionInLine()+1;
+        int column = idToken.getCharPositionInLine() + 1;
         String id = ctx.getChild(0).getText();
-        if (vars.contains(id)){
-            erroresSemanticos.add("Error: variable" + id + " ya fue declarada (" + line + ", " + column + ")");
-        } else {
+        if(vars.contains(id)) {
+            erroresSemanticos.add("Error: variable " + id + " ya fue declarada ("+line+", "+column+")");
+        }else{
             vars.add(id);
         }
         String type = ctx.getChild(2).getText();
-        int value = Integer.parseInt(ctx.NUM().getText());
-        return new VariableDeclaration(id,type,value);
+        return new VariableDeclaration(id,type);
     }
 
     @Override
-    public Expression visitVariable_decl(MiniPascalParser.Variable_declContext ctx) {
-        return super.visitVariable_decl(ctx);
+    public Expression visitProcedureAndFunctionDeclarationPart(MiniPascalParser.ProcedureAndFunctionDeclarationPartContext ctx) {
+        return super.visitProcedureAndFunctionDeclarationPart(ctx);
     }
 
     @Override
-    public Expression visitArray_decl(MiniPascalParser.Array_declContext ctx) {
-        return super.visitArray_decl(ctx);
+    public Expression visitProcedureDeclaration(MiniPascalParser.ProcedureDeclarationContext ctx) {
+        return super.visitProcedureDeclaration(ctx);
     }
 
     @Override
-    public Expression visitExprStatement(MiniPascalParser.ExprStatementContext ctx) {
-        return super.visitExprStatement(ctx);
+    public Expression visitResultType(MiniPascalParser.ResultTypeContext ctx) {
+        return super.visitResultType(ctx);
+    }
+
+    @Override
+    public Expression visitFunctionDeclaration(MiniPascalParser.FunctionDeclarationContext ctx) {
+        String id = ctx.getChild(1).getChild(0).getText();
+        vars.add(id);
+        return new Variable(id);
+    }
+
+    @Override
+    public Expression visitFormalParameterList(MiniPascalParser.FormalParameterListContext ctx) {
+        return super.visitFormalParameterList(ctx);
+    }
+
+    @Override
+    public Expression visitFormalParameterSection(MiniPascalParser.FormalParameterSectionContext ctx) {
+        return super.visitFormalParameterSection(ctx);
+    }
+
+    @Override
+    public Expression visitTypeIdentifier(MiniPascalParser.TypeIdentifierContext ctx) {
+        return super.visitTypeIdentifier(ctx);
+    }
+
+    @Override
+    public Expression visitArrayType(MiniPascalParser.ArrayTypeContext ctx) {
+        return super.visitArrayType(ctx);
+    }
+
+    @Override
+    public Expression visitConstant(MiniPascalParser.ConstantContext ctx) {
+        return super.visitConstant(ctx);
+    }
+
+    @Override
+    public Expression visitSign(MiniPascalParser.SignContext ctx) {
+        return super.visitSign(ctx);
+    }
+
+    @Override
+    public Expression visitConstantChr(MiniPascalParser.ConstantChrContext ctx) {
+        String message = ctx.getChild(0).getText();
+        mensajes.add(message);
+        return new Write(message);
+    }
+
+    @Override
+    public Expression visitUnsignedNumber(MiniPascalParser.UnsignedNumberContext ctx) {
+        return super.visitUnsignedNumber(ctx);
+    }
+
+    @Override
+    public Expression visitUnsignedInteger(MiniPascalParser.UnsignedIntegerContext ctx) {
+        return super.visitUnsignedInteger(ctx);
+    }
+
+    @Override
+    public Expression visitUnsignedReal(MiniPascalParser.UnsignedRealContext ctx) {
+        return super.visitUnsignedReal(ctx);
+    }
+
+    @Override
+    public Expression visitString(MiniPascalParser.StringContext ctx) {
+        return super.visitString(ctx);
+    }
+
+    @Override
+    public Expression visitCompoundStatement(MiniPascalParser.CompoundStatementContext ctx) {
+        return super.visitCompoundStatement(ctx);
+    }
+
+    @Override
+    public Expression visitBlockEnd(MiniPascalParser.BlockEndContext ctx) {
+        return super.visitBlockEnd(ctx);
+    }
+
+    @Override
+    public Expression visitStatements(MiniPascalParser.StatementsContext ctx) {
+        return super.visitStatements(ctx);
+    }
+
+    @Override
+    public Expression visitStatement(MiniPascalParser.StatementContext ctx) {
+        return super.visitStatement(ctx);
+    }
+
+    @Override
+    public Expression visitAssignmentStatement(MiniPascalParser.AssignmentStatementContext ctx) {
+        return super.visitAssignmentStatement(ctx);
+    }
+
+    @Override
+    public Expression visitProcedureStatement(MiniPascalParser.ProcedureStatementContext ctx) {
+        return super.visitProcedureStatement(ctx);
+    }
+
+    @Override
+    public Expression visitActualParameterList(MiniPascalParser.ActualParameterListContext ctx) {
+        return super.visitActualParameterList(ctx);
+    }
+
+    @Override
+    public Expression visitActualParameter(MiniPascalParser.ActualParameterContext ctx) {
+        return super.visitActualParameter(ctx);
     }
 
     @Override
@@ -69,220 +179,101 @@ public class AntlrToExpression extends MiniPascalBaseVisitor<Expression>{
     }
 
     @Override
-    public Expression visitFunctionCallStatement(MiniPascalParser.FunctionCallStatementContext ctx) {
-        return super.visitFunctionCallStatement(ctx);
+    public Expression visitWriteStatement(MiniPascalParser.WriteStatementContext ctx) {
+        return super.visitWriteStatement(ctx);
     }
 
     @Override
-    public Expression visitProcedureCallStatement(MiniPascalParser.ProcedureCallStatementContext ctx) {
-        return super.visitProcedureCallStatement(ctx);
+    public Expression visitReadStatement(MiniPascalParser.ReadStatementContext ctx) {
+        return super.visitReadStatement(ctx);
     }
 
     @Override
-    public Expression visitIfStatementRule(MiniPascalParser.IfStatementRuleContext ctx) {
-        return super.visitIfStatementRule(ctx);
+    public Expression visitExpression(MiniPascalParser.ExpressionContext ctx) {
+        return super.visitExpression(ctx);
     }
 
     @Override
-    public Expression visitWhileStatementRule(MiniPascalParser.WhileStatementRuleContext ctx) {
-        return super.visitWhileStatementRule(ctx);
+    public Expression visitWritelnStatement(MiniPascalParser.WritelnStatementContext ctx) {
+        String message = ctx.getText();
+        mensajes.add(message);
+        return new Write(message);
     }
 
     @Override
-    public Expression visitForStatementRule(MiniPascalParser.ForStatementRuleContext ctx) {
-        return super.visitForStatementRule(ctx);
+    public Expression visitRelationaloperator(MiniPascalParser.RelationaloperatorContext ctx) {
+        return super.visitRelationaloperator(ctx);
     }
 
     @Override
-    public Expression visitRepeatStatementRule(MiniPascalParser.RepeatStatementRuleContext ctx) {
-        return super.visitRepeatStatementRule(ctx);
+    public Expression visitSimpleExpression(MiniPascalParser.SimpleExpressionContext ctx) {
+        return super.visitSimpleExpression(ctx);
     }
 
     @Override
-    public Expression visitGreaterThanOrEqualExpr(MiniPascalParser.GreaterThanOrEqualExprContext ctx) {
-        return super.visitGreaterThanOrEqualExpr(ctx);
+    public Expression visitAdditiveoperator(MiniPascalParser.AdditiveoperatorContext ctx) {
+        return super.visitAdditiveoperator(ctx);
     }
 
     @Override
-    public Expression visitStringLiteralExpr(MiniPascalParser.StringLiteralExprContext ctx) {
-        return super.visitStringLiteralExpr(ctx);
+    public Expression visitTerm(MiniPascalParser.TermContext ctx) {
+//        if (Objects.equals(ctx.getChild(1).getText(), "*")){
+//            Expression left = visit(ctx.getChild(0));
+//            Expression right = visit(ctx.getChild(2));
+//            return new Multiplication(left,right);
+//        }else if (Objects.equals(ctx.getChild(1).getText(), "+")){
+//            Expression left = visit(ctx.getChild(0));
+//            Expression right = visit(ctx.getChild(2));
+//            return new Addition(left,right);
+//        }else{
+//            return super.visitTerm(ctx);
+//        }
+        return super.visitTerm(ctx);
     }
 
     @Override
-    public Expression visitLessThanOrEqualExpr(MiniPascalParser.LessThanOrEqualExprContext ctx) {
-        return super.visitLessThanOrEqualExpr(ctx);
+    public Expression visitMultiplicativeoperator(MiniPascalParser.MultiplicativeoperatorContext ctx) {
+        return super.visitMultiplicativeoperator(ctx);
     }
 
     @Override
-    public Expression visitModExpr(MiniPascalParser.ModExprContext ctx) {
-        return super.visitModExpr(ctx);
+    public Expression visitFactor(MiniPascalParser.FactorContext ctx) {
+        return super.visitFactor(ctx);
     }
 
     @Override
-    public Expression visitBooleanExpr(MiniPascalParser.BooleanExprContext ctx) {
-        return super.visitBooleanExpr(ctx);
+    public Expression visitVariable(MiniPascalParser.VariableContext ctx) {
+        return super.visitVariable(ctx);
     }
 
     @Override
-    public Expression visitLessThanExpr(MiniPascalParser.LessThanExprContext ctx) {
-        return super.visitLessThanExpr(ctx);
+    public Expression visitIdentifierList(MiniPascalParser.IdentifierListContext ctx) {
+        return super.visitIdentifierList(ctx);
     }
 
     @Override
-    public Expression visitOrExpr(MiniPascalParser.OrExprContext ctx) {
-        return super.visitOrExpr(ctx);
+    public Expression visitConststr(MiniPascalParser.ConststrContext ctx) {
+        return super.visitConststr(ctx);
     }
 
     @Override
-    public Expression visitNotEqualToExpr(MiniPascalParser.NotEqualToExprContext ctx) {
-        return super.visitNotEqualToExpr(ctx);
-    }
-
-    @Override
-    public Expression visitSubExpr(MiniPascalParser.SubExprContext ctx) {
-        return super.visitSubExpr(ctx);
-    }
-
-    @Override
-    public Expression visitParenthesesExpr(MiniPascalParser.ParenthesesExprContext ctx) {
-        return super.visitParenthesesExpr(ctx);
-    }
-
-    @Override
-    public Expression visitNumExpr(MiniPascalParser.NumExprContext ctx) {
-        String numText = ctx.getChild(0).getText();
-        int num = Integer.parseInt(numText);
-        return new Number(num);
-    }
-
-    @Override
-    public Expression visitGreaterThanExpr(MiniPascalParser.GreaterThanExprContext ctx) {
-        return super.visitGreaterThanExpr(ctx);
-    }
-
-    @Override
-    public Expression visitNotExpr(MiniPascalParser.NotExprContext ctx) {
-        return super.visitNotExpr(ctx);
-    }
-
-    @Override
-    public Expression visitArrayAccessExpr(MiniPascalParser.ArrayAccessExprContext ctx) {
-        return super.visitArrayAccessExpr(ctx);
-    }
-
-    @Override
-    public Expression visitConstCharExpr(MiniPascalParser.ConstCharExprContext ctx) {
-        return super.visitConstCharExpr(ctx);
-    }
-
-    @Override
-    public Expression visitAddExpr(MiniPascalParser.AddExprContext ctx) {
-        Expression left = visit(ctx.getChild(0));
-        Expression right = visit(ctx.getChild(2));
-        return new Addition(left, right);
-    }
-
-    @Override
-    public Expression visitEqualToExpr(MiniPascalParser.EqualToExprContext ctx) {
-        return super.visitEqualToExpr(ctx);
-    }
-
-    @Override
-    public Expression visitMulExpr(MiniPascalParser.MulExprContext ctx) {
-        Expression left = visit(ctx.getChild(0));
-        Expression right = visit(ctx.getChild(2));
-        return new Multiplication(left, right);
-    }
-
-    @Override
-    public Expression visitDivExpr(MiniPascalParser.DivExprContext ctx) {
-        return super.visitDivExpr(ctx);
-    }
-
-    @Override
-    public Expression visitIdExpr(MiniPascalParser.IdExprContext ctx) {
-        Token idToken = ctx.ID().getSymbol();
+    public Expression visitIdentifier(MiniPascalParser.IdentifierContext ctx) {
+        Token idToken = ctx.IDENT().getSymbol();
         int line = idToken.getLine();
         int column = idToken.getCharPositionInLine() + 1;
         String id = ctx.getChild(0).getText();
-        if (!vars.contains(id)){
-            erroresSemanticos.add("Error variable "+ id + " no declarada (" + line +", "+column+")");
+        if(!vars.contains(id)) {
+            erroresSemanticos.add("Error: variable " + id + " no ha sido declarada (" + line + ", " + column + ")");
+        }else{
+            vars.add(id);
         }
         return new Variable(id);
     }
 
     @Override
-    public Expression visitAndExpr(MiniPascalParser.AndExprContext ctx) {
-        return super.visitAndExpr(ctx);
-    }
-
-    @Override
-    public Expression visitArray_access(MiniPascalParser.Array_accessContext ctx) {
-        return super.visitArray_access(ctx);
-    }
-
-    @Override
-    public Expression visitIndex_expr(MiniPascalParser.Index_exprContext ctx) {
-        return super.visitIndex_expr(ctx);
-    }
-
-    @Override
-    public Expression visitType(MiniPascalParser.TypeContext ctx) {
-        return super.visitType(ctx);
-    }
-
-    @Override
-    public Expression visitArray_type(MiniPascalParser.Array_typeContext ctx) {
-        return super.visitArray_type(ctx);
-    }
-
-    @Override
-    public Expression visitValue(MiniPascalParser.ValueContext ctx) {
-        return super.visitValue(ctx);
-    }
-
-    @Override
-    public Expression visitArray_value(MiniPascalParser.Array_valueContext ctx) {
-        return super.visitArray_value(ctx);
-    }
-
-    @Override
-    public Expression visitFunction_decl(MiniPascalParser.Function_declContext ctx) {
-        return super.visitFunction_decl(ctx);
-    }
-
-    @Override
-    public Expression visitParams(MiniPascalParser.ParamsContext ctx) {
-        return super.visitParams(ctx);
-    }
-
-    @Override
-    public Expression visitParam(MiniPascalParser.ParamContext ctx) {
-        return super.visitParam(ctx);
-    }
-
-    @Override
-    public Expression visitFunction_call(MiniPascalParser.Function_callContext ctx) {
-        return super.visitFunction_call(ctx);
-    }
-
-    @Override
-    public Expression visitArgs(MiniPascalParser.ArgsContext ctx) {
-        return super.visitArgs(ctx);
-    }
-
-    @Override
-    public Expression visitProcedure_decl(MiniPascalParser.Procedure_declContext ctx) {
-        return super.visitProcedure_decl(ctx);
-    }
-
-    @Override
-    public Expression visitProcedure_call(MiniPascalParser.Procedure_callContext ctx) {
-        return super.visitProcedure_call(ctx);
-    }
-
-    @Override
-    public Expression visitMain(MiniPascalParser.MainContext ctx) {
-        return super.visitMain(ctx);
+    public Expression visitNumber(MiniPascalParser.NumberContext ctx) {
+        String numText = ctx.getChild(0).getText();
+        int num = Integer.parseInt(numText);
+        return new Number(num);
     }
 }
