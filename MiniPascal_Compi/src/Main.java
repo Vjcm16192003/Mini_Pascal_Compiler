@@ -2,37 +2,31 @@ import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.print("Usage: file name");
-            return;
-        }
+    public static void main(String[] args) throws IOException {
 
+        String inputFile = null;
+        if ( args.length>0 ) inputFile = args[0];
+        InputStream is = System.in;
+        if ( inputFile!=null ) is = new FileInputStream(inputFile);
+        ANTLRInputStream input = new ANTLRInputStream(is);
+
+
+        MiniPascalLexer lexer = new MiniPascalLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        MiniPascalParser parser = new MiniPascalParser(tokens);
+        ParseTree tree = parser.start();
+
+        InterpretVisitor visitor = new InterpretVisitor();
+        visitor.visit(tree);
         String fileName = args[0];
-        MiniPascalParser parser = getParser(fileName);
+        parser = getParser(fileName);
         ParseTree antlrAST = parser.program();
-
-        AntlrToProgram progVisitor = new AntlrToProgram();
-        Program prog = progVisitor.visit(antlrAST);
-        if (progVisitor.erroresSemanticos.isEmpty()) {
-//            ExpressionProcessor ep = new ExpressionProcessor(prog.expressions);
-//            for (String evaluation : ep.getEvaluationResults()) {
-//                System.out.println(evaluation);
-//            }
-        } else {
-            for (String err : progVisitor.erroresSemanticos) {
-                System.out.println(err);
-            }
-            for(String mensaje : progVisitor.mensajes){
-                System.out.println(mensaje);
-            }
-        }
-
-        // Display the parse tree using TreeViewer
         showParseTree(parser, antlrAST);
     }
 

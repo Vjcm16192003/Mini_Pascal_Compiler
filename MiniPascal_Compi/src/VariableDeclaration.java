@@ -1,4 +1,4 @@
-public class VariableDeclaration extends Expression {
+public class VariableDeclaration {
     public String id;
     public String type;
 

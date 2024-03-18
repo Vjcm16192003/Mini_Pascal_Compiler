@@ -1,4 +1,9 @@
 // Generated from C:/Users/gusta/IdeaProjects/Mini_Pascal_Compiler/MiniPascal_Compi/src/MiniPascal.g4 by ANTLR 4.13.1
+
+     import java.util.HashMap;
+     import java.lang.Math;
+     import java.util.Scanner;
+     
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -16,68 +21,58 @@ public class MiniPascalParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		CONST=1, VAR=2, INTEGER=3, CHAR=4, CHR=5, STRING=6, BOOLEAN=7, ARRAY=8, 
-		IN=9, OF=10, FUNCTION=11, PROCEDURE=12, PROGRAM=13, BEGIN=14, END=15, 
-		IF=16, THEN=17, ELSE=18, WHILE=19, DO=20, FOR=21, TO=22, DOWNTO=23, REPEAT=24, 
-		UNTIL=25, WRITE=26, WRITELN=27, READ=28, NOT=29, AND=30, OR=31, PLUS=32, 
-		MINUS=33, STAR=34, SLASH=35, DIV=36, MOD=37, ASSIGN=38, EQUAL=39, NOT_EQUAL=40, 
-		LT=41, LE=42, GT=43, GE=44, LPAREN=45, RPAREN=46, LBRACK=47, RBRACK=48, 
-		COMMA=49, SEMI=50, COLON=51, DOT=52, DOTDOT=53, NUM_INT=54, STRING_LITERAL=55, 
-		IDENT=56, NUM_REAL=57, WS=58, COMMENT=59;
+		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, PROGRAM=7, VAR=8, FUNCTION=9, 
+		PROCEDURE=10, TRUE=11, FALSE=12, BOOLEAN=13, AND=14, OR=15, NOT=16, MOD=17, 
+		SQRT=18, LN=19, EXP=20, SIN=21, COS=22, REAL=23, FOR=24, WHILE=25, DO=26, 
+		TO=27, BREAK=28, CONTINUE=29, IF=30, THEN=31, ELSE=32, CASE=33, OF=34, 
+		BEGIN=35, END=36, LPAREN=37, RPAREN=38, MULT=39, DIV=40, ADD=41, SUBT=42, 
+		EQ=43, GT=44, LT=45, GTE=46, LTE=47, NEQ=48, DELIM=49, ID=50, STRING_LITERAL=51, 
+		NUM=52, WS=53, COMMENT_1=54, COMMENT_2=55;
 	public static final int
-		RULE_program = 0, RULE_block = 1, RULE_variableDeclarationPart = 2, RULE_variableDeclaration = 3, 
-		RULE_procedureAndFunctionDeclarationPart = 4, RULE_procedureDeclaration = 5, 
-		RULE_resultType = 6, RULE_functionDeclaration = 7, RULE_formalParameterList = 8, 
-		RULE_formalParameterSection = 9, RULE_typeIdentifier = 10, RULE_arrayType = 11, 
-		RULE_constant = 12, RULE_sign = 13, RULE_constantChr = 14, RULE_unsignedNumber = 15, 
-		RULE_unsignedInteger = 16, RULE_unsignedReal = 17, RULE_string = 18, RULE_compoundStatement = 19, 
-		RULE_blockEnd = 20, RULE_statements = 21, RULE_statement = 22, RULE_writelnStatement = 23, 
-		RULE_assignmentStatement = 24, RULE_procedureStatement = 25, RULE_actualParameterList = 26, 
-		RULE_actualParameter = 27, RULE_ifStatement = 28, RULE_whileStatement = 29, 
-		RULE_forStatement = 30, RULE_repeatStatement = 31, RULE_writeStatement = 32, 
-		RULE_readStatement = 33, RULE_expression = 34, RULE_relationaloperator = 35, 
-		RULE_simpleExpression = 36, RULE_additiveoperator = 37, RULE_term = 38, 
-		RULE_multiplicativeoperator = 39, RULE_factor = 40, RULE_variable = 41, 
-		RULE_identifierList = 42, RULE_conststr = 43, RULE_identifier = 44, RULE_number = 45;
+		RULE_start = 0, RULE_program = 1, RULE_varBlock = 2, RULE_varDecs = 3, 
+		RULE_varDec = 4, RULE_functionDecs = 5, RULE_funcOrProcDec = 6, RULE_funcDec = 7, 
+		RULE_procDec = 8, RULE_formalParameterList = 9, RULE_paramGroup = 10, 
+		RULE_variableList = 11, RULE_variableType = 12, RULE_functionCall = 13, 
+		RULE_procedureCall = 14, RULE_parameters = 15, RULE_block = 16, RULE_statements = 17, 
+		RULE_statement = 18, RULE_varAssign = 19, RULE_readLn = 20, RULE_writeLn = 21, 
+		RULE_line = 22, RULE_loopType = 23, RULE_whileLoop = 24, RULE_forLoop = 25, 
+		RULE_varForAssign = 26, RULE_loopBlock = 27, RULE_loopStatements = 28, 
+		RULE_loopStatement = 29, RULE_eval_break = 30, RULE_eval_continue = 31, 
+		RULE_ifStatement = 32, RULE_condBlock = 33, RULE_stateBlock = 34, RULE_caseStatement = 35, 
+		RULE_caseBlock = 36, RULE_expr = 37, RULE_func_identifier = 38, RULE_element = 39, 
+		RULE_identifier = 40;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "block", "variableDeclarationPart", "variableDeclaration", 
-			"procedureAndFunctionDeclarationPart", "procedureDeclaration", "resultType", 
-			"functionDeclaration", "formalParameterList", "formalParameterSection", 
-			"typeIdentifier", "arrayType", "constant", "sign", "constantChr", "unsignedNumber", 
-			"unsignedInteger", "unsignedReal", "string", "compoundStatement", "blockEnd", 
-			"statements", "statement", "writelnStatement", "assignmentStatement", 
-			"procedureStatement", "actualParameterList", "actualParameter", "ifStatement", 
-			"whileStatement", "forStatement", "repeatStatement", "writeStatement", 
-			"readStatement", "expression", "relationaloperator", "simpleExpression", 
-			"additiveoperator", "term", "multiplicativeoperator", "factor", "variable", 
-			"identifierList", "conststr", "identifier", "number"
+			"start", "program", "varBlock", "varDecs", "varDec", "functionDecs", 
+			"funcOrProcDec", "funcDec", "procDec", "formalParameterList", "paramGroup", 
+			"variableList", "variableType", "functionCall", "procedureCall", "parameters", 
+			"block", "statements", "statement", "varAssign", "readLn", "writeLn", 
+			"line", "loopType", "whileLoop", "forLoop", "varForAssign", "loopBlock", 
+			"loopStatements", "loopStatement", "eval_break", "eval_continue", "ifStatement", 
+			"condBlock", "stateBlock", "caseStatement", "caseBlock", "expr", "func_identifier", 
+			"element", "identifier"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'Const'", "'var'", "'Integer'", "'Char'", "'CHR'", "'String'", 
-			"'Boolean'", "'Array'", "'In'", "'of'", "'Function'", "'Procedure'", 
-			"'program'", "'begin'", "'end'", "'If'", "'Then'", "'Else'", "'While'", 
-			"'Do'", "'For'", "'To'", "'Downto'", "'Repeat'", "'Until'", "'write'", 
-			"'writeln'", "'read'", "'Not'", "'And'", "'Or'", "'+'", "'-'", "'*'", 
-			"'/'", "'div'", "'mod'", "':='", "'='", "'<>'", "'<'", "'<='", "'>'", 
-			"'>='", "'('", "')'", "'['", "']'", "','", "';'", "':'", "'.'", "'..'"
+			null, "';'", "'.'", "':'", "':='", "'readln'", "'writeln'", null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, "'('", "')'", "'*'", "'/'", "'+'", "'-'", "'='", 
+			"'>'", "'<'", "'>='", "'<='", "'<>'", "','"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "CONST", "VAR", "INTEGER", "CHAR", "CHR", "STRING", "BOOLEAN", 
-			"ARRAY", "IN", "OF", "FUNCTION", "PROCEDURE", "PROGRAM", "BEGIN", "END", 
-			"IF", "THEN", "ELSE", "WHILE", "DO", "FOR", "TO", "DOWNTO", "REPEAT", 
-			"UNTIL", "WRITE", "WRITELN", "READ", "NOT", "AND", "OR", "PLUS", "MINUS", 
-			"STAR", "SLASH", "DIV", "MOD", "ASSIGN", "EQUAL", "NOT_EQUAL", "LT", 
-			"LE", "GT", "GE", "LPAREN", "RPAREN", "LBRACK", "RBRACK", "COMMA", "SEMI", 
-			"COLON", "DOT", "DOTDOT", "NUM_INT", "STRING_LITERAL", "IDENT", "NUM_REAL", 
-			"WS", "COMMENT"
+			null, null, null, null, null, null, null, "PROGRAM", "VAR", "FUNCTION", 
+			"PROCEDURE", "TRUE", "FALSE", "BOOLEAN", "AND", "OR", "NOT", "MOD", "SQRT", 
+			"LN", "EXP", "SIN", "COS", "REAL", "FOR", "WHILE", "DO", "TO", "BREAK", 
+			"CONTINUE", "IF", "THEN", "ELSE", "CASE", "OF", "BEGIN", "END", "LPAREN", 
+			"RPAREN", "MULT", "DIV", "ADD", "SUBT", "EQ", "GT", "LT", "GTE", "LTE", 
+			"NEQ", "DELIM", "ID", "STRING_LITERAL", "NUM", "WS", "COMMENT_1", "COMMENT_2"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -126,9 +121,60 @@ public class MiniPascalParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
+
+	    Scanner io = new Scanner(System.in);
+
 	public MiniPascalParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class StartContext extends ParserRuleContext {
+		public ProgramContext program() {
+			return getRuleContext(ProgramContext.class,0);
+		}
+		public TerminalNode EOF() { return getToken(MiniPascalParser.EOF, 0); }
+		public StartContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_start; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterStart(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitStart(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitStart(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final StartContext start() throws RecognitionException {
+		StartContext _localctx = new StartContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_start);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(82);
+			program();
+			setState(83);
+			match(EOF);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
 	}
 
 	@SuppressWarnings("CheckReturnValue")
@@ -137,12 +183,14 @@ public class MiniPascalParser extends Parser {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(MiniPascalParser.SEMI, 0); }
-		public List<BlockContext> block() {
-			return getRuleContexts(BlockContext.class);
+		public VarBlockContext varBlock() {
+			return getRuleContext(VarBlockContext.class,0);
 		}
-		public BlockContext block(int i) {
-			return getRuleContext(BlockContext.class,i);
+		public FunctionDecsContext functionDecs() {
+			return getRuleContext(FunctionDecsContext.class,0);
+		}
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
 		}
 		public ProgramContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -165,31 +213,24 @@ public class MiniPascalParser extends Parser {
 
 	public final ProgramContext program() throws RecognitionException {
 		ProgramContext _localctx = new ProgramContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_program);
-		int _la;
+		enterRule(_localctx, 2, RULE_program);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(92);
+			setState(85);
 			match(PROGRAM);
-			setState(93);
+			setState(86);
 			identifier();
-			setState(94);
-			match(SEMI);
-			setState(98);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 22532L) != 0)) {
-				{
-				{
-				setState(95);
-				block();
-				}
-				}
-				setState(100);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
+			setState(87);
+			match(T__0);
+			setState(88);
+			varBlock();
+			setState(89);
+			functionDecs();
+			setState(90);
+			block();
+			setState(91);
+			match(T__1);
 			}
 		}
 		catch (RecognitionException re) {
@@ -204,134 +245,254 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class BlockContext extends ParserRuleContext {
-		public CompoundStatementContext compoundStatement() {
-			return getRuleContext(CompoundStatementContext.class,0);
+	public static class VarBlockContext extends ParserRuleContext {
+		public TerminalNode VAR() { return getToken(MiniPascalParser.VAR, 0); }
+		public VarDecsContext varDecs() {
+			return getRuleContext(VarDecsContext.class,0);
 		}
-		public VariableDeclarationPartContext variableDeclarationPart() {
-			return getRuleContext(VariableDeclarationPartContext.class,0);
-		}
-		public ProcedureAndFunctionDeclarationPartContext procedureAndFunctionDeclarationPart() {
-			return getRuleContext(ProcedureAndFunctionDeclarationPartContext.class,0);
-		}
-		public BlockContext(ParserRuleContext parent, int invokingState) {
+		public VarBlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_block; }
+		@Override public int getRuleIndex() { return RULE_varBlock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterBlock(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVarBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitBlock(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVarBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitBlock(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVarBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final BlockContext block() throws RecognitionException {
-		BlockContext _localctx = new BlockContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_block);
-		int _la;
+	public final VarBlockContext varBlock() throws RecognitionException {
+		VarBlockContext _localctx = new VarBlockContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_varBlock);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
+			setState(96);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__0:
+			case T__1:
+			case FUNCTION:
+			case PROCEDURE:
+			case BEGIN:
+				enterOuterAlt(_localctx, 1);
+				{
+				}
+				break;
+			case VAR:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(94);
+				match(VAR);
+				setState(95);
+				varDecs();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class VarDecsContext extends ParserRuleContext {
+		public VarDecContext varDec() {
+			return getRuleContext(VarDecContext.class,0);
+		}
+		public VarDecsContext varDecs() {
+			return getRuleContext(VarDecsContext.class,0);
+		}
+		public VarDecsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_varDecs; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVarDecs(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVarDecs(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVarDecs(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final VarDecsContext varDecs() throws RecognitionException {
+		VarDecsContext _localctx = new VarDecsContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_varDecs);
+		try {
 			setState(102);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==VAR) {
+			switch (_input.LA(1)) {
+			case T__0:
+			case T__1:
+			case FUNCTION:
+			case PROCEDURE:
+			case BEGIN:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(101);
-				variableDeclarationPart();
 				}
+				break;
+			case ID:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(99);
+				varDec();
+				setState(100);
+				varDecs();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
 
-			setState(105);
+	@SuppressWarnings("CheckReturnValue")
+	public static class VarDecContext extends ParserRuleContext {
+		public VarDecContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_varDec; }
+	 
+		public VarDecContext() { }
+		public void copyFrom(VarDecContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class InitDecContext extends VarDecContext {
+		public Token type;
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public TerminalNode EQ() { return getToken(MiniPascalParser.EQ, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public TerminalNode BOOLEAN() { return getToken(MiniPascalParser.BOOLEAN, 0); }
+		public TerminalNode REAL() { return getToken(MiniPascalParser.REAL, 0); }
+		public InitDecContext(VarDecContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterInitDec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitInitDec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitInitDec(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class NormDecContext extends VarDecContext {
+		public Token type;
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public TerminalNode BOOLEAN() { return getToken(MiniPascalParser.BOOLEAN, 0); }
+		public TerminalNode REAL() { return getToken(MiniPascalParser.REAL, 0); }
+		public NormDecContext(VarDecContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterNormDec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitNormDec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitNormDec(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final VarDecContext varDec() throws RecognitionException {
+		VarDecContext _localctx = new VarDecContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_varDec);
+		int _la;
+		try {
+			setState(115);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==FUNCTION || _la==PROCEDURE) {
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				_localctx = new InitDecContext(_localctx);
+				enterOuterAlt(_localctx, 1);
 				{
 				setState(104);
-				procedureAndFunctionDeclarationPart();
+				match(ID);
+				setState(105);
+				match(T__2);
+				setState(106);
+				((InitDecContext)_localctx).type = _input.LT(1);
+				_la = _input.LA(1);
+				if ( !(_la==BOOLEAN || _la==REAL) ) {
+					((InitDecContext)_localctx).type = (Token)_errHandler.recoverInline(this);
 				}
-			}
-
-			setState(107);
-			compoundStatement();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class VariableDeclarationPartContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(MiniPascalParser.VAR, 0); }
-		public List<VariableDeclarationContext> variableDeclaration() {
-			return getRuleContexts(VariableDeclarationContext.class);
-		}
-		public VariableDeclarationContext variableDeclaration(int i) {
-			return getRuleContext(VariableDeclarationContext.class,i);
-		}
-		public List<TerminalNode> SEMI() { return getTokens(MiniPascalParser.SEMI); }
-		public TerminalNode SEMI(int i) {
-			return getToken(MiniPascalParser.SEMI, i);
-		}
-		public VariableDeclarationPartContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_variableDeclarationPart; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVariableDeclarationPart(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVariableDeclarationPart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVariableDeclarationPart(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final VariableDeclarationPartContext variableDeclarationPart() throws RecognitionException {
-		VariableDeclarationPartContext _localctx = new VariableDeclarationPartContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_variableDeclarationPart);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(109);
-			match(VAR);
-			setState(113); 
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(107);
+				match(EQ);
+				setState(108);
+				expr(0);
+				setState(109);
+				match(T__0);
+				}
+				break;
+			case 2:
+				_localctx = new NormDecContext(_localctx);
+				enterOuterAlt(_localctx, 2);
 				{
-				{
-				setState(110);
-				variableDeclaration();
 				setState(111);
-				match(SEMI);
-				}
-				}
-				setState(115); 
-				_errHandler.sync(this);
+				match(ID);
+				setState(112);
+				match(T__2);
+				setState(113);
+				((NormDecContext)_localctx).type = _input.LT(1);
 				_la = _input.LA(1);
-			} while ( _la==IDENT );
+				if ( !(_la==BOOLEAN || _la==REAL) ) {
+					((NormDecContext)_localctx).type = (Token)_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(114);
+				match(T__0);
+				}
+				break;
 			}
 		}
 		catch (RecognitionException re) {
@@ -346,132 +507,57 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class VariableDeclarationContext extends ParserRuleContext {
-		public IdentifierListContext identifierList() {
-			return getRuleContext(IdentifierListContext.class,0);
+	public static class FunctionDecsContext extends ParserRuleContext {
+		public FuncOrProcDecContext funcOrProcDec() {
+			return getRuleContext(FuncOrProcDecContext.class,0);
 		}
-		public TerminalNode COLON() { return getToken(MiniPascalParser.COLON, 0); }
-		public TypeIdentifierContext typeIdentifier() {
-			return getRuleContext(TypeIdentifierContext.class,0);
+		public FunctionDecsContext functionDecs() {
+			return getRuleContext(FunctionDecsContext.class,0);
 		}
-		public VariableDeclarationContext(ParserRuleContext parent, int invokingState) {
+		public FunctionDecsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_variableDeclaration; }
+		@Override public int getRuleIndex() { return RULE_functionDecs; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVariableDeclaration(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFunctionDecs(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVariableDeclaration(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFunctionDecs(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVariableDeclaration(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFunctionDecs(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final VariableDeclarationContext variableDeclaration() throws RecognitionException {
-		VariableDeclarationContext _localctx = new VariableDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_variableDeclaration);
+	public final FunctionDecsContext functionDecs() throws RecognitionException {
+		FunctionDecsContext _localctx = new FunctionDecsContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_functionDecs);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(117);
-			identifierList();
-			setState(118);
-			match(COLON);
-			setState(119);
-			typeIdentifier();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ProcedureAndFunctionDeclarationPartContext extends ParserRuleContext {
-		public List<ProcedureDeclarationContext> procedureDeclaration() {
-			return getRuleContexts(ProcedureDeclarationContext.class);
-		}
-		public ProcedureDeclarationContext procedureDeclaration(int i) {
-			return getRuleContext(ProcedureDeclarationContext.class,i);
-		}
-		public List<FunctionDeclarationContext> functionDeclaration() {
-			return getRuleContexts(FunctionDeclarationContext.class);
-		}
-		public FunctionDeclarationContext functionDeclaration(int i) {
-			return getRuleContext(FunctionDeclarationContext.class,i);
-		}
-		public List<TerminalNode> SEMI() { return getTokens(MiniPascalParser.SEMI); }
-		public TerminalNode SEMI(int i) {
-			return getToken(MiniPascalParser.SEMI, i);
-		}
-		public ProcedureAndFunctionDeclarationPartContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_procedureAndFunctionDeclarationPart; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterProcedureAndFunctionDeclarationPart(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitProcedureAndFunctionDeclarationPart(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitProcedureAndFunctionDeclarationPart(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ProcedureAndFunctionDeclarationPartContext procedureAndFunctionDeclarationPart() throws RecognitionException {
-		ProcedureAndFunctionDeclarationPartContext _localctx = new ProcedureAndFunctionDeclarationPartContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_procedureAndFunctionDeclarationPart);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(125); 
+			setState(121);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			do {
+			switch (_input.LA(1)) {
+			case T__1:
+			case BEGIN:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(125);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case PROCEDURE:
-					{
-					setState(121);
-					procedureDeclaration();
-					}
-					break;
-				case FUNCTION:
-					{
-					setState(122);
-					functionDeclaration();
-					setState(123);
-					match(SEMI);
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
 				}
+				break;
+			case FUNCTION:
+			case PROCEDURE:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(118);
+				funcOrProcDec();
+				setState(119);
+				functionDecs();
 				}
-				setState(127); 
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( _la==FUNCTION || _la==PROCEDURE );
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -486,177 +572,231 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ProcedureDeclarationContext extends ParserRuleContext {
-		public TerminalNode PROCEDURE() { return getToken(MiniPascalParser.PROCEDURE, 0); }
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
+	public static class FuncOrProcDecContext extends ParserRuleContext {
+		public FuncDecContext funcDec() {
+			return getRuleContext(FuncDecContext.class,0);
 		}
-		public TerminalNode SEMI() { return getToken(MiniPascalParser.SEMI, 0); }
+		public ProcDecContext procDec() {
+			return getRuleContext(ProcDecContext.class,0);
+		}
+		public FuncOrProcDecContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_funcOrProcDec; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFuncOrProcDec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFuncOrProcDec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFuncOrProcDec(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final FuncOrProcDecContext funcOrProcDec() throws RecognitionException {
+		FuncOrProcDecContext _localctx = new FuncOrProcDecContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_funcOrProcDec);
+		try {
+			setState(125);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case FUNCTION:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(123);
+				funcDec();
+				}
+				break;
+			case PROCEDURE:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(124);
+				procDec();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class FuncDecContext extends ParserRuleContext {
+		public Token type;
+		public TerminalNode FUNCTION() { return getToken(MiniPascalParser.FUNCTION, 0); }
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public VarBlockContext varBlock() {
+			return getRuleContext(VarBlockContext.class,0);
+		}
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
-		public ProcedureDeclarationContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_procedureDeclaration; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterProcedureDeclaration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitProcedureDeclaration(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitProcedureDeclaration(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ProcedureDeclarationContext procedureDeclaration() throws RecognitionException {
-		ProcedureDeclarationContext _localctx = new ProcedureDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_procedureDeclaration);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(129);
-			match(PROCEDURE);
-			setState(130);
-			identifier();
-			setState(131);
-			match(SEMI);
-			setState(132);
-			block();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ResultTypeContext extends ParserRuleContext {
-		public TypeIdentifierContext typeIdentifier() {
-			return getRuleContext(TypeIdentifierContext.class,0);
-		}
-		public ResultTypeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_resultType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterResultType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitResultType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitResultType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ResultTypeContext resultType() throws RecognitionException {
-		ResultTypeContext _localctx = new ResultTypeContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_resultType);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(134);
-			typeIdentifier();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class FunctionDeclarationContext extends ParserRuleContext {
-		public TerminalNode FUNCTION() { return getToken(MiniPascalParser.FUNCTION, 0); }
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
-		}
-		public TerminalNode COLON() { return getToken(MiniPascalParser.COLON, 0); }
-		public ResultTypeContext resultType() {
-			return getRuleContext(ResultTypeContext.class,0);
-		}
-		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public TerminalNode REAL() { return getToken(MiniPascalParser.REAL, 0); }
+		public TerminalNode BOOLEAN() { return getToken(MiniPascalParser.BOOLEAN, 0); }
 		public FormalParameterListContext formalParameterList() {
 			return getRuleContext(FormalParameterListContext.class,0);
 		}
-		public FunctionDeclarationContext(ParserRuleContext parent, int invokingState) {
+		public FuncDecContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_functionDeclaration; }
+		@Override public int getRuleIndex() { return RULE_funcDec; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFunctionDeclaration(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFuncDec(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFunctionDeclaration(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFuncDec(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFunctionDeclaration(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFuncDec(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final FunctionDeclarationContext functionDeclaration() throws RecognitionException {
-		FunctionDeclarationContext _localctx = new FunctionDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_functionDeclaration);
+	public final FuncDecContext funcDec() throws RecognitionException {
+		FuncDecContext _localctx = new FuncDecContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_funcDec);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(136);
+			setState(127);
 			match(FUNCTION);
-			setState(137);
-			identifier();
-			setState(143);
+			setState(128);
+			match(ID);
+			setState(129);
+			match(LPAREN);
+			setState(131);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==LPAREN) {
+			if (_la==ID) {
 				{
-				setState(138);
-				match(LPAREN);
-				setState(140);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
-				case 1:
-					{
-					setState(139);
-					formalParameterList();
-					}
-					break;
-				}
-				setState(142);
-				match(RPAREN);
+				setState(130);
+				formalParameterList();
 				}
 			}
 
+			setState(133);
+			match(RPAREN);
+			setState(134);
+			match(T__2);
+			setState(135);
+			((FuncDecContext)_localctx).type = _input.LT(1);
+			_la = _input.LA(1);
+			if ( !(_la==BOOLEAN || _la==REAL) ) {
+				((FuncDecContext)_localctx).type = (Token)_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			setState(136);
+			match(T__0);
+			setState(137);
+			varBlock();
+			setState(138);
+			block();
+			setState(139);
+			match(T__0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ProcDecContext extends ParserRuleContext {
+		public TerminalNode PROCEDURE() { return getToken(MiniPascalParser.PROCEDURE, 0); }
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public VarBlockContext varBlock() {
+			return getRuleContext(VarBlockContext.class,0);
+		}
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public FormalParameterListContext formalParameterList() {
+			return getRuleContext(FormalParameterListContext.class,0);
+		}
+		public ProcDecContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_procDec; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterProcDec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitProcDec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitProcDec(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ProcDecContext procDec() throws RecognitionException {
+		ProcDecContext _localctx = new ProcDecContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_procDec);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(141);
+			match(PROCEDURE);
+			setState(142);
+			match(ID);
+			setState(143);
+			match(LPAREN);
 			setState(145);
-			match(COLON);
-			setState(146);
-			resultType();
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==ID) {
+				{
+				setState(144);
+				formalParameterList();
+				}
+			}
+
+			setState(147);
+			match(RPAREN);
+			setState(148);
+			match(T__0);
+			setState(149);
+			varBlock();
+			setState(150);
+			block();
+			setState(151);
+			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -672,15 +812,11 @@ public class MiniPascalParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class FormalParameterListContext extends ParserRuleContext {
-		public List<FormalParameterSectionContext> formalParameterSection() {
-			return getRuleContexts(FormalParameterSectionContext.class);
+		public List<ParamGroupContext> paramGroup() {
+			return getRuleContexts(ParamGroupContext.class);
 		}
-		public FormalParameterSectionContext formalParameterSection(int i) {
-			return getRuleContext(FormalParameterSectionContext.class,i);
-		}
-		public List<TerminalNode> SEMI() { return getTokens(MiniPascalParser.SEMI); }
-		public TerminalNode SEMI(int i) {
-			return getToken(MiniPascalParser.SEMI, i);
+		public ParamGroupContext paramGroup(int i) {
+			return getRuleContext(ParamGroupContext.class,i);
 		}
 		public FormalParameterListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -703,37 +839,29 @@ public class MiniPascalParser extends Parser {
 
 	public final FormalParameterListContext formalParameterList() throws RecognitionException {
 		FormalParameterListContext _localctx = new FormalParameterListContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_formalParameterList);
+		enterRule(_localctx, 18, RULE_formalParameterList);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(156);
+			setState(153);
+			paramGroup();
+			setState(158);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==VAR || _la==IDENT) {
+			while (_la==T__0) {
 				{
-				setState(148);
-				formalParameterSection();
-				setState(153);
+				{
+				setState(154);
+				match(T__0);
+				setState(155);
+				paramGroup();
+				}
+				}
+				setState(160);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==SEMI) {
-					{
-					{
-					setState(149);
-					match(SEMI);
-					setState(150);
-					formalParameterSection();
-					}
-					}
-					setState(155);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				}
 			}
-
 			}
 		}
 		catch (RecognitionException re) {
@@ -748,251 +876,113 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class FormalParameterSectionContext extends ParserRuleContext {
-		public IdentifierListContext identifierList() {
-			return getRuleContext(IdentifierListContext.class,0);
+	public static class ParamGroupContext extends ParserRuleContext {
+		public VariableListContext variableList() {
+			return getRuleContext(VariableListContext.class,0);
 		}
-		public TerminalNode COLON() { return getToken(MiniPascalParser.COLON, 0); }
-		public TypeIdentifierContext typeIdentifier() {
-			return getRuleContext(TypeIdentifierContext.class,0);
+		public VariableTypeContext variableType() {
+			return getRuleContext(VariableTypeContext.class,0);
 		}
-		public TerminalNode VAR() { return getToken(MiniPascalParser.VAR, 0); }
-		public FormalParameterSectionContext(ParserRuleContext parent, int invokingState) {
+		public ParamGroupContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_formalParameterSection; }
+		@Override public int getRuleIndex() { return RULE_paramGroup; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFormalParameterSection(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterParamGroup(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFormalParameterSection(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitParamGroup(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFormalParameterSection(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitParamGroup(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final FormalParameterSectionContext formalParameterSection() throws RecognitionException {
-		FormalParameterSectionContext _localctx = new FormalParameterSectionContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_formalParameterSection);
+	public final ParamGroupContext paramGroup() throws RecognitionException {
+		ParamGroupContext _localctx = new ParamGroupContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_paramGroup);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(161);
+			variableList();
+			setState(162);
+			match(T__2);
+			setState(163);
+			variableType();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class VariableListContext extends ParserRuleContext {
+		public List<IdentifierContext> identifier() {
+			return getRuleContexts(IdentifierContext.class);
+		}
+		public IdentifierContext identifier(int i) {
+			return getRuleContext(IdentifierContext.class,i);
+		}
+		public List<TerminalNode> DELIM() { return getTokens(MiniPascalParser.DELIM); }
+		public TerminalNode DELIM(int i) {
+			return getToken(MiniPascalParser.DELIM, i);
+		}
+		public VariableListContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_variableList; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVariableList(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVariableList(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVariableList(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final VariableListContext variableList() throws RecognitionException {
+		VariableListContext _localctx = new VariableListContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_variableList);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(159);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==VAR) {
-				{
-				setState(158);
-				match(VAR);
-				}
-			}
-
-			setState(161);
-			identifierList();
-			setState(162);
-			match(COLON);
-			setState(163);
-			typeIdentifier();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class TypeIdentifierContext extends ParserRuleContext {
-		public TerminalNode INTEGER() { return getToken(MiniPascalParser.INTEGER, 0); }
-		public TerminalNode CHAR() { return getToken(MiniPascalParser.CHAR, 0); }
-		public TerminalNode STRING() { return getToken(MiniPascalParser.STRING, 0); }
-		public TerminalNode BOOLEAN() { return getToken(MiniPascalParser.BOOLEAN, 0); }
-		public ArrayTypeContext arrayType() {
-			return getRuleContext(ArrayTypeContext.class,0);
-		}
-		public TypeIdentifierContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_typeIdentifier; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterTypeIdentifier(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitTypeIdentifier(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitTypeIdentifier(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final TypeIdentifierContext typeIdentifier() throws RecognitionException {
-		TypeIdentifierContext _localctx = new TypeIdentifierContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_typeIdentifier);
-		try {
+			setState(165);
+			identifier();
 			setState(170);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case INTEGER:
-				enterOuterAlt(_localctx, 1);
+			_la = _input.LA(1);
+			while (_la==DELIM) {
 				{
-				setState(165);
-				match(INTEGER);
-				}
-				break;
-			case CHAR:
-				enterOuterAlt(_localctx, 2);
 				{
 				setState(166);
-				match(CHAR);
-				}
-				break;
-			case STRING:
-				enterOuterAlt(_localctx, 3);
-				{
+				match(DELIM);
 				setState(167);
-				match(STRING);
+				identifier();
 				}
-				break;
-			case BOOLEAN:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(168);
-				match(BOOLEAN);
 				}
-				break;
-			case ARRAY:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(169);
-				arrayType();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ArrayTypeContext extends ParserRuleContext {
-		public TerminalNode ARRAY() { return getToken(MiniPascalParser.ARRAY, 0); }
-		public TerminalNode LBRACK() { return getToken(MiniPascalParser.LBRACK, 0); }
-		public List<ConstantContext> constant() {
-			return getRuleContexts(ConstantContext.class);
-		}
-		public ConstantContext constant(int i) {
-			return getRuleContext(ConstantContext.class,i);
-		}
-		public List<TerminalNode> DOTDOT() { return getTokens(MiniPascalParser.DOTDOT); }
-		public TerminalNode DOTDOT(int i) {
-			return getToken(MiniPascalParser.DOTDOT, i);
-		}
-		public TerminalNode RBRACK() { return getToken(MiniPascalParser.RBRACK, 0); }
-		public TerminalNode OF() { return getToken(MiniPascalParser.OF, 0); }
-		public TypeIdentifierContext typeIdentifier() {
-			return getRuleContext(TypeIdentifierContext.class,0);
-		}
-		public TerminalNode COMMA() { return getToken(MiniPascalParser.COMMA, 0); }
-		public ArrayTypeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_arrayType; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterArrayType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitArrayType(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitArrayType(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ArrayTypeContext arrayType() throws RecognitionException {
-		ArrayTypeContext _localctx = new ArrayTypeContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_arrayType);
-		try {
-			setState(194);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
 				setState(172);
-				match(ARRAY);
-				setState(173);
-				match(LBRACK);
-				setState(174);
-				constant();
-				setState(175);
-				match(DOTDOT);
-				setState(176);
-				constant();
-				setState(177);
-				match(RBRACK);
-				setState(178);
-				match(OF);
-				setState(179);
-				typeIdentifier();
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(181);
-				match(ARRAY);
-				setState(182);
-				match(LBRACK);
-				setState(183);
-				constant();
-				setState(184);
-				match(DOTDOT);
-				setState(185);
-				constant();
-				setState(186);
-				match(COMMA);
-				setState(187);
-				constant();
-				setState(188);
-				match(DOTDOT);
-				setState(189);
-				constant();
-				setState(190);
-				match(RBRACK);
-				setState(191);
-				match(OF);
-				setState(192);
-				typeIdentifier();
-				}
-				break;
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1007,140 +997,38 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ConstantContext extends ParserRuleContext {
-		public UnsignedNumberContext unsignedNumber() {
-			return getRuleContext(UnsignedNumberContext.class,0);
-		}
-		public SignContext sign() {
-			return getRuleContext(SignContext.class,0);
-		}
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
-		}
-		public StringContext string() {
-			return getRuleContext(StringContext.class,0);
-		}
-		public ConstantChrContext constantChr() {
-			return getRuleContext(ConstantChrContext.class,0);
-		}
-		public ConstantContext(ParserRuleContext parent, int invokingState) {
+	public static class VariableTypeContext extends ParserRuleContext {
+		public TerminalNode REAL() { return getToken(MiniPascalParser.REAL, 0); }
+		public TerminalNode BOOLEAN() { return getToken(MiniPascalParser.BOOLEAN, 0); }
+		public VariableTypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_constant; }
+		@Override public int getRuleIndex() { return RULE_variableType; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterConstant(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVariableType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitConstant(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVariableType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitConstant(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVariableType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ConstantContext constant() throws RecognitionException {
-		ConstantContext _localctx = new ConstantContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_constant);
-		try {
-			setState(206);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(196);
-				unsignedNumber();
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(197);
-				sign();
-				setState(198);
-				unsignedNumber();
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(200);
-				identifier();
-				}
-				break;
-			case 4:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(201);
-				sign();
-				setState(202);
-				identifier();
-				}
-				break;
-			case 5:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(204);
-				string();
-				}
-				break;
-			case 6:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(205);
-				constantChr();
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class SignContext extends ParserRuleContext {
-		public TerminalNode PLUS() { return getToken(MiniPascalParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(MiniPascalParser.MINUS, 0); }
-		public SignContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_sign; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterSign(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitSign(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitSign(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final SignContext sign() throws RecognitionException {
-		SignContext _localctx = new SignContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_sign);
+	public final VariableTypeContext variableType() throws RecognitionException {
+		VariableTypeContext _localctx = new VariableTypeContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_variableType);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(208);
+			setState(173);
 			_la = _input.LA(1);
-			if ( !(_la==PLUS || _la==MINUS) ) {
+			if ( !(_la==BOOLEAN || _la==REAL) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1162,45 +1050,47 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ConstantChrContext extends ParserRuleContext {
-		public TerminalNode CHR() { return getToken(MiniPascalParser.CHR, 0); }
+	public static class FunctionCallContext extends ParserRuleContext {
+		public Func_identifierContext func_identifier() {
+			return getRuleContext(Func_identifierContext.class,0);
+		}
 		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public UnsignedIntegerContext unsignedInteger() {
-			return getRuleContext(UnsignedIntegerContext.class,0);
+		public ParametersContext parameters() {
+			return getRuleContext(ParametersContext.class,0);
 		}
 		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
-		public ConstantChrContext(ParserRuleContext parent, int invokingState) {
+		public FunctionCallContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_constantChr; }
+		@Override public int getRuleIndex() { return RULE_functionCall; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterConstantChr(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFunctionCall(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitConstantChr(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFunctionCall(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitConstantChr(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFunctionCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ConstantChrContext constantChr() throws RecognitionException {
-		ConstantChrContext _localctx = new ConstantChrContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_constantChr);
+	public final FunctionCallContext functionCall() throws RecognitionException {
+		FunctionCallContext _localctx = new FunctionCallContext(_ctx, getState());
+		enterRule(_localctx, 26, RULE_functionCall);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(210);
-			match(CHR);
-			setState(211);
+			setState(175);
+			func_identifier();
+			setState(176);
 			match(LPAREN);
-			setState(212);
-			unsignedInteger();
-			setState(213);
+			setState(177);
+			parameters();
+			setState(178);
 			match(RPAREN);
 			}
 		}
@@ -1216,51 +1106,139 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class UnsignedNumberContext extends ParserRuleContext {
-		public UnsignedIntegerContext unsignedInteger() {
-			return getRuleContext(UnsignedIntegerContext.class,0);
+	public static class ProcedureCallContext extends ParserRuleContext {
+		public Func_identifierContext func_identifier() {
+			return getRuleContext(Func_identifierContext.class,0);
 		}
-		public UnsignedRealContext unsignedReal() {
-			return getRuleContext(UnsignedRealContext.class,0);
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public ParametersContext parameters() {
+			return getRuleContext(ParametersContext.class,0);
 		}
-		public UnsignedNumberContext(ParserRuleContext parent, int invokingState) {
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public ProcedureCallContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_unsignedNumber; }
+		@Override public int getRuleIndex() { return RULE_procedureCall; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterUnsignedNumber(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterProcedureCall(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitUnsignedNumber(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitProcedureCall(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitUnsignedNumber(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitProcedureCall(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final UnsignedNumberContext unsignedNumber() throws RecognitionException {
-		UnsignedNumberContext _localctx = new UnsignedNumberContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_unsignedNumber);
+	public final ProcedureCallContext procedureCall() throws RecognitionException {
+		ProcedureCallContext _localctx = new ProcedureCallContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_procedureCall);
 		try {
-			setState(217);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(180);
+			func_identifier();
+			setState(181);
+			match(LPAREN);
+			setState(182);
+			parameters();
+			setState(183);
+			match(RPAREN);
+			setState(184);
+			match(T__0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParametersContext extends ParserRuleContext {
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public List<TerminalNode> DELIM() { return getTokens(MiniPascalParser.DELIM); }
+		public TerminalNode DELIM(int i) {
+			return getToken(MiniPascalParser.DELIM, i);
+		}
+		public ParametersContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_parameters; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterParameters(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitParameters(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitParameters(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ParametersContext parameters() throws RecognitionException {
+		ParametersContext _localctx = new ParametersContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_parameters);
+		int _la;
+		try {
+			setState(195);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case NUM_INT:
+			case RPAREN:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(215);
-				unsignedInteger();
 				}
 				break;
-			case NUM_REAL:
+			case TRUE:
+			case FALSE:
+			case NOT:
+			case SQRT:
+			case LN:
+			case EXP:
+			case SIN:
+			case COS:
+			case LPAREN:
+			case SUBT:
+			case ID:
+			case NUM:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(216);
-				unsignedReal();
+				setState(187);
+				expr(0);
+				setState(192);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==DELIM) {
+					{
+					{
+					setState(188);
+					match(DELIM);
+					setState(189);
+					expr(0);
+					}
+					}
+					setState(194);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 				}
 				break;
 			default:
@@ -1279,217 +1257,57 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class UnsignedIntegerContext extends ParserRuleContext {
-		public TerminalNode NUM_INT() { return getToken(MiniPascalParser.NUM_INT, 0); }
-		public UnsignedIntegerContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_unsignedInteger; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterUnsignedInteger(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitUnsignedInteger(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitUnsignedInteger(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final UnsignedIntegerContext unsignedInteger() throws RecognitionException {
-		UnsignedIntegerContext _localctx = new UnsignedIntegerContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_unsignedInteger);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(219);
-			match(NUM_INT);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class UnsignedRealContext extends ParserRuleContext {
-		public TerminalNode NUM_REAL() { return getToken(MiniPascalParser.NUM_REAL, 0); }
-		public UnsignedRealContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_unsignedReal; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterUnsignedReal(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitUnsignedReal(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitUnsignedReal(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final UnsignedRealContext unsignedReal() throws RecognitionException {
-		UnsignedRealContext _localctx = new UnsignedRealContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_unsignedReal);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(221);
-			match(NUM_REAL);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class StringContext extends ParserRuleContext {
-		public TerminalNode STRING_LITERAL() { return getToken(MiniPascalParser.STRING_LITERAL, 0); }
-		public StringContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_string; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterString(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitString(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitString(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final StringContext string() throws RecognitionException {
-		StringContext _localctx = new StringContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_string);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(223);
-			match(STRING_LITERAL);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class CompoundStatementContext extends ParserRuleContext {
+	public static class BlockContext extends ParserRuleContext {
 		public TerminalNode BEGIN() { return getToken(MiniPascalParser.BEGIN, 0); }
 		public StatementsContext statements() {
 			return getRuleContext(StatementsContext.class,0);
 		}
-		public BlockEndContext blockEnd() {
-			return getRuleContext(BlockEndContext.class,0);
-		}
-		public CompoundStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_compoundStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterCompoundStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitCompoundStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitCompoundStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final CompoundStatementContext compoundStatement() throws RecognitionException {
-		CompoundStatementContext _localctx = new CompoundStatementContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_compoundStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(225);
-			match(BEGIN);
-			setState(226);
-			statements();
-			setState(227);
-			blockEnd();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class BlockEndContext extends ParserRuleContext {
 		public TerminalNode END() { return getToken(MiniPascalParser.END, 0); }
-		public BlockEndContext(ParserRuleContext parent, int invokingState) {
+		public BlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_blockEnd; }
+		@Override public int getRuleIndex() { return RULE_block; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterBlockEnd(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitBlockEnd(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitBlockEnd(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final BlockEndContext blockEnd() throws RecognitionException {
-		BlockEndContext _localctx = new BlockEndContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_blockEnd);
+	public final BlockContext block() throws RecognitionException {
+		BlockContext _localctx = new BlockContext(_ctx, getState());
+		enterRule(_localctx, 32, RULE_block);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(229);
-			match(END);
+			setState(202);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__0:
+			case T__1:
+				enterOuterAlt(_localctx, 1);
+				{
+				}
+				break;
+			case BEGIN:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(198);
+				match(BEGIN);
+				setState(199);
+				statements();
+				setState(200);
+				match(END);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1505,15 +1323,11 @@ public class MiniPascalParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class StatementsContext extends ParserRuleContext {
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
-		}
-		public List<TerminalNode> SEMI() { return getTokens(MiniPascalParser.SEMI); }
-		public TerminalNode SEMI(int i) {
-			return getToken(MiniPascalParser.SEMI, i);
+		public StatementsContext statements() {
+			return getRuleContext(StatementsContext.class,0);
 		}
 		public StatementsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1536,33 +1350,35 @@ public class MiniPascalParser extends Parser {
 
 	public final StatementsContext statements() throws RecognitionException {
 		StatementsContext _localctx = new StatementsContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_statements);
+		enterRule(_localctx, 34, RULE_statements);
 		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(231);
-			statement();
-			setState(236);
+			setState(208);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					{
-					{
-					setState(232);
-					match(SEMI);
-					setState(233);
-					statement();
-					}
-					} 
+			switch (_input.LA(1)) {
+			case END:
+				enterOuterAlt(_localctx, 1);
+				{
 				}
-				setState(238);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
-			}
-			setState(239);
-			match(SEMI);
+				break;
+			case T__4:
+			case T__5:
+			case FOR:
+			case WHILE:
+			case BREAK:
+			case CONTINUE:
+			case IF:
+			case CASE:
+			case ID:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(205);
+				statement();
+				setState(206);
+				statements();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1578,35 +1394,32 @@ public class MiniPascalParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class StatementContext extends ParserRuleContext {
-		public AssignmentStatementContext assignmentStatement() {
-			return getRuleContext(AssignmentStatementContext.class,0);
+		public VarAssignContext varAssign() {
+			return getRuleContext(VarAssignContext.class,0);
 		}
-		public ProcedureStatementContext procedureStatement() {
-			return getRuleContext(ProcedureStatementContext.class,0);
+		public ProcedureCallContext procedureCall() {
+			return getRuleContext(ProcedureCallContext.class,0);
 		}
-		public CompoundStatementContext compoundStatement() {
-			return getRuleContext(CompoundStatementContext.class,0);
+		public LoopTypeContext loopType() {
+			return getRuleContext(LoopTypeContext.class,0);
 		}
 		public IfStatementContext ifStatement() {
 			return getRuleContext(IfStatementContext.class,0);
 		}
-		public WhileStatementContext whileStatement() {
-			return getRuleContext(WhileStatementContext.class,0);
+		public CaseStatementContext caseStatement() {
+			return getRuleContext(CaseStatementContext.class,0);
 		}
-		public ForStatementContext forStatement() {
-			return getRuleContext(ForStatementContext.class,0);
+		public ReadLnContext readLn() {
+			return getRuleContext(ReadLnContext.class,0);
 		}
-		public RepeatStatementContext repeatStatement() {
-			return getRuleContext(RepeatStatementContext.class,0);
+		public WriteLnContext writeLn() {
+			return getRuleContext(WriteLnContext.class,0);
 		}
-		public WriteStatementContext writeStatement() {
-			return getRuleContext(WriteStatementContext.class,0);
+		public Eval_breakContext eval_break() {
+			return getRuleContext(Eval_breakContext.class,0);
 		}
-		public WritelnStatementContext writelnStatement() {
-			return getRuleContext(WritelnStatementContext.class,0);
-		}
-		public ReadStatementContext readStatement() {
-			return getRuleContext(ReadStatementContext.class,0);
+		public Eval_continueContext eval_continue() {
+			return getRuleContext(Eval_continueContext.class,0);
 		}
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1629,79 +1442,72 @@ public class MiniPascalParser extends Parser {
 
 	public final StatementContext statement() throws RecognitionException {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_statement);
+		enterRule(_localctx, 36, RULE_statement);
 		try {
-			setState(251);
+			setState(219);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(241);
-				assignmentStatement();
+				setState(210);
+				varAssign();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(242);
-				procedureStatement();
+				setState(211);
+				procedureCall();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(243);
-				compoundStatement();
+				setState(212);
+				loopType();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(244);
+				setState(213);
 				ifStatement();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(245);
-				whileStatement();
+				setState(214);
+				caseStatement();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(246);
-				forStatement();
+				setState(215);
+				readLn();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(247);
-				repeatStatement();
+				setState(216);
+				writeLn();
 				}
 				break;
 			case 8:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(248);
-				writeStatement();
+				setState(217);
+				eval_break();
 				}
 				break;
 			case 9:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(249);
-				writelnStatement();
-				}
-				break;
-			case 10:
-				enterOuterAlt(_localctx, 10);
-				{
-				setState(250);
-				readStatement();
+				setState(218);
+				eval_continue();
 				}
 				break;
 			}
@@ -1718,63 +1524,148 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class WritelnStatementContext extends ParserRuleContext {
-		public TerminalNode WRITELN() { return getToken(MiniPascalParser.WRITELN, 0); }
-		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public ConststrContext conststr() {
-			return getRuleContext(ConststrContext.class,0);
-		}
-		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
-		public TerminalNode COMMA() { return getToken(MiniPascalParser.COMMA, 0); }
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public WritelnStatementContext(ParserRuleContext parent, int invokingState) {
+	public static class VarAssignContext extends ParserRuleContext {
+		public VarAssignContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_writelnStatement; }
+		@Override public int getRuleIndex() { return RULE_varAssign; }
+	 
+		public VarAssignContext() { }
+		public void copyFrom(VarAssignContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class FuncAssignmentContext extends VarAssignContext {
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public FunctionCallContext functionCall() {
+			return getRuleContext(FunctionCallContext.class,0);
+		}
+		public FuncAssignmentContext(VarAssignContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterWritelnStatement(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFuncAssignment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitWritelnStatement(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFuncAssignment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitWritelnStatement(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFuncAssignment(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExprAssignmentContext extends VarAssignContext {
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ExprAssignmentContext(VarAssignContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterExprAssignment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitExprAssignment(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitExprAssignment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final WritelnStatementContext writelnStatement() throws RecognitionException {
-		WritelnStatementContext _localctx = new WritelnStatementContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_writelnStatement);
-		int _la;
+	public final VarAssignContext varAssign() throws RecognitionException {
+		VarAssignContext _localctx = new VarAssignContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_varAssign);
+		try {
+			setState(231);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
+			case 1:
+				_localctx = new FuncAssignmentContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(221);
+				match(ID);
+				setState(222);
+				match(T__3);
+				setState(223);
+				functionCall();
+				setState(224);
+				match(T__0);
+				}
+				break;
+			case 2:
+				_localctx = new ExprAssignmentContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(226);
+				match(ID);
+				setState(227);
+				match(T__3);
+				setState(228);
+				expr(0);
+				setState(229);
+				match(T__0);
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ReadLnContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public ReadLnContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_readLn; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterReadLn(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitReadLn(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitReadLn(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ReadLnContext readLn() throws RecognitionException {
+		ReadLnContext _localctx = new ReadLnContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_readLn);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(253);
-			match(WRITELN);
-			setState(254);
+			setState(233);
+			match(T__4);
+			setState(234);
 			match(LPAREN);
-			setState(255);
-			conststr();
-			setState(258);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==COMMA) {
-				{
-				setState(256);
-				match(COMMA);
-				setState(257);
-				variable();
-				}
-			}
-
-			setState(260);
+			setState(235);
+			match(ID);
+			setState(236);
 			match(RPAREN);
+			setState(237);
+			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1789,179 +1680,77 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class AssignmentStatementContext extends ParserRuleContext {
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public TerminalNode ASSIGN() { return getToken(MiniPascalParser.ASSIGN, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public AssignmentStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_assignmentStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterAssignmentStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitAssignmentStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitAssignmentStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final AssignmentStatementContext assignmentStatement() throws RecognitionException {
-		AssignmentStatementContext _localctx = new AssignmentStatementContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_assignmentStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(262);
-			variable();
-			setState(263);
-			match(ASSIGN);
-			setState(264);
-			expression();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ProcedureStatementContext extends ParserRuleContext {
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
-		}
+	public static class WriteLnContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public ActualParameterListContext actualParameterList() {
-			return getRuleContext(ActualParameterListContext.class,0);
-		}
 		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
-		public ProcedureStatementContext(ParserRuleContext parent, int invokingState) {
+		public List<LineContext> line() {
+			return getRuleContexts(LineContext.class);
+		}
+		public LineContext line(int i) {
+			return getRuleContext(LineContext.class,i);
+		}
+		public List<TerminalNode> DELIM() { return getTokens(MiniPascalParser.DELIM); }
+		public TerminalNode DELIM(int i) {
+			return getToken(MiniPascalParser.DELIM, i);
+		}
+		public WriteLnContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_procedureStatement; }
+		@Override public int getRuleIndex() { return RULE_writeLn; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterProcedureStatement(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterWriteLn(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitProcedureStatement(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitWriteLn(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitProcedureStatement(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitWriteLn(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ProcedureStatementContext procedureStatement() throws RecognitionException {
-		ProcedureStatementContext _localctx = new ProcedureStatementContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_procedureStatement);
+	public final WriteLnContext writeLn() throws RecognitionException {
+		WriteLnContext _localctx = new WriteLnContext(_ctx, getState());
+		enterRule(_localctx, 42, RULE_writeLn);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(266);
-			identifier();
-			setState(271);
+			setState(239);
+			match(T__5);
+			setState(240);
+			match(LPAREN);
+			setState(245); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==LPAREN) {
-				{
-				setState(267);
-				match(LPAREN);
-				setState(268);
-				actualParameterList();
-				setState(269);
-				match(RPAREN);
-				}
-			}
-
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ActualParameterListContext extends ParserRuleContext {
-		public List<ActualParameterContext> actualParameter() {
-			return getRuleContexts(ActualParameterContext.class);
-		}
-		public ActualParameterContext actualParameter(int i) {
-			return getRuleContext(ActualParameterContext.class,i);
-		}
-		public List<TerminalNode> COMMA() { return getTokens(MiniPascalParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(MiniPascalParser.COMMA, i);
-		}
-		public ActualParameterListContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_actualParameterList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterActualParameterList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitActualParameterList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitActualParameterList(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ActualParameterListContext actualParameterList() throws RecognitionException {
-		ActualParameterListContext _localctx = new ActualParameterListContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_actualParameterList);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(273);
-			actualParameter();
-			setState(278);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==COMMA) {
+			do {
 				{
 				{
-				setState(274);
-				match(COMMA);
-				setState(275);
-				actualParameter();
-				}
-				}
-				setState(280);
+				setState(241);
+				line();
+				setState(243);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			}
+				if (_la==DELIM) {
+					{
+					setState(242);
+					match(DELIM);
+					}
+				}
+
+				}
+				}
+				setState(247); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 7885834841561088L) != 0) );
+			setState(249);
+			match(RPAREN);
+			setState(250);
+			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1976,37 +1765,643 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ActualParameterContext extends ParserRuleContext {
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public ActualParameterContext(ParserRuleContext parent, int invokingState) {
+	public static class LineContext extends ParserRuleContext {
+		public LineContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_actualParameter; }
+		@Override public int getRuleIndex() { return RULE_line; }
+	 
+		public LineContext() { }
+		public void copyFrom(LineContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExprLineContext extends LineContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public ExprLineContext(LineContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterActualParameter(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterExprLine(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitActualParameter(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitExprLine(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitActualParameter(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitExprLine(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class StrLineContext extends LineContext {
+		public TerminalNode STRING_LITERAL() { return getToken(MiniPascalParser.STRING_LITERAL, 0); }
+		public StrLineContext(LineContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterStrLine(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitStrLine(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitStrLine(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ActualParameterContext actualParameter() throws RecognitionException {
-		ActualParameterContext _localctx = new ActualParameterContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_actualParameter);
+	public final LineContext line() throws RecognitionException {
+		LineContext _localctx = new LineContext(_ctx, getState());
+		enterRule(_localctx, 44, RULE_line);
+		try {
+			setState(254);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case TRUE:
+			case FALSE:
+			case NOT:
+			case SQRT:
+			case LN:
+			case EXP:
+			case SIN:
+			case COS:
+			case LPAREN:
+			case SUBT:
+			case ID:
+			case NUM:
+				_localctx = new ExprLineContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(252);
+				expr(0);
+				}
+				break;
+			case STRING_LITERAL:
+				_localctx = new StrLineContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(253);
+				match(STRING_LITERAL);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class LoopTypeContext extends ParserRuleContext {
+		public WhileLoopContext whileLoop() {
+			return getRuleContext(WhileLoopContext.class,0);
+		}
+		public ForLoopContext forLoop() {
+			return getRuleContext(ForLoopContext.class,0);
+		}
+		public LoopTypeContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loopType; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterLoopType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitLoopType(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitLoopType(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LoopTypeContext loopType() throws RecognitionException {
+		LoopTypeContext _localctx = new LoopTypeContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_loopType);
+		try {
+			setState(258);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case WHILE:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(256);
+				whileLoop();
+				}
+				break;
+			case FOR:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(257);
+				forLoop();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class WhileLoopContext extends ParserRuleContext {
+		public TerminalNode WHILE() { return getToken(MiniPascalParser.WHILE, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public TerminalNode DO() { return getToken(MiniPascalParser.DO, 0); }
+		public LoopBlockContext loopBlock() {
+			return getRuleContext(LoopBlockContext.class,0);
+		}
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public WhileLoopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_whileLoop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterWhileLoop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitWhileLoop(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitWhileLoop(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final WhileLoopContext whileLoop() throws RecognitionException {
+		WhileLoopContext _localctx = new WhileLoopContext(_ctx, getState());
+		enterRule(_localctx, 48, RULE_whileLoop);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(260);
+			match(WHILE);
+			setState(262);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
+			case 1:
+				{
+				setState(261);
+				match(LPAREN);
+				}
+				break;
+			}
+			setState(264);
+			expr(0);
+			setState(265);
+			match(RPAREN);
+			setState(266);
+			match(DO);
+			setState(267);
+			loopBlock();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ForLoopContext extends ParserRuleContext {
+		public TerminalNode FOR() { return getToken(MiniPascalParser.FOR, 0); }
+		public VarForAssignContext varForAssign() {
+			return getRuleContext(VarForAssignContext.class,0);
+		}
+		public TerminalNode TO() { return getToken(MiniPascalParser.TO, 0); }
+		public ElementContext element() {
+			return getRuleContext(ElementContext.class,0);
+		}
+		public TerminalNode DO() { return getToken(MiniPascalParser.DO, 0); }
+		public LoopBlockContext loopBlock() {
+			return getRuleContext(LoopBlockContext.class,0);
+		}
+		public ForLoopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_forLoop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterForLoop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitForLoop(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitForLoop(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ForLoopContext forLoop() throws RecognitionException {
+		ForLoopContext _localctx = new ForLoopContext(_ctx, getState());
+		enterRule(_localctx, 50, RULE_forLoop);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(269);
+			match(FOR);
+			setState(270);
+			varForAssign();
+			setState(271);
+			match(TO);
+			setState(272);
+			element();
+			setState(273);
+			match(DO);
+			setState(275);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==BEGIN) {
+				{
+				setState(274);
+				loopBlock();
+				}
+			}
+
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class VarForAssignContext extends ParserRuleContext {
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public VarForAssignContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_varForAssign; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVarForAssign(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVarForAssign(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVarForAssign(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final VarForAssignContext varForAssign() throws RecognitionException {
+		VarForAssignContext _localctx = new VarForAssignContext(_ctx, getState());
+		enterRule(_localctx, 52, RULE_varForAssign);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(277);
+			match(ID);
+			setState(278);
+			match(T__3);
+			setState(279);
+			expr(0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class LoopBlockContext extends ParserRuleContext {
+		public TerminalNode BEGIN() { return getToken(MiniPascalParser.BEGIN, 0); }
+		public LoopStatementsContext loopStatements() {
+			return getRuleContext(LoopStatementsContext.class,0);
+		}
+		public TerminalNode END() { return getToken(MiniPascalParser.END, 0); }
+		public LoopBlockContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loopBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterLoopBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitLoopBlock(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitLoopBlock(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LoopBlockContext loopBlock() throws RecognitionException {
+		LoopBlockContext _localctx = new LoopBlockContext(_ctx, getState());
+		enterRule(_localctx, 54, RULE_loopBlock);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(281);
-			expression();
+			match(BEGIN);
+			setState(282);
+			loopStatements();
+			setState(283);
+			match(END);
+			setState(284);
+			match(T__0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class LoopStatementsContext extends ParserRuleContext {
+		public LoopStatementContext loopStatement() {
+			return getRuleContext(LoopStatementContext.class,0);
+		}
+		public LoopStatementsContext loopStatements() {
+			return getRuleContext(LoopStatementsContext.class,0);
+		}
+		public LoopStatementsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loopStatements; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterLoopStatements(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitLoopStatements(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitLoopStatements(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LoopStatementsContext loopStatements() throws RecognitionException {
+		LoopStatementsContext _localctx = new LoopStatementsContext(_ctx, getState());
+		enterRule(_localctx, 56, RULE_loopStatements);
+		try {
+			setState(290);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case END:
+				enterOuterAlt(_localctx, 1);
+				{
+				}
+				break;
+			case T__4:
+			case T__5:
+			case FOR:
+			case WHILE:
+			case BREAK:
+			case CONTINUE:
+			case IF:
+			case CASE:
+			case ID:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(287);
+				loopStatement();
+				setState(288);
+				loopStatements();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class LoopStatementContext extends ParserRuleContext {
+		public VarDecContext varDec() {
+			return getRuleContext(VarDecContext.class,0);
+		}
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
+		}
+		public Eval_breakContext eval_break() {
+			return getRuleContext(Eval_breakContext.class,0);
+		}
+		public Eval_continueContext eval_continue() {
+			return getRuleContext(Eval_continueContext.class,0);
+		}
+		public LoopStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loopStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterLoopStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitLoopStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitLoopStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LoopStatementContext loopStatement() throws RecognitionException {
+		LoopStatementContext _localctx = new LoopStatementContext(_ctx, getState());
+		enterRule(_localctx, 58, RULE_loopStatement);
+		try {
+			setState(296);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(292);
+				varDec();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(293);
+				statement();
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(294);
+				eval_break();
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(295);
+				eval_continue();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Eval_breakContext extends ParserRuleContext {
+		public TerminalNode BREAK() { return getToken(MiniPascalParser.BREAK, 0); }
+		public Eval_breakContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_eval_break; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterEval_break(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitEval_break(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitEval_break(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Eval_breakContext eval_break() throws RecognitionException {
+		Eval_breakContext _localctx = new Eval_breakContext(_ctx, getState());
+		enterRule(_localctx, 60, RULE_eval_break);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(298);
+			match(BREAK);
+			setState(299);
+			match(T__0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Eval_continueContext extends ParserRuleContext {
+		public TerminalNode CONTINUE() { return getToken(MiniPascalParser.CONTINUE, 0); }
+		public Eval_continueContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_eval_continue; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterEval_continue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitEval_continue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitEval_continue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Eval_continueContext eval_continue() throws RecognitionException {
+		Eval_continueContext _localctx = new Eval_continueContext(_ctx, getState());
+		enterRule(_localctx, 62, RULE_eval_continue);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(301);
+			match(CONTINUE);
+			setState(302);
+			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2022,18 +2417,23 @@ public class MiniPascalParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class IfStatementContext extends ParserRuleContext {
-		public TerminalNode IF() { return getToken(MiniPascalParser.IF, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+		public List<TerminalNode> IF() { return getTokens(MiniPascalParser.IF); }
+		public TerminalNode IF(int i) {
+			return getToken(MiniPascalParser.IF, i);
 		}
-		public TerminalNode THEN() { return getToken(MiniPascalParser.THEN, 0); }
-		public List<StatementContext> statement() {
-			return getRuleContexts(StatementContext.class);
+		public List<CondBlockContext> condBlock() {
+			return getRuleContexts(CondBlockContext.class);
 		}
-		public StatementContext statement(int i) {
-			return getRuleContext(StatementContext.class,i);
+		public CondBlockContext condBlock(int i) {
+			return getRuleContext(CondBlockContext.class,i);
 		}
-		public TerminalNode ELSE() { return getToken(MiniPascalParser.ELSE, 0); }
+		public List<TerminalNode> ELSE() { return getTokens(MiniPascalParser.ELSE); }
+		public TerminalNode ELSE(int i) {
+			return getToken(MiniPascalParser.ELSE, i);
+		}
+		public StateBlockContext stateBlock() {
+			return getRuleContext(StateBlockContext.class,0);
+		}
 		public IfStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2055,27 +2455,44 @@ public class MiniPascalParser extends Parser {
 
 	public final IfStatementContext ifStatement() throws RecognitionException {
 		IfStatementContext _localctx = new IfStatementContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_ifStatement);
+		enterRule(_localctx, 64, RULE_ifStatement);
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(283);
+			setState(304);
 			match(IF);
-			setState(284);
-			expression();
-			setState(285);
-			match(THEN);
-			setState(286);
-			statement();
-			setState(289);
+			setState(305);
+			condBlock();
+			setState(311);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
+			_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					{
+					{
+					setState(306);
+					match(ELSE);
+					setState(307);
+					match(IF);
+					setState(308);
+					condBlock();
+					}
+					} 
+				}
+				setState(313);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
+			}
+			setState(316);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
 			case 1:
 				{
-				setState(287);
+				setState(314);
 				match(ELSE);
-				setState(288);
-				statement();
+				setState(315);
+				stateBlock();
 				}
 				break;
 			}
@@ -2093,783 +2510,138 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class WhileStatementContext extends ParserRuleContext {
-		public TerminalNode WHILE() { return getToken(MiniPascalParser.WHILE, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
+	public static class CondBlockContext extends ParserRuleContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode DO() { return getToken(MiniPascalParser.DO, 0); }
-		public StatementContext statement() {
-			return getRuleContext(StatementContext.class,0);
+		public TerminalNode THEN() { return getToken(MiniPascalParser.THEN, 0); }
+		public StateBlockContext stateBlock() {
+			return getRuleContext(StateBlockContext.class,0);
 		}
-		public WhileStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_whileStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterWhileStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitWhileStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitWhileStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final WhileStatementContext whileStatement() throws RecognitionException {
-		WhileStatementContext _localctx = new WhileStatementContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_whileStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(291);
-			match(WHILE);
-			setState(292);
-			expression();
-			setState(293);
-			match(DO);
-			setState(294);
-			statement();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ForStatementContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(MiniPascalParser.FOR, 0); }
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
-		}
-		public TerminalNode ASSIGN() { return getToken(MiniPascalParser.ASSIGN, 0); }
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
-		}
-		public TerminalNode DO() { return getToken(MiniPascalParser.DO, 0); }
-		public StatementContext statement() {
-			return getRuleContext(StatementContext.class,0);
-		}
-		public TerminalNode TO() { return getToken(MiniPascalParser.TO, 0); }
-		public TerminalNode DOWNTO() { return getToken(MiniPascalParser.DOWNTO, 0); }
-		public ForStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_forStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterForStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitForStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitForStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ForStatementContext forStatement() throws RecognitionException {
-		ForStatementContext _localctx = new ForStatementContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_forStatement);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(296);
-			match(FOR);
-			setState(297);
-			identifier();
-			setState(298);
-			match(ASSIGN);
-			setState(299);
-			expression();
-			setState(300);
-			_la = _input.LA(1);
-			if ( !(_la==TO || _la==DOWNTO) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			setState(301);
-			expression();
-			setState(302);
-			match(DO);
-			setState(303);
-			statement();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class RepeatStatementContext extends ParserRuleContext {
-		public TerminalNode REPEAT() { return getToken(MiniPascalParser.REPEAT, 0); }
-		public StatementsContext statements() {
-			return getRuleContext(StatementsContext.class,0);
-		}
-		public TerminalNode UNTIL() { return getToken(MiniPascalParser.UNTIL, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public RepeatStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_repeatStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterRepeatStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitRepeatStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitRepeatStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final RepeatStatementContext repeatStatement() throws RecognitionException {
-		RepeatStatementContext _localctx = new RepeatStatementContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_repeatStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(305);
-			match(REPEAT);
-			setState(306);
-			statements();
-			setState(307);
-			match(UNTIL);
-			setState(308);
-			expression();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class WriteStatementContext extends ParserRuleContext {
-		public TerminalNode WRITE() { return getToken(MiniPascalParser.WRITE, 0); }
 		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public ConststrContext conststr() {
-			return getRuleContext(ConststrContext.class,0);
-		}
 		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
-		public TerminalNode COMMA() { return getToken(MiniPascalParser.COMMA, 0); }
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public WriteStatementContext(ParserRuleContext parent, int invokingState) {
+		public CondBlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_writeStatement; }
+		@Override public int getRuleIndex() { return RULE_condBlock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterWriteStatement(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterCondBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitWriteStatement(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitCondBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitWriteStatement(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitCondBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final WriteStatementContext writeStatement() throws RecognitionException {
-		WriteStatementContext _localctx = new WriteStatementContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_writeStatement);
+	public final CondBlockContext condBlock() throws RecognitionException {
+		CondBlockContext _localctx = new CondBlockContext(_ctx, getState());
+		enterRule(_localctx, 66, RULE_condBlock);
 		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(310);
-			match(WRITE);
-			setState(311);
-			match(LPAREN);
-			setState(312);
-			conststr();
-			setState(315);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (_la==COMMA) {
-				{
-				setState(313);
-				match(COMMA);
-				setState(314);
-				variable();
-				}
-			}
-
-			setState(317);
-			match(RPAREN);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ReadStatementContext extends ParserRuleContext {
-		public TerminalNode READ() { return getToken(MiniPascalParser.READ, 0); }
-		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
-		public ReadStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_readStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterReadStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitReadStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitReadStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ReadStatementContext readStatement() throws RecognitionException {
-		ReadStatementContext _localctx = new ReadStatementContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_readStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(319);
-			match(READ);
-			setState(320);
-			match(LPAREN);
-			setState(321);
-			variable();
-			setState(322);
-			match(RPAREN);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class ExpressionContext extends ParserRuleContext {
-		public List<SimpleExpressionContext> simpleExpression() {
-			return getRuleContexts(SimpleExpressionContext.class);
-		}
-		public SimpleExpressionContext simpleExpression(int i) {
-			return getRuleContext(SimpleExpressionContext.class,i);
-		}
-		public RelationaloperatorContext relationaloperator() {
-			return getRuleContext(RelationaloperatorContext.class,0);
-		}
-		public ExpressionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_expression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ExpressionContext expression() throws RecognitionException {
-		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_expression);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(324);
-			simpleExpression();
-			setState(328);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 34634616275456L) != 0)) {
+			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
+			case 1:
 				{
-				setState(325);
-				relationaloperator();
-				setState(326);
-				simpleExpression();
-				}
-			}
-
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class RelationaloperatorContext extends ParserRuleContext {
-		public TerminalNode EQUAL() { return getToken(MiniPascalParser.EQUAL, 0); }
-		public TerminalNode NOT_EQUAL() { return getToken(MiniPascalParser.NOT_EQUAL, 0); }
-		public TerminalNode LT() { return getToken(MiniPascalParser.LT, 0); }
-		public TerminalNode LE() { return getToken(MiniPascalParser.LE, 0); }
-		public TerminalNode GE() { return getToken(MiniPascalParser.GE, 0); }
-		public TerminalNode GT() { return getToken(MiniPascalParser.GT, 0); }
-		public TerminalNode IN() { return getToken(MiniPascalParser.IN, 0); }
-		public RelationaloperatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_relationaloperator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterRelationaloperator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitRelationaloperator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitRelationaloperator(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final RelationaloperatorContext relationaloperator() throws RecognitionException {
-		RelationaloperatorContext _localctx = new RelationaloperatorContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_relationaloperator);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(330);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 34634616275456L) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class SimpleExpressionContext extends ParserRuleContext {
-		public List<TermContext> term() {
-			return getRuleContexts(TermContext.class);
-		}
-		public TermContext term(int i) {
-			return getRuleContext(TermContext.class,i);
-		}
-		public List<AdditiveoperatorContext> additiveoperator() {
-			return getRuleContexts(AdditiveoperatorContext.class);
-		}
-		public AdditiveoperatorContext additiveoperator(int i) {
-			return getRuleContext(AdditiveoperatorContext.class,i);
-		}
-		public SimpleExpressionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_simpleExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterSimpleExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitSimpleExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitSimpleExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final SimpleExpressionContext simpleExpression() throws RecognitionException {
-		SimpleExpressionContext _localctx = new SimpleExpressionContext(_ctx, getState());
-		enterRule(_localctx, 72, RULE_simpleExpression);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(332);
-			term();
-			setState(338);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 15032385536L) != 0)) {
-				{
-				{
-				setState(333);
-				additiveoperator();
-				setState(334);
-				term();
-				}
-				}
-				setState(340);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class AdditiveoperatorContext extends ParserRuleContext {
-		public TerminalNode PLUS() { return getToken(MiniPascalParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(MiniPascalParser.MINUS, 0); }
-		public TerminalNode OR() { return getToken(MiniPascalParser.OR, 0); }
-		public AdditiveoperatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_additiveoperator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterAdditiveoperator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitAdditiveoperator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitAdditiveoperator(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final AdditiveoperatorContext additiveoperator() throws RecognitionException {
-		AdditiveoperatorContext _localctx = new AdditiveoperatorContext(_ctx, getState());
-		enterRule(_localctx, 74, RULE_additiveoperator);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(341);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 15032385536L) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class TermContext extends ParserRuleContext {
-		public List<FactorContext> factor() {
-			return getRuleContexts(FactorContext.class);
-		}
-		public FactorContext factor(int i) {
-			return getRuleContext(FactorContext.class,i);
-		}
-		public List<MultiplicativeoperatorContext> multiplicativeoperator() {
-			return getRuleContexts(MultiplicativeoperatorContext.class);
-		}
-		public MultiplicativeoperatorContext multiplicativeoperator(int i) {
-			return getRuleContext(MultiplicativeoperatorContext.class,i);
-		}
-		public TermContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_term; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitTerm(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitTerm(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final TermContext term() throws RecognitionException {
-		TermContext _localctx = new TermContext(_ctx, getState());
-		enterRule(_localctx, 76, RULE_term);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(343);
-			factor();
-			setState(349);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 258771779584L) != 0)) {
-				{
-				{
-				setState(344);
-				multiplicativeoperator();
-				setState(345);
-				factor();
-				}
-				}
-				setState(351);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class MultiplicativeoperatorContext extends ParserRuleContext {
-		public TerminalNode STAR() { return getToken(MiniPascalParser.STAR, 0); }
-		public TerminalNode SLASH() { return getToken(MiniPascalParser.SLASH, 0); }
-		public TerminalNode DIV() { return getToken(MiniPascalParser.DIV, 0); }
-		public TerminalNode MOD() { return getToken(MiniPascalParser.MOD, 0); }
-		public TerminalNode AND() { return getToken(MiniPascalParser.AND, 0); }
-		public MultiplicativeoperatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_multiplicativeoperator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterMultiplicativeoperator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitMultiplicativeoperator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitMultiplicativeoperator(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final MultiplicativeoperatorContext multiplicativeoperator() throws RecognitionException {
-		MultiplicativeoperatorContext _localctx = new MultiplicativeoperatorContext(_ctx, getState());
-		enterRule(_localctx, 78, RULE_multiplicativeoperator);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(352);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 258771779584L) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class FactorContext extends ParserRuleContext {
-		public VariableContext variable() {
-			return getRuleContext(VariableContext.class,0);
-		}
-		public NumberContext number() {
-			return getRuleContext(NumberContext.class,0);
-		}
-		public ConststrContext conststr() {
-			return getRuleContext(ConststrContext.class,0);
-		}
-		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
-		public TerminalNode NOT() { return getToken(MiniPascalParser.NOT, 0); }
-		public FactorContext factor() {
-			return getRuleContext(FactorContext.class,0);
-		}
-		public FactorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_factor; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFactor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFactor(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFactor(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final FactorContext factor() throws RecognitionException {
-		FactorContext _localctx = new FactorContext(_ctx, getState());
-		enterRule(_localctx, 80, RULE_factor);
-		try {
-			setState(363);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case IDENT:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(354);
-				variable();
-				}
-				break;
-			case NUM_INT:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(355);
-				number();
-				}
-				break;
-			case STRING_LITERAL:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(356);
-				conststr();
-				}
-				break;
-			case LPAREN:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(357);
+				setState(318);
 				match(LPAREN);
-				setState(358);
-				expression();
-				setState(359);
+				}
+				break;
+			}
+			setState(321);
+			expr(0);
+			setState(323);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==RPAREN) {
+				{
+				setState(322);
 				match(RPAREN);
 				}
-				break;
-			case NOT:
-				enterOuterAlt(_localctx, 5);
+			}
+
+			setState(325);
+			match(THEN);
+			setState(326);
+			stateBlock();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class StateBlockContext extends ParserRuleContext {
+		public BlockContext block() {
+			return getRuleContext(BlockContext.class,0);
+		}
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
+		}
+		public StateBlockContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_stateBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterStateBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitStateBlock(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitStateBlock(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final StateBlockContext stateBlock() throws RecognitionException {
+		StateBlockContext _localctx = new StateBlockContext(_ctx, getState());
+		enterRule(_localctx, 68, RULE_stateBlock);
+		try {
+			setState(332);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case T__0:
+			case BEGIN:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(361);
-				match(NOT);
-				setState(362);
-				factor();
+				setState(328);
+				block();
+				setState(329);
+				match(T__0);
+				}
+				break;
+			case T__4:
+			case T__5:
+			case FOR:
+			case WHILE:
+			case BREAK:
+			case CONTINUE:
+			case IF:
+			case CASE:
+			case ID:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(331);
+				statement();
 				}
 				break;
 			default:
@@ -2888,151 +2660,91 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class VariableContext extends ParserRuleContext {
-		public IdentifierContext identifier() {
-			return getRuleContext(IdentifierContext.class,0);
+	public static class CaseStatementContext extends ParserRuleContext {
+		public TerminalNode CASE() { return getToken(MiniPascalParser.CASE, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode LBRACK() { return getToken(MiniPascalParser.LBRACK, 0); }
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
+		public TerminalNode OF() { return getToken(MiniPascalParser.OF, 0); }
+		public TerminalNode END() { return getToken(MiniPascalParser.END, 0); }
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public List<CaseBlockContext> caseBlock() {
+			return getRuleContexts(CaseBlockContext.class);
 		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public CaseBlockContext caseBlock(int i) {
+			return getRuleContext(CaseBlockContext.class,i);
 		}
-		public TerminalNode RBRACK() { return getToken(MiniPascalParser.RBRACK, 0); }
-		public TerminalNode COMMA() { return getToken(MiniPascalParser.COMMA, 0); }
-		public VariableContext(ParserRuleContext parent, int invokingState) {
+		public CaseStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_variable; }
+		@Override public int getRuleIndex() { return RULE_caseStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterVariable(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterCaseStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitVariable(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitCaseStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitVariable(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitCaseStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final VariableContext variable() throws RecognitionException {
-		VariableContext _localctx = new VariableContext(_ctx, getState());
-		enterRule(_localctx, 82, RULE_variable);
-		try {
-			setState(378);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(365);
-				identifier();
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(366);
-				identifier();
-				setState(367);
-				match(LBRACK);
-				setState(368);
-				expression();
-				setState(369);
-				match(RBRACK);
-				}
-				break;
-			case 3:
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(371);
-				identifier();
-				setState(372);
-				match(LBRACK);
-				setState(373);
-				expression();
-				setState(374);
-				match(COMMA);
-				setState(375);
-				expression();
-				setState(376);
-				match(RBRACK);
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	@SuppressWarnings("CheckReturnValue")
-	public static class IdentifierListContext extends ParserRuleContext {
-		public List<IdentifierContext> identifier() {
-			return getRuleContexts(IdentifierContext.class);
-		}
-		public IdentifierContext identifier(int i) {
-			return getRuleContext(IdentifierContext.class,i);
-		}
-		public List<TerminalNode> COMMA() { return getTokens(MiniPascalParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(MiniPascalParser.COMMA, i);
-		}
-		public IdentifierListContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_identifierList; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterIdentifierList(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitIdentifierList(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitIdentifierList(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final IdentifierListContext identifierList() throws RecognitionException {
-		IdentifierListContext _localctx = new IdentifierListContext(_ctx, getState());
-		enterRule(_localctx, 84, RULE_identifierList);
+	public final CaseStatementContext caseStatement() throws RecognitionException {
+		CaseStatementContext _localctx = new CaseStatementContext(_ctx, getState());
+		enterRule(_localctx, 70, RULE_caseStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(380);
-			identifier();
-			setState(385);
+			setState(334);
+			match(CASE);
+			setState(336);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
+			case 1:
+				{
+				setState(335);
+				match(LPAREN);
+				}
+				break;
+			}
+			setState(338);
+			expr(0);
+			setState(340);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==COMMA) {
+			if (_la==RPAREN) {
+				{
+				setState(339);
+				match(RPAREN);
+				}
+			}
+
+			setState(342);
+			match(OF);
+			setState(344); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
 				{
 				{
-				setState(381);
-				match(COMMA);
-				setState(382);
-				identifier();
+				setState(343);
+				caseBlock();
 				}
 				}
-				setState(387);
+				setState(346); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			}
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 5634035027875840L) != 0) );
+			setState(348);
+			match(END);
+			setState(349);
+			match(T__0);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3047,35 +2759,766 @@ public class MiniPascalParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class ConststrContext extends ParserRuleContext {
-		public TerminalNode STRING_LITERAL() { return getToken(MiniPascalParser.STRING_LITERAL, 0); }
-		public ConststrContext(ParserRuleContext parent, int invokingState) {
+	public static class CaseBlockContext extends ParserRuleContext {
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public StatementContext statement() {
+			return getRuleContext(StatementContext.class,0);
+		}
+		public CaseBlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_conststr; }
+		@Override public int getRuleIndex() { return RULE_caseBlock; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterConststr(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterCaseBlock(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitConststr(this);
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitCaseBlock(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitConststr(this);
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitCaseBlock(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final ConststrContext conststr() throws RecognitionException {
-		ConststrContext _localctx = new ConststrContext(_ctx, getState());
-		enterRule(_localctx, 86, RULE_conststr);
+	public final CaseBlockContext caseBlock() throws RecognitionException {
+		CaseBlockContext _localctx = new CaseBlockContext(_ctx, getState());
+		enterRule(_localctx, 72, RULE_caseBlock);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(388);
-			match(STRING_LITERAL);
+			setState(351);
+			expr(0);
+			setState(352);
+			match(T__2);
+			setState(353);
+			statement();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExprContext extends ParserRuleContext {
+		public ExprContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expr; }
+	 
+		public ExprContext() { }
+		public void copyFrom(ExprContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class UnaryExprContext extends ExprContext {
+		public TerminalNode SUBT() { return getToken(MiniPascalParser.SUBT, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public UnaryExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterUnaryExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitUnaryExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitUnaryExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class NotExprContext extends ExprContext {
+		public TerminalNode NOT() { return getToken(MiniPascalParser.NOT, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public NotExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterNotExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitNotExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitNotExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ElementExprContext extends ExprContext {
+		public ElementContext element() {
+			return getRuleContext(ElementContext.class,0);
+		}
+		public ElementExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterElementExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitElementExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitElementExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AddExprContext extends ExprContext {
+		public ExprContext lEx;
+		public Token op;
+		public ExprContext rEx;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode ADD() { return getToken(MiniPascalParser.ADD, 0); }
+		public TerminalNode SUBT() { return getToken(MiniPascalParser.SUBT, 0); }
+		public AddExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterAddExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitAddExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitAddExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class EquationExprContext extends ExprContext {
+		public Token type;
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public TerminalNode SQRT() { return getToken(MiniPascalParser.SQRT, 0); }
+		public TerminalNode LN() { return getToken(MiniPascalParser.LN, 0); }
+		public TerminalNode EXP() { return getToken(MiniPascalParser.EXP, 0); }
+		public TerminalNode SIN() { return getToken(MiniPascalParser.SIN, 0); }
+		public TerminalNode COS() { return getToken(MiniPascalParser.COS, 0); }
+		public EquationExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterEquationExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitEquationExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitEquationExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class OrExprContext extends ExprContext {
+		public ExprContext lEx;
+		public ExprContext rEx;
+		public TerminalNode OR() { return getToken(MiniPascalParser.OR, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public OrExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterOrExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitOrExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitOrExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class MultExprContext extends ExprContext {
+		public ExprContext lEx;
+		public Token op;
+		public ExprContext rEx;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode MULT() { return getToken(MiniPascalParser.MULT, 0); }
+		public TerminalNode DIV() { return getToken(MiniPascalParser.DIV, 0); }
+		public TerminalNode MOD() { return getToken(MiniPascalParser.MOD, 0); }
+		public MultExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterMultExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitMultExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitMultExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class EqualityExprContext extends ExprContext {
+		public ExprContext lEx;
+		public Token op;
+		public ExprContext rEx;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode EQ() { return getToken(MiniPascalParser.EQ, 0); }
+		public TerminalNode NEQ() { return getToken(MiniPascalParser.NEQ, 0); }
+		public EqualityExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterEqualityExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitEqualityExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitEqualityExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class FunctCallExprContext extends ExprContext {
+		public FunctionCallContext functionCall() {
+			return getRuleContext(FunctionCallContext.class,0);
+		}
+		public FunctCallExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFunctCallExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFunctCallExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFunctCallExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class CompareExprContext extends ExprContext {
+		public ExprContext lEx;
+		public Token op;
+		public ExprContext rEx;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode LTE() { return getToken(MiniPascalParser.LTE, 0); }
+		public TerminalNode GTE() { return getToken(MiniPascalParser.GTE, 0); }
+		public TerminalNode LT() { return getToken(MiniPascalParser.LT, 0); }
+		public TerminalNode GT() { return getToken(MiniPascalParser.GT, 0); }
+		public CompareExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterCompareExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitCompareExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitCompareExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class AndExprContext extends ExprContext {
+		public ExprContext lEx;
+		public ExprContext rEx;
+		public TerminalNode AND() { return getToken(MiniPascalParser.AND, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public AndExprContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterAndExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitAndExpr(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitAndExpr(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ExprContext expr() throws RecognitionException {
+		return expr(0);
+	}
+
+	private ExprContext expr(int _p) throws RecognitionException {
+		ParserRuleContext _parentctx = _ctx;
+		int _parentState = getState();
+		ExprContext _localctx = new ExprContext(_ctx, _parentState);
+		ExprContext _prevctx = _localctx;
+		int _startState = 74;
+		enterRecursionRule(_localctx, 74, RULE_expr, _p);
+		int _la;
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(367);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
+			case 1:
+				{
+				_localctx = new EquationExprContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+
+				setState(356);
+				((EquationExprContext)_localctx).type = _input.LT(1);
+				_la = _input.LA(1);
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 8126464L) != 0)) ) {
+					((EquationExprContext)_localctx).type = (Token)_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(357);
+				match(LPAREN);
+				setState(358);
+				expr(0);
+				setState(359);
+				match(RPAREN);
+				}
+				break;
+			case 2:
+				{
+				_localctx = new UnaryExprContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(361);
+				match(SUBT);
+				setState(362);
+				expr(10);
+				}
+				break;
+			case 3:
+				{
+				_localctx = new NotExprContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(363);
+				match(NOT);
+				setState(364);
+				expr(9);
+				}
+				break;
+			case 4:
+				{
+				_localctx = new FunctCallExprContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(365);
+				functionCall();
+				}
+				break;
+			case 5:
+				{
+				_localctx = new ElementExprContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(366);
+				element();
+				}
+				break;
+			}
+			_ctx.stop = _input.LT(-1);
+			setState(389);
+			_errHandler.sync(this);
+			_alt = getInterpreter().adaptivePredict(_input,33,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
+					if ( _parseListeners!=null ) triggerExitRuleEvent();
+					_prevctx = _localctx;
+					{
+					setState(387);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
+					case 1:
+						{
+						_localctx = new MultExprContext(new ExprContext(_parentctx, _parentState));
+						((MultExprContext)_localctx).lEx = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(369);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						setState(370);
+						((MultExprContext)_localctx).op = _input.LT(1);
+						_la = _input.LA(1);
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1649267572736L) != 0)) ) {
+							((MultExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(371);
+						((MultExprContext)_localctx).rEx = expr(9);
+						}
+						break;
+					case 2:
+						{
+						_localctx = new AddExprContext(new ExprContext(_parentctx, _parentState));
+						((AddExprContext)_localctx).lEx = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(372);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(373);
+						((AddExprContext)_localctx).op = _input.LT(1);
+						_la = _input.LA(1);
+						if ( !(_la==ADD || _la==SUBT) ) {
+							((AddExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(374);
+						((AddExprContext)_localctx).rEx = expr(8);
+						}
+						break;
+					case 3:
+						{
+						_localctx = new CompareExprContext(new ExprContext(_parentctx, _parentState));
+						((CompareExprContext)_localctx).lEx = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(375);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(376);
+						((CompareExprContext)_localctx).op = _input.LT(1);
+						_la = _input.LA(1);
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 263882790666240L) != 0)) ) {
+							((CompareExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(377);
+						((CompareExprContext)_localctx).rEx = expr(7);
+						}
+						break;
+					case 4:
+						{
+						_localctx = new EqualityExprContext(new ExprContext(_parentctx, _parentState));
+						((EqualityExprContext)_localctx).lEx = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(378);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(379);
+						((EqualityExprContext)_localctx).op = _input.LT(1);
+						_la = _input.LA(1);
+						if ( !(_la==EQ || _la==NEQ) ) {
+							((EqualityExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						setState(380);
+						((EqualityExprContext)_localctx).rEx = expr(6);
+						}
+						break;
+					case 5:
+						{
+						_localctx = new AndExprContext(new ExprContext(_parentctx, _parentState));
+						((AndExprContext)_localctx).lEx = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(381);
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						setState(382);
+						match(AND);
+						setState(383);
+						((AndExprContext)_localctx).rEx = expr(5);
+						}
+						break;
+					case 6:
+						{
+						_localctx = new OrExprContext(new ExprContext(_parentctx, _parentState));
+						((OrExprContext)_localctx).lEx = _prevctx;
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(384);
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
+						setState(385);
+						match(OR);
+						setState(386);
+						((OrExprContext)_localctx).rEx = expr(4);
+						}
+						break;
+					}
+					} 
+				}
+				setState(391);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,33,_ctx);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			unrollRecursionContexts(_parentctx);
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class Func_identifierContext extends ParserRuleContext {
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public Func_identifierContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_func_identifier; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterFunc_identifier(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitFunc_identifier(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitFunc_identifier(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Func_identifierContext func_identifier() throws RecognitionException {
+		Func_identifierContext _localctx = new Func_identifierContext(_ctx, getState());
+		enterRule(_localctx, 76, RULE_func_identifier);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(392);
+			match(ID);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ElementContext extends ParserRuleContext {
+		public ElementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_element; }
+	 
+		public ElementContext() { }
+		public void copyFrom(ElementContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class IdElementContext extends ElementContext {
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
+		public IdElementContext(ElementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterIdElement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitIdElement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitIdElement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class RealElementContext extends ElementContext {
+		public TerminalNode NUM() { return getToken(MiniPascalParser.NUM, 0); }
+		public RealElementContext(ElementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterRealElement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitRealElement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitRealElement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class BoolElementContext extends ElementContext {
+		public TerminalNode TRUE() { return getToken(MiniPascalParser.TRUE, 0); }
+		public TerminalNode FALSE() { return getToken(MiniPascalParser.FALSE, 0); }
+		public BoolElementContext(ElementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterBoolElement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitBoolElement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitBoolElement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	@SuppressWarnings("CheckReturnValue")
+	public static class ParElementContext extends ElementContext {
+		public TerminalNode LPAREN() { return getToken(MiniPascalParser.LPAREN, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
+		public TerminalNode RPAREN() { return getToken(MiniPascalParser.RPAREN, 0); }
+		public ParElementContext(ElementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterParElement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitParElement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitParElement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ElementContext element() throws RecognitionException {
+		ElementContext _localctx = new ElementContext(_ctx, getState());
+		enterRule(_localctx, 78, RULE_element);
+		int _la;
+		try {
+			setState(401);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case LPAREN:
+				_localctx = new ParElementContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(394);
+				match(LPAREN);
+				setState(395);
+				expr(0);
+				setState(396);
+				match(RPAREN);
+				}
+				break;
+			case ID:
+				_localctx = new IdElementContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(398);
+				match(ID);
+				}
+				break;
+			case TRUE:
+			case FALSE:
+				_localctx = new BoolElementContext(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(399);
+				_la = _input.LA(1);
+				if ( !(_la==TRUE || _la==FALSE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case NUM:
+				_localctx = new RealElementContext(_localctx);
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(400);
+				match(NUM);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3091,7 +3534,7 @@ public class MiniPascalParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class IdentifierContext extends ParserRuleContext {
-		public TerminalNode IDENT() { return getToken(MiniPascalParser.IDENT, 0); }
+		public TerminalNode ID() { return getToken(MiniPascalParser.ID, 0); }
 		public IdentifierContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3113,12 +3556,12 @@ public class MiniPascalParser extends Parser {
 
 	public final IdentifierContext identifier() throws RecognitionException {
 		IdentifierContext _localctx = new IdentifierContext(_ctx, getState());
-		enterRule(_localctx, 88, RULE_identifier);
+		enterRule(_localctx, 80, RULE_identifier);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(390);
-			match(IDENT);
+			setState(403);
+			match(ID);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3132,51 +3575,33 @@ public class MiniPascalParser extends Parser {
 		return _localctx;
 	}
 
-	@SuppressWarnings("CheckReturnValue")
-	public static class NumberContext extends ParserRuleContext {
-		public TerminalNode NUM_INT() { return getToken(MiniPascalParser.NUM_INT, 0); }
-		public NumberContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
+	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
+		switch (ruleIndex) {
+		case 37:
+			return expr_sempred((ExprContext)_localctx, predIndex);
 		}
-		@Override public int getRuleIndex() { return RULE_number; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).enterNumber(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof MiniPascalListener ) ((MiniPascalListener)listener).exitNumber(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof MiniPascalVisitor ) return ((MiniPascalVisitor<? extends T>)visitor).visitNumber(this);
-			else return visitor.visitChildren(this);
-		}
+		return true;
 	}
-
-	public final NumberContext number() throws RecognitionException {
-		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 90, RULE_number);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(392);
-			match(NUM_INT);
-			}
+	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
+		switch (predIndex) {
+		case 0:
+			return precpred(_ctx, 8);
+		case 1:
+			return precpred(_ctx, 7);
+		case 2:
+			return precpred(_ctx, 6);
+		case 3:
+			return precpred(_ctx, 5);
+		case 4:
+			return precpred(_ctx, 4);
+		case 5:
+			return precpred(_ctx, 3);
 		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
+		return true;
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001;\u018b\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u00017\u0196\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -3188,231 +3613,245 @@ public class MiniPascalParser extends Parser {
 		"\u0002\u001c\u0007\u001c\u0002\u001d\u0007\u001d\u0002\u001e\u0007\u001e"+
 		"\u0002\u001f\u0007\u001f\u0002 \u0007 \u0002!\u0007!\u0002\"\u0007\"\u0002"+
 		"#\u0007#\u0002$\u0007$\u0002%\u0007%\u0002&\u0007&\u0002\'\u0007\'\u0002"+
-		"(\u0007(\u0002)\u0007)\u0002*\u0007*\u0002+\u0007+\u0002,\u0007,\u0002"+
-		"-\u0007-\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0005\u0000a"+
-		"\b\u0000\n\u0000\f\u0000d\t\u0000\u0001\u0001\u0003\u0001g\b\u0001\u0001"+
-		"\u0001\u0003\u0001j\b\u0001\u0001\u0001\u0001\u0001\u0001\u0002\u0001"+
-		"\u0002\u0001\u0002\u0001\u0002\u0004\u0002r\b\u0002\u000b\u0002\f\u0002"+
-		"s\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0004\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0004\u0004~\b\u0004\u000b\u0004\f\u0004\u007f"+
-		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0006"+
-		"\u0001\u0006\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0003\u0007"+
-		"\u008d\b\u0007\u0001\u0007\u0003\u0007\u0090\b\u0007\u0001\u0007\u0001"+
-		"\u0007\u0001\u0007\u0001\b\u0001\b\u0001\b\u0005\b\u0098\b\b\n\b\f\b\u009b"+
-		"\t\b\u0003\b\u009d\b\b\u0001\t\u0003\t\u00a0\b\t\u0001\t\u0001\t\u0001"+
-		"\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0003\n\u00ab\b\n\u0001"+
-		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001"+
-		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001"+
-		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001"+
-		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0003\u000b\u00c3\b\u000b\u0001"+
-		"\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
-		"\f\u0003\f\u00cf\b\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001\u000e"+
-		"\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f\u0003\u000f\u00da\b\u000f"+
-		"\u0001\u0010\u0001\u0010\u0001\u0011\u0001\u0011\u0001\u0012\u0001\u0012"+
-		"\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014"+
-		"\u0001\u0015\u0001\u0015\u0001\u0015\u0005\u0015\u00eb\b\u0015\n\u0015"+
-		"\f\u0015\u00ee\t\u0015\u0001\u0015\u0001\u0015\u0001\u0016\u0001\u0016"+
-		"\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016"+
-		"\u0001\u0016\u0001\u0016\u0003\u0016\u00fc\b\u0016\u0001\u0017\u0001\u0017"+
-		"\u0001\u0017\u0001\u0017\u0001\u0017\u0003\u0017\u0103\b\u0017\u0001\u0017"+
-		"\u0001\u0017\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0019"+
-		"\u0001\u0019\u0001\u0019\u0001\u0019\u0001\u0019\u0003\u0019\u0110\b\u0019"+
-		"\u0001\u001a\u0001\u001a\u0001\u001a\u0005\u001a\u0115\b\u001a\n\u001a"+
-		"\f\u001a\u0118\t\u001a\u0001\u001b\u0001\u001b\u0001\u001c\u0001\u001c"+
-		"\u0001\u001c\u0001\u001c\u0001\u001c\u0001\u001c\u0003\u001c\u0122\b\u001c"+
-		"\u0001\u001d\u0001\u001d\u0001\u001d\u0001\u001d\u0001\u001d\u0001\u001e"+
-		"\u0001\u001e\u0001\u001e\u0001\u001e\u0001\u001e\u0001\u001e\u0001\u001e"+
-		"\u0001\u001e\u0001\u001e\u0001\u001f\u0001\u001f\u0001\u001f\u0001\u001f"+
-		"\u0001\u001f\u0001 \u0001 \u0001 \u0001 \u0001 \u0003 \u013c\b \u0001"+
-		" \u0001 \u0001!\u0001!\u0001!\u0001!\u0001!\u0001\"\u0001\"\u0001\"\u0001"+
-		"\"\u0003\"\u0149\b\"\u0001#\u0001#\u0001$\u0001$\u0001$\u0001$\u0005$"+
-		"\u0151\b$\n$\f$\u0154\t$\u0001%\u0001%\u0001&\u0001&\u0001&\u0001&\u0005"+
-		"&\u015c\b&\n&\f&\u015f\t&\u0001\'\u0001\'\u0001(\u0001(\u0001(\u0001("+
-		"\u0001(\u0001(\u0001(\u0001(\u0001(\u0003(\u016c\b(\u0001)\u0001)\u0001"+
-		")\u0001)\u0001)\u0001)\u0001)\u0001)\u0001)\u0001)\u0001)\u0001)\u0001"+
-		")\u0003)\u017b\b)\u0001*\u0001*\u0001*\u0005*\u0180\b*\n*\f*\u0183\t*"+
-		"\u0001+\u0001+\u0001,\u0001,\u0001-\u0001-\u0001-\u0000\u0000.\u0000\u0002"+
-		"\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e"+
-		" \"$&(*,.02468:<>@BDFHJLNPRTVXZ\u0000\u0005\u0001\u0000 !\u0001\u0000"+
-		"\u0016\u0017\u0002\u0000\t\t\',\u0001\u0000\u001f!\u0002\u0000\u001e\u001e"+
-		"\"%\u018b\u0000\\\u0001\u0000\u0000\u0000\u0002f\u0001\u0000\u0000\u0000"+
-		"\u0004m\u0001\u0000\u0000\u0000\u0006u\u0001\u0000\u0000\u0000\b}\u0001"+
-		"\u0000\u0000\u0000\n\u0081\u0001\u0000\u0000\u0000\f\u0086\u0001\u0000"+
-		"\u0000\u0000\u000e\u0088\u0001\u0000\u0000\u0000\u0010\u009c\u0001\u0000"+
-		"\u0000\u0000\u0012\u009f\u0001\u0000\u0000\u0000\u0014\u00aa\u0001\u0000"+
-		"\u0000\u0000\u0016\u00c2\u0001\u0000\u0000\u0000\u0018\u00ce\u0001\u0000"+
-		"\u0000\u0000\u001a\u00d0\u0001\u0000\u0000\u0000\u001c\u00d2\u0001\u0000"+
-		"\u0000\u0000\u001e\u00d9\u0001\u0000\u0000\u0000 \u00db\u0001\u0000\u0000"+
-		"\u0000\"\u00dd\u0001\u0000\u0000\u0000$\u00df\u0001\u0000\u0000\u0000"+
-		"&\u00e1\u0001\u0000\u0000\u0000(\u00e5\u0001\u0000\u0000\u0000*\u00e7"+
-		"\u0001\u0000\u0000\u0000,\u00fb\u0001\u0000\u0000\u0000.\u00fd\u0001\u0000"+
-		"\u0000\u00000\u0106\u0001\u0000\u0000\u00002\u010a\u0001\u0000\u0000\u0000"+
-		"4\u0111\u0001\u0000\u0000\u00006\u0119\u0001\u0000\u0000\u00008\u011b"+
-		"\u0001\u0000\u0000\u0000:\u0123\u0001\u0000\u0000\u0000<\u0128\u0001\u0000"+
-		"\u0000\u0000>\u0131\u0001\u0000\u0000\u0000@\u0136\u0001\u0000\u0000\u0000"+
-		"B\u013f\u0001\u0000\u0000\u0000D\u0144\u0001\u0000\u0000\u0000F\u014a"+
-		"\u0001\u0000\u0000\u0000H\u014c\u0001\u0000\u0000\u0000J\u0155\u0001\u0000"+
-		"\u0000\u0000L\u0157\u0001\u0000\u0000\u0000N\u0160\u0001\u0000\u0000\u0000"+
-		"P\u016b\u0001\u0000\u0000\u0000R\u017a\u0001\u0000\u0000\u0000T\u017c"+
-		"\u0001\u0000\u0000\u0000V\u0184\u0001\u0000\u0000\u0000X\u0186\u0001\u0000"+
-		"\u0000\u0000Z\u0188\u0001\u0000\u0000\u0000\\]\u0005\r\u0000\u0000]^\u0003"+
-		"X,\u0000^b\u00052\u0000\u0000_a\u0003\u0002\u0001\u0000`_\u0001\u0000"+
-		"\u0000\u0000ad\u0001\u0000\u0000\u0000b`\u0001\u0000\u0000\u0000bc\u0001"+
-		"\u0000\u0000\u0000c\u0001\u0001\u0000\u0000\u0000db\u0001\u0000\u0000"+
-		"\u0000eg\u0003\u0004\u0002\u0000fe\u0001\u0000\u0000\u0000fg\u0001\u0000"+
-		"\u0000\u0000gi\u0001\u0000\u0000\u0000hj\u0003\b\u0004\u0000ih\u0001\u0000"+
-		"\u0000\u0000ij\u0001\u0000\u0000\u0000jk\u0001\u0000\u0000\u0000kl\u0003"+
-		"&\u0013\u0000l\u0003\u0001\u0000\u0000\u0000mq\u0005\u0002\u0000\u0000"+
-		"no\u0003\u0006\u0003\u0000op\u00052\u0000\u0000pr\u0001\u0000\u0000\u0000"+
-		"qn\u0001\u0000\u0000\u0000rs\u0001\u0000\u0000\u0000sq\u0001\u0000\u0000"+
-		"\u0000st\u0001\u0000\u0000\u0000t\u0005\u0001\u0000\u0000\u0000uv\u0003"+
-		"T*\u0000vw\u00053\u0000\u0000wx\u0003\u0014\n\u0000x\u0007\u0001\u0000"+
-		"\u0000\u0000y~\u0003\n\u0005\u0000z{\u0003\u000e\u0007\u0000{|\u00052"+
-		"\u0000\u0000|~\u0001\u0000\u0000\u0000}y\u0001\u0000\u0000\u0000}z\u0001"+
-		"\u0000\u0000\u0000~\u007f\u0001\u0000\u0000\u0000\u007f}\u0001\u0000\u0000"+
-		"\u0000\u007f\u0080\u0001\u0000\u0000\u0000\u0080\t\u0001\u0000\u0000\u0000"+
-		"\u0081\u0082\u0005\f\u0000\u0000\u0082\u0083\u0003X,\u0000\u0083\u0084"+
-		"\u00052\u0000\u0000\u0084\u0085\u0003\u0002\u0001\u0000\u0085\u000b\u0001"+
-		"\u0000\u0000\u0000\u0086\u0087\u0003\u0014\n\u0000\u0087\r\u0001\u0000"+
-		"\u0000\u0000\u0088\u0089\u0005\u000b\u0000\u0000\u0089\u008f\u0003X,\u0000"+
-		"\u008a\u008c\u0005-\u0000\u0000\u008b\u008d\u0003\u0010\b\u0000\u008c"+
-		"\u008b\u0001\u0000\u0000\u0000\u008c\u008d\u0001\u0000\u0000\u0000\u008d"+
-		"\u008e\u0001\u0000\u0000\u0000\u008e\u0090\u0005.\u0000\u0000\u008f\u008a"+
-		"\u0001\u0000\u0000\u0000\u008f\u0090\u0001\u0000\u0000\u0000\u0090\u0091"+
-		"\u0001\u0000\u0000\u0000\u0091\u0092\u00053\u0000\u0000\u0092\u0093\u0003"+
-		"\f\u0006\u0000\u0093\u000f\u0001\u0000\u0000\u0000\u0094\u0099\u0003\u0012"+
-		"\t\u0000\u0095\u0096\u00052\u0000\u0000\u0096\u0098\u0003\u0012\t\u0000"+
-		"\u0097\u0095\u0001\u0000\u0000\u0000\u0098\u009b\u0001\u0000\u0000\u0000"+
-		"\u0099\u0097\u0001\u0000\u0000\u0000\u0099\u009a\u0001\u0000\u0000\u0000"+
-		"\u009a\u009d\u0001\u0000\u0000\u0000\u009b\u0099\u0001\u0000\u0000\u0000"+
-		"\u009c\u0094\u0001\u0000\u0000\u0000\u009c\u009d\u0001\u0000\u0000\u0000"+
-		"\u009d\u0011\u0001\u0000\u0000\u0000\u009e\u00a0\u0005\u0002\u0000\u0000"+
-		"\u009f\u009e\u0001\u0000\u0000\u0000\u009f\u00a0\u0001\u0000\u0000\u0000"+
-		"\u00a0\u00a1\u0001\u0000\u0000\u0000\u00a1\u00a2\u0003T*\u0000\u00a2\u00a3"+
-		"\u00053\u0000\u0000\u00a3\u00a4\u0003\u0014\n\u0000\u00a4\u0013\u0001"+
-		"\u0000\u0000\u0000\u00a5\u00ab\u0005\u0003\u0000\u0000\u00a6\u00ab\u0005"+
-		"\u0004\u0000\u0000\u00a7\u00ab\u0005\u0006\u0000\u0000\u00a8\u00ab\u0005"+
-		"\u0007\u0000\u0000\u00a9\u00ab\u0003\u0016\u000b\u0000\u00aa\u00a5\u0001"+
-		"\u0000\u0000\u0000\u00aa\u00a6\u0001\u0000\u0000\u0000\u00aa\u00a7\u0001"+
-		"\u0000\u0000\u0000\u00aa\u00a8\u0001\u0000\u0000\u0000\u00aa\u00a9\u0001"+
-		"\u0000\u0000\u0000\u00ab\u0015\u0001\u0000\u0000\u0000\u00ac\u00ad\u0005"+
-		"\b\u0000\u0000\u00ad\u00ae\u0005/\u0000\u0000\u00ae\u00af\u0003\u0018"+
-		"\f\u0000\u00af\u00b0\u00055\u0000\u0000\u00b0\u00b1\u0003\u0018\f\u0000"+
-		"\u00b1\u00b2\u00050\u0000\u0000\u00b2\u00b3\u0005\n\u0000\u0000\u00b3"+
-		"\u00b4\u0003\u0014\n\u0000\u00b4\u00c3\u0001\u0000\u0000\u0000\u00b5\u00b6"+
-		"\u0005\b\u0000\u0000\u00b6\u00b7\u0005/\u0000\u0000\u00b7\u00b8\u0003"+
-		"\u0018\f\u0000\u00b8\u00b9\u00055\u0000\u0000\u00b9\u00ba\u0003\u0018"+
-		"\f\u0000\u00ba\u00bb\u00051\u0000\u0000\u00bb\u00bc\u0003\u0018\f\u0000"+
-		"\u00bc\u00bd\u00055\u0000\u0000\u00bd\u00be\u0003\u0018\f\u0000\u00be"+
-		"\u00bf\u00050\u0000\u0000\u00bf\u00c0\u0005\n\u0000\u0000\u00c0\u00c1"+
-		"\u0003\u0014\n\u0000\u00c1\u00c3\u0001\u0000\u0000\u0000\u00c2\u00ac\u0001"+
-		"\u0000\u0000\u0000\u00c2\u00b5\u0001\u0000\u0000\u0000\u00c3\u0017\u0001"+
-		"\u0000\u0000\u0000\u00c4\u00cf\u0003\u001e\u000f\u0000\u00c5\u00c6\u0003"+
-		"\u001a\r\u0000\u00c6\u00c7\u0003\u001e\u000f\u0000\u00c7\u00cf\u0001\u0000"+
-		"\u0000\u0000\u00c8\u00cf\u0003X,\u0000\u00c9\u00ca\u0003\u001a\r\u0000"+
-		"\u00ca\u00cb\u0003X,\u0000\u00cb\u00cf\u0001\u0000\u0000\u0000\u00cc\u00cf"+
-		"\u0003$\u0012\u0000\u00cd\u00cf\u0003\u001c\u000e\u0000\u00ce\u00c4\u0001"+
-		"\u0000\u0000\u0000\u00ce\u00c5\u0001\u0000\u0000\u0000\u00ce\u00c8\u0001"+
-		"\u0000\u0000\u0000\u00ce\u00c9\u0001\u0000\u0000\u0000\u00ce\u00cc\u0001"+
-		"\u0000\u0000\u0000\u00ce\u00cd\u0001\u0000\u0000\u0000\u00cf\u0019\u0001"+
-		"\u0000\u0000\u0000\u00d0\u00d1\u0007\u0000\u0000\u0000\u00d1\u001b\u0001"+
-		"\u0000\u0000\u0000\u00d2\u00d3\u0005\u0005\u0000\u0000\u00d3\u00d4\u0005"+
-		"-\u0000\u0000\u00d4\u00d5\u0003 \u0010\u0000\u00d5\u00d6\u0005.\u0000"+
-		"\u0000\u00d6\u001d\u0001\u0000\u0000\u0000\u00d7\u00da\u0003 \u0010\u0000"+
-		"\u00d8\u00da\u0003\"\u0011\u0000\u00d9\u00d7\u0001\u0000\u0000\u0000\u00d9"+
-		"\u00d8\u0001\u0000\u0000\u0000\u00da\u001f\u0001\u0000\u0000\u0000\u00db"+
-		"\u00dc\u00056\u0000\u0000\u00dc!\u0001\u0000\u0000\u0000\u00dd\u00de\u0005"+
-		"9\u0000\u0000\u00de#\u0001\u0000\u0000\u0000\u00df\u00e0\u00057\u0000"+
-		"\u0000\u00e0%\u0001\u0000\u0000\u0000\u00e1\u00e2\u0005\u000e\u0000\u0000"+
-		"\u00e2\u00e3\u0003*\u0015\u0000\u00e3\u00e4\u0003(\u0014\u0000\u00e4\'"+
-		"\u0001\u0000\u0000\u0000\u00e5\u00e6\u0005\u000f\u0000\u0000\u00e6)\u0001"+
-		"\u0000\u0000\u0000\u00e7\u00ec\u0003,\u0016\u0000\u00e8\u00e9\u00052\u0000"+
-		"\u0000\u00e9\u00eb\u0003,\u0016\u0000\u00ea\u00e8\u0001\u0000\u0000\u0000"+
-		"\u00eb\u00ee\u0001\u0000\u0000\u0000\u00ec\u00ea\u0001\u0000\u0000\u0000"+
-		"\u00ec\u00ed\u0001\u0000\u0000\u0000\u00ed\u00ef\u0001\u0000\u0000\u0000"+
-		"\u00ee\u00ec\u0001\u0000\u0000\u0000\u00ef\u00f0\u00052\u0000\u0000\u00f0"+
-		"+\u0001\u0000\u0000\u0000\u00f1\u00fc\u00030\u0018\u0000\u00f2\u00fc\u0003"+
-		"2\u0019\u0000\u00f3\u00fc\u0003&\u0013\u0000\u00f4\u00fc\u00038\u001c"+
-		"\u0000\u00f5\u00fc\u0003:\u001d\u0000\u00f6\u00fc\u0003<\u001e\u0000\u00f7"+
-		"\u00fc\u0003>\u001f\u0000\u00f8\u00fc\u0003@ \u0000\u00f9\u00fc\u0003"+
-		".\u0017\u0000\u00fa\u00fc\u0003B!\u0000\u00fb\u00f1\u0001\u0000\u0000"+
-		"\u0000\u00fb\u00f2\u0001\u0000\u0000\u0000\u00fb\u00f3\u0001\u0000\u0000"+
-		"\u0000\u00fb\u00f4\u0001\u0000\u0000\u0000\u00fb\u00f5\u0001\u0000\u0000"+
-		"\u0000\u00fb\u00f6\u0001\u0000\u0000\u0000\u00fb\u00f7\u0001\u0000\u0000"+
-		"\u0000\u00fb\u00f8\u0001\u0000\u0000\u0000\u00fb\u00f9\u0001\u0000\u0000"+
-		"\u0000\u00fb\u00fa\u0001\u0000\u0000\u0000\u00fc-\u0001\u0000\u0000\u0000"+
-		"\u00fd\u00fe\u0005\u001b\u0000\u0000\u00fe\u00ff\u0005-\u0000\u0000\u00ff"+
-		"\u0102\u0003V+\u0000\u0100\u0101\u00051\u0000\u0000\u0101\u0103\u0003"+
-		"R)\u0000\u0102\u0100\u0001\u0000\u0000\u0000\u0102\u0103\u0001\u0000\u0000"+
-		"\u0000\u0103\u0104\u0001\u0000\u0000\u0000\u0104\u0105\u0005.\u0000\u0000"+
-		"\u0105/\u0001\u0000\u0000\u0000\u0106\u0107\u0003R)\u0000\u0107\u0108"+
-		"\u0005&\u0000\u0000\u0108\u0109\u0003D\"\u0000\u01091\u0001\u0000\u0000"+
-		"\u0000\u010a\u010f\u0003X,\u0000\u010b\u010c\u0005-\u0000\u0000\u010c"+
-		"\u010d\u00034\u001a\u0000\u010d\u010e\u0005.\u0000\u0000\u010e\u0110\u0001"+
-		"\u0000\u0000\u0000\u010f\u010b\u0001\u0000\u0000\u0000\u010f\u0110\u0001"+
-		"\u0000\u0000\u0000\u01103\u0001\u0000\u0000\u0000\u0111\u0116\u00036\u001b"+
-		"\u0000\u0112\u0113\u00051\u0000\u0000\u0113\u0115\u00036\u001b\u0000\u0114"+
-		"\u0112\u0001\u0000\u0000\u0000\u0115\u0118\u0001\u0000\u0000\u0000\u0116"+
-		"\u0114\u0001\u0000\u0000\u0000\u0116\u0117\u0001\u0000\u0000\u0000\u0117"+
-		"5\u0001\u0000\u0000\u0000\u0118\u0116\u0001\u0000\u0000\u0000\u0119\u011a"+
-		"\u0003D\"\u0000\u011a7\u0001\u0000\u0000\u0000\u011b\u011c\u0005\u0010"+
-		"\u0000\u0000\u011c\u011d\u0003D\"\u0000\u011d\u011e\u0005\u0011\u0000"+
-		"\u0000\u011e\u0121\u0003,\u0016\u0000\u011f\u0120\u0005\u0012\u0000\u0000"+
-		"\u0120\u0122\u0003,\u0016\u0000\u0121\u011f\u0001\u0000\u0000\u0000\u0121"+
-		"\u0122\u0001\u0000\u0000\u0000\u01229\u0001\u0000\u0000\u0000\u0123\u0124"+
-		"\u0005\u0013\u0000\u0000\u0124\u0125\u0003D\"\u0000\u0125\u0126\u0005"+
-		"\u0014\u0000\u0000\u0126\u0127\u0003,\u0016\u0000\u0127;\u0001\u0000\u0000"+
-		"\u0000\u0128\u0129\u0005\u0015\u0000\u0000\u0129\u012a\u0003X,\u0000\u012a"+
-		"\u012b\u0005&\u0000\u0000\u012b\u012c\u0003D\"\u0000\u012c\u012d\u0007"+
-		"\u0001\u0000\u0000\u012d\u012e\u0003D\"\u0000\u012e\u012f\u0005\u0014"+
-		"\u0000\u0000\u012f\u0130\u0003,\u0016\u0000\u0130=\u0001\u0000\u0000\u0000"+
-		"\u0131\u0132\u0005\u0018\u0000\u0000\u0132\u0133\u0003*\u0015\u0000\u0133"+
-		"\u0134\u0005\u0019\u0000\u0000\u0134\u0135\u0003D\"\u0000\u0135?\u0001"+
-		"\u0000\u0000\u0000\u0136\u0137\u0005\u001a\u0000\u0000\u0137\u0138\u0005"+
-		"-\u0000\u0000\u0138\u013b\u0003V+\u0000\u0139\u013a\u00051\u0000\u0000"+
-		"\u013a\u013c\u0003R)\u0000\u013b\u0139\u0001\u0000\u0000\u0000\u013b\u013c"+
-		"\u0001\u0000\u0000\u0000\u013c\u013d\u0001\u0000\u0000\u0000\u013d\u013e"+
-		"\u0005.\u0000\u0000\u013eA\u0001\u0000\u0000\u0000\u013f\u0140\u0005\u001c"+
-		"\u0000\u0000\u0140\u0141\u0005-\u0000\u0000\u0141\u0142\u0003R)\u0000"+
-		"\u0142\u0143\u0005.\u0000\u0000\u0143C\u0001\u0000\u0000\u0000\u0144\u0148"+
-		"\u0003H$\u0000\u0145\u0146\u0003F#\u0000\u0146\u0147\u0003H$\u0000\u0147"+
-		"\u0149\u0001\u0000\u0000\u0000\u0148\u0145\u0001\u0000\u0000\u0000\u0148"+
-		"\u0149\u0001\u0000\u0000\u0000\u0149E\u0001\u0000\u0000\u0000\u014a\u014b"+
-		"\u0007\u0002\u0000\u0000\u014bG\u0001\u0000\u0000\u0000\u014c\u0152\u0003"+
-		"L&\u0000\u014d\u014e\u0003J%\u0000\u014e\u014f\u0003L&\u0000\u014f\u0151"+
-		"\u0001\u0000\u0000\u0000\u0150\u014d\u0001\u0000\u0000\u0000\u0151\u0154"+
-		"\u0001\u0000\u0000\u0000\u0152\u0150\u0001\u0000\u0000\u0000\u0152\u0153"+
-		"\u0001\u0000\u0000\u0000\u0153I\u0001\u0000\u0000\u0000\u0154\u0152\u0001"+
-		"\u0000\u0000\u0000\u0155\u0156\u0007\u0003\u0000\u0000\u0156K\u0001\u0000"+
-		"\u0000\u0000\u0157\u015d\u0003P(\u0000\u0158\u0159\u0003N\'\u0000\u0159"+
-		"\u015a\u0003P(\u0000\u015a\u015c\u0001\u0000\u0000\u0000\u015b\u0158\u0001"+
-		"\u0000\u0000\u0000\u015c\u015f\u0001\u0000\u0000\u0000\u015d\u015b\u0001"+
-		"\u0000\u0000\u0000\u015d\u015e\u0001\u0000\u0000\u0000\u015eM\u0001\u0000"+
-		"\u0000\u0000\u015f\u015d\u0001\u0000\u0000\u0000\u0160\u0161\u0007\u0004"+
-		"\u0000\u0000\u0161O\u0001\u0000\u0000\u0000\u0162\u016c\u0003R)\u0000"+
-		"\u0163\u016c\u0003Z-\u0000\u0164\u016c\u0003V+\u0000\u0165\u0166\u0005"+
-		"-\u0000\u0000\u0166\u0167\u0003D\"\u0000\u0167\u0168\u0005.\u0000\u0000"+
-		"\u0168\u016c\u0001\u0000\u0000\u0000\u0169\u016a\u0005\u001d\u0000\u0000"+
-		"\u016a\u016c\u0003P(\u0000\u016b\u0162\u0001\u0000\u0000\u0000\u016b\u0163"+
-		"\u0001\u0000\u0000\u0000\u016b\u0164\u0001\u0000\u0000\u0000\u016b\u0165"+
-		"\u0001\u0000\u0000\u0000\u016b\u0169\u0001\u0000\u0000\u0000\u016cQ\u0001"+
-		"\u0000\u0000\u0000\u016d\u017b\u0003X,\u0000\u016e\u016f\u0003X,\u0000"+
-		"\u016f\u0170\u0005/\u0000\u0000\u0170\u0171\u0003D\"\u0000\u0171\u0172"+
-		"\u00050\u0000\u0000\u0172\u017b\u0001\u0000\u0000\u0000\u0173\u0174\u0003"+
-		"X,\u0000\u0174\u0175\u0005/\u0000\u0000\u0175\u0176\u0003D\"\u0000\u0176"+
-		"\u0177\u00051\u0000\u0000\u0177\u0178\u0003D\"\u0000\u0178\u0179\u0005"+
-		"0\u0000\u0000\u0179\u017b\u0001\u0000\u0000\u0000\u017a\u016d\u0001\u0000"+
-		"\u0000\u0000\u017a\u016e\u0001\u0000\u0000\u0000\u017a\u0173\u0001\u0000"+
-		"\u0000\u0000\u017bS\u0001\u0000\u0000\u0000\u017c\u0181\u0003X,\u0000"+
-		"\u017d\u017e\u00051\u0000\u0000\u017e\u0180\u0003X,\u0000\u017f\u017d"+
-		"\u0001\u0000\u0000\u0000\u0180\u0183\u0001\u0000\u0000\u0000\u0181\u017f"+
-		"\u0001\u0000\u0000\u0000\u0181\u0182\u0001\u0000\u0000\u0000\u0182U\u0001"+
-		"\u0000\u0000\u0000\u0183\u0181\u0001\u0000\u0000\u0000\u0184\u0185\u0005"+
-		"7\u0000\u0000\u0185W\u0001\u0000\u0000\u0000\u0186\u0187\u00058\u0000"+
-		"\u0000\u0187Y\u0001\u0000\u0000\u0000\u0188\u0189\u00056\u0000\u0000\u0189"+
-		"[\u0001\u0000\u0000\u0000\u001cbfis}\u007f\u008c\u008f\u0099\u009c\u009f"+
-		"\u00aa\u00c2\u00ce\u00d9\u00ec\u00fb\u0102\u010f\u0116\u0121\u013b\u0148"+
-		"\u0152\u015d\u016b\u017a\u0181";
+		"(\u0007(\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001"+
+		"\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0003\u0002a\b\u0002\u0001\u0003\u0001"+
+		"\u0003\u0001\u0003\u0001\u0003\u0003\u0003g\b\u0003\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0003\u0004t\b\u0004\u0001"+
+		"\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005z\b\u0005\u0001"+
+		"\u0006\u0001\u0006\u0003\u0006~\b\u0006\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0003\u0007\u0084\b\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001"+
+		"\b\u0001\b\u0001\b\u0001\b\u0003\b\u0092\b\b\u0001\b\u0001\b\u0001\b\u0001"+
+		"\b\u0001\b\u0001\b\u0001\t\u0001\t\u0001\t\u0005\t\u009d\b\t\n\t\f\t\u00a0"+
+		"\t\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001\u000b\u0001\u000b\u0001\u000b"+
+		"\u0005\u000b\u00a9\b\u000b\n\u000b\f\u000b\u00ac\t\u000b\u0001\f\u0001"+
+		"\f\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\u000e\u0001\u000e\u0001"+
+		"\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000f\u0001\u000f\u0001"+
+		"\u000f\u0001\u000f\u0005\u000f\u00bf\b\u000f\n\u000f\f\u000f\u00c2\t\u000f"+
+		"\u0003\u000f\u00c4\b\u000f\u0001\u0010\u0001\u0010\u0001\u0010\u0001\u0010"+
+		"\u0001\u0010\u0003\u0010\u00cb\b\u0010\u0001\u0011\u0001\u0011\u0001\u0011"+
+		"\u0001\u0011\u0003\u0011\u00d1\b\u0011\u0001\u0012\u0001\u0012\u0001\u0012"+
+		"\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012"+
+		"\u0003\u0012\u00dc\b\u0012\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013"+
+		"\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013\u0001\u0013"+
+		"\u0003\u0013\u00e8\b\u0013\u0001\u0014\u0001\u0014\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015"+
+		"\u0003\u0015\u00f4\b\u0015\u0004\u0015\u00f6\b\u0015\u000b\u0015\f\u0015"+
+		"\u00f7\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0016\u0001\u0016\u0003"+
+		"\u0016\u00ff\b\u0016\u0001\u0017\u0001\u0017\u0003\u0017\u0103\b\u0017"+
+		"\u0001\u0018\u0001\u0018\u0003\u0018\u0107\b\u0018\u0001\u0018\u0001\u0018"+
+		"\u0001\u0018\u0001\u0018\u0001\u0018\u0001\u0019\u0001\u0019\u0001\u0019"+
+		"\u0001\u0019\u0001\u0019\u0001\u0019\u0003\u0019\u0114\b\u0019\u0001\u001a"+
+		"\u0001\u001a\u0001\u001a\u0001\u001a\u0001\u001b\u0001\u001b\u0001\u001b"+
+		"\u0001\u001b\u0001\u001b\u0001\u001c\u0001\u001c\u0001\u001c\u0001\u001c"+
+		"\u0003\u001c\u0123\b\u001c\u0001\u001d\u0001\u001d\u0001\u001d\u0001\u001d"+
+		"\u0003\u001d\u0129\b\u001d\u0001\u001e\u0001\u001e\u0001\u001e\u0001\u001f"+
+		"\u0001\u001f\u0001\u001f\u0001 \u0001 \u0001 \u0001 \u0001 \u0005 \u0136"+
+		"\b \n \f \u0139\t \u0001 \u0001 \u0003 \u013d\b \u0001!\u0003!\u0140\b"+
+		"!\u0001!\u0001!\u0003!\u0144\b!\u0001!\u0001!\u0001!\u0001\"\u0001\"\u0001"+
+		"\"\u0001\"\u0003\"\u014d\b\"\u0001#\u0001#\u0003#\u0151\b#\u0001#\u0001"+
+		"#\u0003#\u0155\b#\u0001#\u0001#\u0004#\u0159\b#\u000b#\f#\u015a\u0001"+
+		"#\u0001#\u0001#\u0001$\u0001$\u0001$\u0001$\u0001%\u0001%\u0001%\u0001"+
+		"%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0003%\u0170"+
+		"\b%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001"+
+		"%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0001%\u0005%\u0184"+
+		"\b%\n%\f%\u0187\t%\u0001&\u0001&\u0001\'\u0001\'\u0001\'\u0001\'\u0001"+
+		"\'\u0001\'\u0001\'\u0003\'\u0192\b\'\u0001(\u0001(\u0001(\u0000\u0001"+
+		"J)\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a"+
+		"\u001c\u001e \"$&(*,.02468:<>@BDFHJLNP\u0000\u0007\u0002\u0000\r\r\u0017"+
+		"\u0017\u0001\u0000\u0012\u0016\u0002\u0000\u0011\u0011\'(\u0001\u0000"+
+		")*\u0001\u0000,/\u0002\u0000++00\u0001\u0000\u000b\f\u01a1\u0000R\u0001"+
+		"\u0000\u0000\u0000\u0002U\u0001\u0000\u0000\u0000\u0004`\u0001\u0000\u0000"+
+		"\u0000\u0006f\u0001\u0000\u0000\u0000\bs\u0001\u0000\u0000\u0000\ny\u0001"+
+		"\u0000\u0000\u0000\f}\u0001\u0000\u0000\u0000\u000e\u007f\u0001\u0000"+
+		"\u0000\u0000\u0010\u008d\u0001\u0000\u0000\u0000\u0012\u0099\u0001\u0000"+
+		"\u0000\u0000\u0014\u00a1\u0001\u0000\u0000\u0000\u0016\u00a5\u0001\u0000"+
+		"\u0000\u0000\u0018\u00ad\u0001\u0000\u0000\u0000\u001a\u00af\u0001\u0000"+
+		"\u0000\u0000\u001c\u00b4\u0001\u0000\u0000\u0000\u001e\u00c3\u0001\u0000"+
+		"\u0000\u0000 \u00ca\u0001\u0000\u0000\u0000\"\u00d0\u0001\u0000\u0000"+
+		"\u0000$\u00db\u0001\u0000\u0000\u0000&\u00e7\u0001\u0000\u0000\u0000("+
+		"\u00e9\u0001\u0000\u0000\u0000*\u00ef\u0001\u0000\u0000\u0000,\u00fe\u0001"+
+		"\u0000\u0000\u0000.\u0102\u0001\u0000\u0000\u00000\u0104\u0001\u0000\u0000"+
+		"\u00002\u010d\u0001\u0000\u0000\u00004\u0115\u0001\u0000\u0000\u00006"+
+		"\u0119\u0001\u0000\u0000\u00008\u0122\u0001\u0000\u0000\u0000:\u0128\u0001"+
+		"\u0000\u0000\u0000<\u012a\u0001\u0000\u0000\u0000>\u012d\u0001\u0000\u0000"+
+		"\u0000@\u0130\u0001\u0000\u0000\u0000B\u013f\u0001\u0000\u0000\u0000D"+
+		"\u014c\u0001\u0000\u0000\u0000F\u014e\u0001\u0000\u0000\u0000H\u015f\u0001"+
+		"\u0000\u0000\u0000J\u016f\u0001\u0000\u0000\u0000L\u0188\u0001\u0000\u0000"+
+		"\u0000N\u0191\u0001\u0000\u0000\u0000P\u0193\u0001\u0000\u0000\u0000R"+
+		"S\u0003\u0002\u0001\u0000ST\u0005\u0000\u0000\u0001T\u0001\u0001\u0000"+
+		"\u0000\u0000UV\u0005\u0007\u0000\u0000VW\u0003P(\u0000WX\u0005\u0001\u0000"+
+		"\u0000XY\u0003\u0004\u0002\u0000YZ\u0003\n\u0005\u0000Z[\u0003 \u0010"+
+		"\u0000[\\\u0005\u0002\u0000\u0000\\\u0003\u0001\u0000\u0000\u0000]a\u0001"+
+		"\u0000\u0000\u0000^_\u0005\b\u0000\u0000_a\u0003\u0006\u0003\u0000`]\u0001"+
+		"\u0000\u0000\u0000`^\u0001\u0000\u0000\u0000a\u0005\u0001\u0000\u0000"+
+		"\u0000bg\u0001\u0000\u0000\u0000cd\u0003\b\u0004\u0000de\u0003\u0006\u0003"+
+		"\u0000eg\u0001\u0000\u0000\u0000fb\u0001\u0000\u0000\u0000fc\u0001\u0000"+
+		"\u0000\u0000g\u0007\u0001\u0000\u0000\u0000hi\u00052\u0000\u0000ij\u0005"+
+		"\u0003\u0000\u0000jk\u0007\u0000\u0000\u0000kl\u0005+\u0000\u0000lm\u0003"+
+		"J%\u0000mn\u0005\u0001\u0000\u0000nt\u0001\u0000\u0000\u0000op\u00052"+
+		"\u0000\u0000pq\u0005\u0003\u0000\u0000qr\u0007\u0000\u0000\u0000rt\u0005"+
+		"\u0001\u0000\u0000sh\u0001\u0000\u0000\u0000so\u0001\u0000\u0000\u0000"+
+		"t\t\u0001\u0000\u0000\u0000uz\u0001\u0000\u0000\u0000vw\u0003\f\u0006"+
+		"\u0000wx\u0003\n\u0005\u0000xz\u0001\u0000\u0000\u0000yu\u0001\u0000\u0000"+
+		"\u0000yv\u0001\u0000\u0000\u0000z\u000b\u0001\u0000\u0000\u0000{~\u0003"+
+		"\u000e\u0007\u0000|~\u0003\u0010\b\u0000}{\u0001\u0000\u0000\u0000}|\u0001"+
+		"\u0000\u0000\u0000~\r\u0001\u0000\u0000\u0000\u007f\u0080\u0005\t\u0000"+
+		"\u0000\u0080\u0081\u00052\u0000\u0000\u0081\u0083\u0005%\u0000\u0000\u0082"+
+		"\u0084\u0003\u0012\t\u0000\u0083\u0082\u0001\u0000\u0000\u0000\u0083\u0084"+
+		"\u0001\u0000\u0000\u0000\u0084\u0085\u0001\u0000\u0000\u0000\u0085\u0086"+
+		"\u0005&\u0000\u0000\u0086\u0087\u0005\u0003\u0000\u0000\u0087\u0088\u0007"+
+		"\u0000\u0000\u0000\u0088\u0089\u0005\u0001\u0000\u0000\u0089\u008a\u0003"+
+		"\u0004\u0002\u0000\u008a\u008b\u0003 \u0010\u0000\u008b\u008c\u0005\u0001"+
+		"\u0000\u0000\u008c\u000f\u0001\u0000\u0000\u0000\u008d\u008e\u0005\n\u0000"+
+		"\u0000\u008e\u008f\u00052\u0000\u0000\u008f\u0091\u0005%\u0000\u0000\u0090"+
+		"\u0092\u0003\u0012\t\u0000\u0091\u0090\u0001\u0000\u0000\u0000\u0091\u0092"+
+		"\u0001\u0000\u0000\u0000\u0092\u0093\u0001\u0000\u0000\u0000\u0093\u0094"+
+		"\u0005&\u0000\u0000\u0094\u0095\u0005\u0001\u0000\u0000\u0095\u0096\u0003"+
+		"\u0004\u0002\u0000\u0096\u0097\u0003 \u0010\u0000\u0097\u0098\u0005\u0001"+
+		"\u0000\u0000\u0098\u0011\u0001\u0000\u0000\u0000\u0099\u009e\u0003\u0014"+
+		"\n\u0000\u009a\u009b\u0005\u0001\u0000\u0000\u009b\u009d\u0003\u0014\n"+
+		"\u0000\u009c\u009a\u0001\u0000\u0000\u0000\u009d\u00a0\u0001\u0000\u0000"+
+		"\u0000\u009e\u009c\u0001\u0000\u0000\u0000\u009e\u009f\u0001\u0000\u0000"+
+		"\u0000\u009f\u0013\u0001\u0000\u0000\u0000\u00a0\u009e\u0001\u0000\u0000"+
+		"\u0000\u00a1\u00a2\u0003\u0016\u000b\u0000\u00a2\u00a3\u0005\u0003\u0000"+
+		"\u0000\u00a3\u00a4\u0003\u0018\f\u0000\u00a4\u0015\u0001\u0000\u0000\u0000"+
+		"\u00a5\u00aa\u0003P(\u0000\u00a6\u00a7\u00051\u0000\u0000\u00a7\u00a9"+
+		"\u0003P(\u0000\u00a8\u00a6\u0001\u0000\u0000\u0000\u00a9\u00ac\u0001\u0000"+
+		"\u0000\u0000\u00aa\u00a8\u0001\u0000\u0000\u0000\u00aa\u00ab\u0001\u0000"+
+		"\u0000\u0000\u00ab\u0017\u0001\u0000\u0000\u0000\u00ac\u00aa\u0001\u0000"+
+		"\u0000\u0000\u00ad\u00ae\u0007\u0000\u0000\u0000\u00ae\u0019\u0001\u0000"+
+		"\u0000\u0000\u00af\u00b0\u0003L&\u0000\u00b0\u00b1\u0005%\u0000\u0000"+
+		"\u00b1\u00b2\u0003\u001e\u000f\u0000\u00b2\u00b3\u0005&\u0000\u0000\u00b3"+
+		"\u001b\u0001\u0000\u0000\u0000\u00b4\u00b5\u0003L&\u0000\u00b5\u00b6\u0005"+
+		"%\u0000\u0000\u00b6\u00b7\u0003\u001e\u000f\u0000\u00b7\u00b8\u0005&\u0000"+
+		"\u0000\u00b8\u00b9\u0005\u0001\u0000\u0000\u00b9\u001d\u0001\u0000\u0000"+
+		"\u0000\u00ba\u00c4\u0001\u0000\u0000\u0000\u00bb\u00c0\u0003J%\u0000\u00bc"+
+		"\u00bd\u00051\u0000\u0000\u00bd\u00bf\u0003J%\u0000\u00be\u00bc\u0001"+
+		"\u0000\u0000\u0000\u00bf\u00c2\u0001\u0000\u0000\u0000\u00c0\u00be\u0001"+
+		"\u0000\u0000\u0000\u00c0\u00c1\u0001\u0000\u0000\u0000\u00c1\u00c4\u0001"+
+		"\u0000\u0000\u0000\u00c2\u00c0\u0001\u0000\u0000\u0000\u00c3\u00ba\u0001"+
+		"\u0000\u0000\u0000\u00c3\u00bb\u0001\u0000\u0000\u0000\u00c4\u001f\u0001"+
+		"\u0000\u0000\u0000\u00c5\u00cb\u0001\u0000\u0000\u0000\u00c6\u00c7\u0005"+
+		"#\u0000\u0000\u00c7\u00c8\u0003\"\u0011\u0000\u00c8\u00c9\u0005$\u0000"+
+		"\u0000\u00c9\u00cb\u0001\u0000\u0000\u0000\u00ca\u00c5\u0001\u0000\u0000"+
+		"\u0000\u00ca\u00c6\u0001\u0000\u0000\u0000\u00cb!\u0001\u0000\u0000\u0000"+
+		"\u00cc\u00d1\u0001\u0000\u0000\u0000\u00cd\u00ce\u0003$\u0012\u0000\u00ce"+
+		"\u00cf\u0003\"\u0011\u0000\u00cf\u00d1\u0001\u0000\u0000\u0000\u00d0\u00cc"+
+		"\u0001\u0000\u0000\u0000\u00d0\u00cd\u0001\u0000\u0000\u0000\u00d1#\u0001"+
+		"\u0000\u0000\u0000\u00d2\u00dc\u0003&\u0013\u0000\u00d3\u00dc\u0003\u001c"+
+		"\u000e\u0000\u00d4\u00dc\u0003.\u0017\u0000\u00d5\u00dc\u0003@ \u0000"+
+		"\u00d6\u00dc\u0003F#\u0000\u00d7\u00dc\u0003(\u0014\u0000\u00d8\u00dc"+
+		"\u0003*\u0015\u0000\u00d9\u00dc\u0003<\u001e\u0000\u00da\u00dc\u0003>"+
+		"\u001f\u0000\u00db\u00d2\u0001\u0000\u0000\u0000\u00db\u00d3\u0001\u0000"+
+		"\u0000\u0000\u00db\u00d4\u0001\u0000\u0000\u0000\u00db\u00d5\u0001\u0000"+
+		"\u0000\u0000\u00db\u00d6\u0001\u0000\u0000\u0000\u00db\u00d7\u0001\u0000"+
+		"\u0000\u0000\u00db\u00d8\u0001\u0000\u0000\u0000\u00db\u00d9\u0001\u0000"+
+		"\u0000\u0000\u00db\u00da\u0001\u0000\u0000\u0000\u00dc%\u0001\u0000\u0000"+
+		"\u0000\u00dd\u00de\u00052\u0000\u0000\u00de\u00df\u0005\u0004\u0000\u0000"+
+		"\u00df\u00e0\u0003\u001a\r\u0000\u00e0\u00e1\u0005\u0001\u0000\u0000\u00e1"+
+		"\u00e8\u0001\u0000\u0000\u0000\u00e2\u00e3\u00052\u0000\u0000\u00e3\u00e4"+
+		"\u0005\u0004\u0000\u0000\u00e4\u00e5\u0003J%\u0000\u00e5\u00e6\u0005\u0001"+
+		"\u0000\u0000\u00e6\u00e8\u0001\u0000\u0000\u0000\u00e7\u00dd\u0001\u0000"+
+		"\u0000\u0000\u00e7\u00e2\u0001\u0000\u0000\u0000\u00e8\'\u0001\u0000\u0000"+
+		"\u0000\u00e9\u00ea\u0005\u0005\u0000\u0000\u00ea\u00eb\u0005%\u0000\u0000"+
+		"\u00eb\u00ec\u00052\u0000\u0000\u00ec\u00ed\u0005&\u0000\u0000\u00ed\u00ee"+
+		"\u0005\u0001\u0000\u0000\u00ee)\u0001\u0000\u0000\u0000\u00ef\u00f0\u0005"+
+		"\u0006\u0000\u0000\u00f0\u00f5\u0005%\u0000\u0000\u00f1\u00f3\u0003,\u0016"+
+		"\u0000\u00f2\u00f4\u00051\u0000\u0000\u00f3\u00f2\u0001\u0000\u0000\u0000"+
+		"\u00f3\u00f4\u0001\u0000\u0000\u0000\u00f4\u00f6\u0001\u0000\u0000\u0000"+
+		"\u00f5\u00f1\u0001\u0000\u0000\u0000\u00f6\u00f7\u0001\u0000\u0000\u0000"+
+		"\u00f7\u00f5\u0001\u0000\u0000\u0000\u00f7\u00f8\u0001\u0000\u0000\u0000"+
+		"\u00f8\u00f9\u0001\u0000\u0000\u0000\u00f9\u00fa\u0005&\u0000\u0000\u00fa"+
+		"\u00fb\u0005\u0001\u0000\u0000\u00fb+\u0001\u0000\u0000\u0000\u00fc\u00ff"+
+		"\u0003J%\u0000\u00fd\u00ff\u00053\u0000\u0000\u00fe\u00fc\u0001\u0000"+
+		"\u0000\u0000\u00fe\u00fd\u0001\u0000\u0000\u0000\u00ff-\u0001\u0000\u0000"+
+		"\u0000\u0100\u0103\u00030\u0018\u0000\u0101\u0103\u00032\u0019\u0000\u0102"+
+		"\u0100\u0001\u0000\u0000\u0000\u0102\u0101\u0001\u0000\u0000\u0000\u0103"+
+		"/\u0001\u0000\u0000\u0000\u0104\u0106\u0005\u0019\u0000\u0000\u0105\u0107"+
+		"\u0005%\u0000\u0000\u0106\u0105\u0001\u0000\u0000\u0000\u0106\u0107\u0001"+
+		"\u0000\u0000\u0000\u0107\u0108\u0001\u0000\u0000\u0000\u0108\u0109\u0003"+
+		"J%\u0000\u0109\u010a\u0005&\u0000\u0000\u010a\u010b\u0005\u001a\u0000"+
+		"\u0000\u010b\u010c\u00036\u001b\u0000\u010c1\u0001\u0000\u0000\u0000\u010d"+
+		"\u010e\u0005\u0018\u0000\u0000\u010e\u010f\u00034\u001a\u0000\u010f\u0110"+
+		"\u0005\u001b\u0000\u0000\u0110\u0111\u0003N\'\u0000\u0111\u0113\u0005"+
+		"\u001a\u0000\u0000\u0112\u0114\u00036\u001b\u0000\u0113\u0112\u0001\u0000"+
+		"\u0000\u0000\u0113\u0114\u0001\u0000\u0000\u0000\u01143\u0001\u0000\u0000"+
+		"\u0000\u0115\u0116\u00052\u0000\u0000\u0116\u0117\u0005\u0004\u0000\u0000"+
+		"\u0117\u0118\u0003J%\u0000\u01185\u0001\u0000\u0000\u0000\u0119\u011a"+
+		"\u0005#\u0000\u0000\u011a\u011b\u00038\u001c\u0000\u011b\u011c\u0005$"+
+		"\u0000\u0000\u011c\u011d\u0005\u0001\u0000\u0000\u011d7\u0001\u0000\u0000"+
+		"\u0000\u011e\u0123\u0001\u0000\u0000\u0000\u011f\u0120\u0003:\u001d\u0000"+
+		"\u0120\u0121\u00038\u001c\u0000\u0121\u0123\u0001\u0000\u0000\u0000\u0122"+
+		"\u011e\u0001\u0000\u0000\u0000\u0122\u011f\u0001\u0000\u0000\u0000\u0123"+
+		"9\u0001\u0000\u0000\u0000\u0124\u0129\u0003\b\u0004\u0000\u0125\u0129"+
+		"\u0003$\u0012\u0000\u0126\u0129\u0003<\u001e\u0000\u0127\u0129\u0003>"+
+		"\u001f\u0000\u0128\u0124\u0001\u0000\u0000\u0000\u0128\u0125\u0001\u0000"+
+		"\u0000\u0000\u0128\u0126\u0001\u0000\u0000\u0000\u0128\u0127\u0001\u0000"+
+		"\u0000\u0000\u0129;\u0001\u0000\u0000\u0000\u012a\u012b\u0005\u001c\u0000"+
+		"\u0000\u012b\u012c\u0005\u0001\u0000\u0000\u012c=\u0001\u0000\u0000\u0000"+
+		"\u012d\u012e\u0005\u001d\u0000\u0000\u012e\u012f\u0005\u0001\u0000\u0000"+
+		"\u012f?\u0001\u0000\u0000\u0000\u0130\u0131\u0005\u001e\u0000\u0000\u0131"+
+		"\u0137\u0003B!\u0000\u0132\u0133\u0005 \u0000\u0000\u0133\u0134\u0005"+
+		"\u001e\u0000\u0000\u0134\u0136\u0003B!\u0000\u0135\u0132\u0001\u0000\u0000"+
+		"\u0000\u0136\u0139\u0001\u0000\u0000\u0000\u0137\u0135\u0001\u0000\u0000"+
+		"\u0000\u0137\u0138\u0001\u0000\u0000\u0000\u0138\u013c\u0001\u0000\u0000"+
+		"\u0000\u0139\u0137\u0001\u0000\u0000\u0000\u013a\u013b\u0005 \u0000\u0000"+
+		"\u013b\u013d\u0003D\"\u0000\u013c\u013a\u0001\u0000\u0000\u0000\u013c"+
+		"\u013d\u0001\u0000\u0000\u0000\u013dA\u0001\u0000\u0000\u0000\u013e\u0140"+
+		"\u0005%\u0000\u0000\u013f\u013e\u0001\u0000\u0000\u0000\u013f\u0140\u0001"+
+		"\u0000\u0000\u0000\u0140\u0141\u0001\u0000\u0000\u0000\u0141\u0143\u0003"+
+		"J%\u0000\u0142\u0144\u0005&\u0000\u0000\u0143\u0142\u0001\u0000\u0000"+
+		"\u0000\u0143\u0144\u0001\u0000\u0000\u0000\u0144\u0145\u0001\u0000\u0000"+
+		"\u0000\u0145\u0146\u0005\u001f\u0000\u0000\u0146\u0147\u0003D\"\u0000"+
+		"\u0147C\u0001\u0000\u0000\u0000\u0148\u0149\u0003 \u0010\u0000\u0149\u014a"+
+		"\u0005\u0001\u0000\u0000\u014a\u014d\u0001\u0000\u0000\u0000\u014b\u014d"+
+		"\u0003$\u0012\u0000\u014c\u0148\u0001\u0000\u0000\u0000\u014c\u014b\u0001"+
+		"\u0000\u0000\u0000\u014dE\u0001\u0000\u0000\u0000\u014e\u0150\u0005!\u0000"+
+		"\u0000\u014f\u0151\u0005%\u0000\u0000\u0150\u014f\u0001\u0000\u0000\u0000"+
+		"\u0150\u0151\u0001\u0000\u0000\u0000\u0151\u0152\u0001\u0000\u0000\u0000"+
+		"\u0152\u0154\u0003J%\u0000\u0153\u0155\u0005&\u0000\u0000\u0154\u0153"+
+		"\u0001\u0000\u0000\u0000\u0154\u0155\u0001\u0000\u0000\u0000\u0155\u0156"+
+		"\u0001\u0000\u0000\u0000\u0156\u0158\u0005\"\u0000\u0000\u0157\u0159\u0003"+
+		"H$\u0000\u0158\u0157\u0001\u0000\u0000\u0000\u0159\u015a\u0001\u0000\u0000"+
+		"\u0000\u015a\u0158\u0001\u0000\u0000\u0000\u015a\u015b\u0001\u0000\u0000"+
+		"\u0000\u015b\u015c\u0001\u0000\u0000\u0000\u015c\u015d\u0005$\u0000\u0000"+
+		"\u015d\u015e\u0005\u0001\u0000\u0000\u015eG\u0001\u0000\u0000\u0000\u015f"+
+		"\u0160\u0003J%\u0000\u0160\u0161\u0005\u0003\u0000\u0000\u0161\u0162\u0003"+
+		"$\u0012\u0000\u0162I\u0001\u0000\u0000\u0000\u0163\u0164\u0006%\uffff"+
+		"\uffff\u0000\u0164\u0165\u0007\u0001\u0000\u0000\u0165\u0166\u0005%\u0000"+
+		"\u0000\u0166\u0167\u0003J%\u0000\u0167\u0168\u0005&\u0000\u0000\u0168"+
+		"\u0170\u0001\u0000\u0000\u0000\u0169\u016a\u0005*\u0000\u0000\u016a\u0170"+
+		"\u0003J%\n\u016b\u016c\u0005\u0010\u0000\u0000\u016c\u0170\u0003J%\t\u016d"+
+		"\u0170\u0003\u001a\r\u0000\u016e\u0170\u0003N\'\u0000\u016f\u0163\u0001"+
+		"\u0000\u0000\u0000\u016f\u0169\u0001\u0000\u0000\u0000\u016f\u016b\u0001"+
+		"\u0000\u0000\u0000\u016f\u016d\u0001\u0000\u0000\u0000\u016f\u016e\u0001"+
+		"\u0000\u0000\u0000\u0170\u0185\u0001\u0000\u0000\u0000\u0171\u0172\n\b"+
+		"\u0000\u0000\u0172\u0173\u0007\u0002\u0000\u0000\u0173\u0184\u0003J%\t"+
+		"\u0174\u0175\n\u0007\u0000\u0000\u0175\u0176\u0007\u0003\u0000\u0000\u0176"+
+		"\u0184\u0003J%\b\u0177\u0178\n\u0006\u0000\u0000\u0178\u0179\u0007\u0004"+
+		"\u0000\u0000\u0179\u0184\u0003J%\u0007\u017a\u017b\n\u0005\u0000\u0000"+
+		"\u017b\u017c\u0007\u0005\u0000\u0000\u017c\u0184\u0003J%\u0006\u017d\u017e"+
+		"\n\u0004\u0000\u0000\u017e\u017f\u0005\u000e\u0000\u0000\u017f\u0184\u0003"+
+		"J%\u0005\u0180\u0181\n\u0003\u0000\u0000\u0181\u0182\u0005\u000f\u0000"+
+		"\u0000\u0182\u0184\u0003J%\u0004\u0183\u0171\u0001\u0000\u0000\u0000\u0183"+
+		"\u0174\u0001\u0000\u0000\u0000\u0183\u0177\u0001\u0000\u0000\u0000\u0183"+
+		"\u017a\u0001\u0000\u0000\u0000\u0183\u017d\u0001\u0000\u0000\u0000\u0183"+
+		"\u0180\u0001\u0000\u0000\u0000\u0184\u0187\u0001\u0000\u0000\u0000\u0185"+
+		"\u0183\u0001\u0000\u0000\u0000\u0185\u0186\u0001\u0000\u0000\u0000\u0186"+
+		"K\u0001\u0000\u0000\u0000\u0187\u0185\u0001\u0000\u0000\u0000\u0188\u0189"+
+		"\u00052\u0000\u0000\u0189M\u0001\u0000\u0000\u0000\u018a\u018b\u0005%"+
+		"\u0000\u0000\u018b\u018c\u0003J%\u0000\u018c\u018d\u0005&\u0000\u0000"+
+		"\u018d\u0192\u0001\u0000\u0000\u0000\u018e\u0192\u00052\u0000\u0000\u018f"+
+		"\u0192\u0007\u0006\u0000\u0000\u0190\u0192\u00054\u0000\u0000\u0191\u018a"+
+		"\u0001\u0000\u0000\u0000\u0191\u018e\u0001\u0000\u0000\u0000\u0191\u018f"+
+		"\u0001\u0000\u0000\u0000\u0191\u0190\u0001\u0000\u0000\u0000\u0192O\u0001"+
+		"\u0000\u0000\u0000\u0193\u0194\u00052\u0000\u0000\u0194Q\u0001\u0000\u0000"+
+		"\u0000#`fsy}\u0083\u0091\u009e\u00aa\u00c0\u00c3\u00ca\u00d0\u00db\u00e7"+
+		"\u00f3\u00f7\u00fe\u0102\u0106\u0113\u0122\u0128\u0137\u013c\u013f\u0143"+
+		"\u014c\u0150\u0154\u015a\u016f\u0183\u0185\u0191";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

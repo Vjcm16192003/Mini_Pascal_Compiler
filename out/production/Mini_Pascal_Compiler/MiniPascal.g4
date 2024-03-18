@@ -1,459 +1,493 @@
 grammar MiniPascal;
 
-program
-    : PROGRAM identifier SEMI block*
+@header{
+     import java.util.HashMap;
+     import java.lang.Math;
+     import java.util.Scanner;
+     }
+
+@members {
+    Scanner io = new Scanner(System.in);
+}
+
+// Generate: antlr4 Calculator.g4
+// Compile: javac Calculator*.java
+// Run: grun Calculator exp -tree test/input1.txt
+
+start:
+    program EOF;
+
+program:
+    PROGRAM identifier ';' varBlock functionDecs block '.';
+
+varBlock:
+
+    | VAR varDecs
     ;
 
-block
-    : (variableDeclarationPart)? procedureAndFunctionDeclarationPart? compoundStatement
+
+varDecs:
+    | varDec varDecs
     ;
 
-
-variableDeclarationPart
-    : VAR (variableDeclaration SEMI)+
+varDec:
+    ID ':' type=(BOOLEAN | REAL) ':=' expr ';'                    #initDec
+    | ID ':' type=(BOOLEAN | REAL) ';'                           #normDec
     ;
 
-variableDeclaration
-    : identifierList COLON typeIdentifier
+//function or procedure declarations
+functionDecs:
+    //nothing
+    | funcOrProcDec functionDecs
     ;
 
-procedureAndFunctionDeclarationPart
-    : (procedureDeclaration | functionDeclaration SEMI)+
+//function declaration
+funcOrProcDec:
+    funcDec
+    | procDec
     ;
 
-procedureDeclaration
-    : PROCEDURE identifier SEMI block
+funcDec:
+    FUNCTION ID LPAREN (formalParameterList)? RPAREN ':' type=(REAL | BOOLEAN) ';' varBlock block ';'
     ;
 
-
-
-resultType
-    : typeIdentifier
+procDec:
+    PROCEDURE ID LPAREN (formalParameterList)? RPAREN ';' varBlock block ';'
     ;
 
-functionDeclaration
-    : FUNCTION identifier (LPAREN formalParameterList? RPAREN)? COLON resultType
+formalParameterList:
+    paramGroup (';' paramGroup)*
     ;
 
-formalParameterList
-    : (formalParameterSection (SEMI formalParameterSection)*)?
+paramGroup:
+    variableList ':' variableType
     ;
 
-formalParameterSection
-    : (VAR)? identifierList COLON typeIdentifier
+variableList:
+    identifier (',' identifier)*
     ;
 
-typeIdentifier
-    : INTEGER
-    | CHAR
-    | STRING
+variableType:
+    REAL
     | BOOLEAN
-    | arrayType
     ;
 
-arrayType
-    : ARRAY LBRACK constant DOTDOT constant RBRACK OF typeIdentifier
-    | ARRAY LBRACK constant DOTDOT constant COMMA constant DOTDOT constant RBRACK OF typeIdentifier
-    ;
-
-constant
-    : unsignedNumber
-    | sign unsignedNumber
-    | identifier
-    | sign identifier
-    | string
-    | constantChr
-    ;
-
-sign
-    : PLUS
-    | MINUS
-    ;
-constantChr
-    : CHR LPAREN unsignedInteger RPAREN
-    ;
-unsignedNumber
-    : unsignedInteger
-    | unsignedReal
-    ;
-
-unsignedInteger
-    : NUM_INT
-    ;
-unsignedReal
-    : NUM_REAL
-    ;
-string
-    : STRING_LITERAL
-    ;
-
-compoundStatement
-    : BEGIN statements blockEnd
-    ;
-
-blockEnd:
-END
+functionCall:
+    func_identifier LPAREN parameters RPAREN
 ;
 
-statements
-    : statement (SEMI statement)* SEMI
+procedureCall:
+    func_identifier LPAREN parameters RPAREN ';'
+;
+
+parameters:
+    //nothing
+    | expr (',' expr)*
     ;
 
-statement
-    : assignmentStatement
-    | procedureStatement
-    | compoundStatement
+
+
+block:
+    //nothing
+    | BEGIN statements END
+    ;
+
+statements:
+    // nothing
+    | statement statements
+    ;
+
+statement:
+    varAssign
+    | procedureCall
+    | loopType
     | ifStatement
-    | whileStatement
-    | forStatement
-    | repeatStatement
-    | writeStatement
-    | writelnStatement
-    | readStatement
+    | caseStatement
+    | readLn
+    | writeLn
+    | eval_break
+    | eval_continue
     ;
 
-writelnStatement
-    :WRITELN LPAREN conststr (COMMA variable)? RPAREN
-    ;
+
 
-assignmentStatement
-    : variable ASSIGN expression
+varAssign:
+    ID ':=' functionCall ';'                            #funcAssignment
+    | ID ':=' expr ';'                                  #exprAssignment
     ;
 
-procedureStatement
-    : identifier (LPAREN actualParameterList RPAREN)?
+
+readLn:
+    'readln' LPAREN ID RPAREN ';'
     ;
 
-actualParameterList
-    : actualParameter (COMMA actualParameter)*
+writeLn:
+    'writeln' LPAREN ( line DELIM?)+ RPAREN ';'
     ;
 
-actualParameter
-    : expression
+//should return string
+line:
+    expr                                #exprLine
+    | STRING_LITERAL                    #strLine
+
     ;
+
 
-ifStatement
-    : IF expression THEN statement (ELSE statement)?
+
+
+loopType:
+    whileLoop
+    | forLoop
     ;
 
-whileStatement
-    : WHILE expression DO statement
+whileLoop:
+    WHILE LPAREN? expr RPAREN DO loopBlock
     ;
 
-forStatement
-    : FOR identifier ASSIGN expression (TO | DOWNTO) expression DO statement
+forLoop:
+    FOR varForAssign TO element DO loopBlock?
     ;
 
-repeatStatement
-    : REPEAT statements UNTIL expression
+varForAssign:
+    ID ':=' expr
     ;
 
-writeStatement
-    : WRITE LPAREN conststr (COMMA variable)? RPAREN
+loopBlock:
+    BEGIN loopStatements END ';'
     ;
 
-readStatement
-    : READ LPAREN variable RPAREN
+loopStatements:
+    //nothing
+    | loopStatement loopStatements
     ;
 
-expression
-    : simpleExpression (relationaloperator simpleExpression)?
+loopStatement:
+    varDec
+    | statement
+    | eval_break
+    | eval_continue
     ;
 
-    relationaloperator
-        : EQUAL
-        | NOT_EQUAL
-        | LT
-        | LE
-        | GE
-        | GT
-        | IN
-        ;
+eval_break:
+    BREAK ';'
+    ;
 
-simpleExpression
-    : term (additiveoperator term)*
+eval_continue:
+    CONTINUE ';'
     ;
 
-    additiveoperator
-        : PLUS
-        | MINUS
-        | OR
-        ;
 
-term
-    : factor (multiplicativeoperator factor)*
-    ;
 
-    multiplicativeoperator
-        : STAR
-        | SLASH
-        | DIV
-        | MOD
-        | AND
-        ;
 
-factor
-    : variable
-    | number
-    | conststr
-    | LPAREN expression RPAREN
-    | NOT factor
-    ;
 
-variable
-    : identifier
-    | identifier LBRACK expression RBRACK
-    | identifier LBRACK expression COMMA expression RBRACK
+ifStatement:
+    IF condBlock (ELSE IF condBlock)* (ELSE stateBlock)?
     ;
 
-identifierList
-    : identifier (COMMA identifier)*
+condBlock:
+    LPAREN? expr RPAREN? THEN stateBlock
     ;
 
-conststr
-    : STRING_LITERAL
+stateBlock:
+    block ';'
+    | statement
     ;
 
-identifier
-    : IDENT
-    ;
-number
-    : NUM_INT
+caseStatement:
+    CASE LPAREN? expr RPAREN? OF (caseBlock)+ END ';'
     ;
 
-CONST
-    : 'Const'
+caseBlock:
+    expr ':' statement
     ;
 
-VAR
-    : 'var'
+expr:
+    type=(SQRT | LN | EXP | SIN | COS) LPAREN expr RPAREN   #equationExpr
+    | SUBT expr                                             #unaryExpr
+    | NOT expr                                              #notExpr
+    | lEx=expr op=(MULT | DIV | MOD) rEx=expr               #multExpr
+    | lEx=expr op=(ADD | SUBT) rEx=expr                     #addExpr
+    | lEx=expr op=(LTE | GTE | LT | GT) rEx=expr            #compareExpr
+    | lEx=expr op=(EQ | NEQ) rEx=expr                       #equalityExpr
+    | lEx=expr AND rEx=expr                                 #andExpr
+    | lEx=expr OR rEx=expr                                  #orExpr
+    | functionCall                                          #functCallExpr
+    | element                                               #elementExpr
     ;
 
-INTEGER
-    : 'Integer'
+func_identifier:
+    ID
     ;
 
-CHAR
-    : 'Char'
+element:
+    LPAREN expr RPAREN                              #parElement
+    | ID                                            #idElement
+    | (TRUE | FALSE)                                #boolElement
+    | NUM                                           #realElement
     ;
 
-CHR
-    : 'CHR'
-    ;
+//Might?? cause some issues. Idk though
 
-STRING
-    : 'String'
-    ;
 
-BOOLEAN
-    : 'Boolean'
+identifier:
+    ID
     ;
 
-ARRAY
-    : 'Array'
-    ;
 
-IN
-    : 'In'
-    ;
+fragment A
+   : ('a' | 'A')
+   ;
 
-OF
-    : 'of'
-    ;
+fragment B
+   : ('b' | 'B')
+   ;
 
-FUNCTION
-    : 'Function'
-    ;
+fragment C
+   : ('c' | 'C')
+   ;
 
-PROCEDURE
-    : 'Procedure'
-    ;
+fragment D
+   : ('d' | 'D')
+   ;
 
-PROGRAM
-    : 'program'
-    ;
+fragment E
+   : ('e' | 'E')
+   ;
 
-BEGIN
-    : 'begin'
-    ;
+fragment F
+   : ('f' | 'F')
+   ;
 
-END
-    : 'end'
-    ;
+fragment G
+   : ('g' | 'G')
+   ;
 
-IF
-    : 'If'
-    ;
+fragment H
+   : ('h' | 'H')
+   ;
 
-THEN
-    : 'Then'
-    ;
+fragment I
+   : ('i' | 'I')
+   ;
 
-ELSE
-    : 'Else'
-    ;
+fragment J
+   : ('j' | 'J')
+   ;
 
-WHILE
-    : 'While'
-    ;
+fragment K
+   : ('k' | 'K')
+   ;
 
-DO
-    : 'Do'
-    ;
+fragment L
+   : ('l' | 'L')
+   ;
 
-FOR
-    : 'For'
-    ;
+fragment M
+   : ('m' | 'M')
+   ;
 
-TO
-    : 'To'
-    ;
+fragment N
+   : ('n' | 'N')
+   ;
 
-DOWNTO
-    : 'Downto'
-    ;
+fragment O
+   : ('o' | 'O')
+   ;
 
-REPEAT
-    : 'Repeat'
-    ;
+fragment P
+   : ('p' | 'P')
+   ;
 
-UNTIL
-    : 'Until'
-    ;
+fragment Q
+   : ('q' | 'Q')
+   ;
 
-WRITE
-    : 'write'
-    ;
+fragment R
+   : ('r' | 'R')
+   ;
 
-WRITELN
-    : 'writeln'
-    ;
+fragment S
+   : ('s' | 'S')
+   ;
 
-READ
-    : 'read'
+fragment T
+   : ('t' | 'T')
+   ;
+
+fragment U
+   : ('u' | 'U')
+   ;
+
+fragment V
+   : ('v' | 'V')
+   ;
+
+fragment W
+   : ('w' | 'W')
+   ;
+
+fragment X
+   : ('x' | 'X')
+   ;
+
+fragment Y
+   : ('y' | 'Y')
+   ;
+
+fragment Z
+   : ('z' | 'Z')
+   ;
+
+
+
+PROGRAM:
+    P R O G R A M
     ;
 
-NOT
-    : 'Not'
+VAR:
+    V A R
     ;
 
-AND
-    : 'And'
+FUNCTION:
+    F U N C T I O N
     ;
 
-OR
-    : 'Or'
+PROCEDURE:
+    P R O C E D U R E
     ;
 
-PLUS
-    : '+'
+TRUE:
+    T R U E
     ;
 
-MINUS
-    : '-'
+FALSE:
+    F A L S E
     ;
 
-STAR
-    : '*'
+BOOLEAN:
+    B O O L E A N
     ;
 
-SLASH
-    : '/'
+AND:
+    A N D
     ;
 
-DIV
-    : 'div'
+OR:
+    O R
     ;
 
-MOD
-    : 'mod'
+NOT:
+    N O T
     ;
 
-ASSIGN
-    : ':='
+MOD:
+    M O D
     ;
 
-EQUAL
-    : '='
+SQRT:           //square root function
+    S Q R T
     ;
 
-NOT_EQUAL
-    : '<>'
+LN:             //natural log function
+    L N
     ;
 
-LT
-    : '<'
+EXP:            //exponent function
+    E X P
     ;
 
-LE
-    : '<='
+SIN:            //sine funciton
+    S I N
     ;
 
-GT
-    : '>'
+COS:            //cosine function
+    C O S
     ;
 
-GE
-    : '>='
+REAL:
+    I N T E G E R
     ;
 
-LPAREN
-    : '('
+FOR:
+    F O R
     ;
 
-RPAREN
-    : ')'
+WHILE:
+    W H I L E
     ;
 
-LBRACK
-    : '['
+DO:
+    D O
     ;
 
-RBRACK
-    : ']'
+TO:
+    T O
     ;
 
-COMMA
-    : ','
+BREAK:
+    B R E A K
     ;
 
-SEMI
-    : ';'
+CONTINUE:
+    C O N T I N U E
     ;
 
-COLON
-    : ':'
+IF:
+    I F
     ;
 
-DOT
-    : '.'
+THEN:
+    T H E N
     ;
 
-DOTDOT
-    : '..'
+ELSE:
+    E L S E
     ;
 
-NUM_INT
-    : ('0' .. '9')+
+CASE:
+    C A S E
     ;
 
-STRING_LITERAL
-    : '\'' (~[\r\n])* '\''
+OF:
+    O F
     ;
 
-IDENT
-    : ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')*
+BEGIN:
+    B E G I N
     ;
 
+END:
+    E N D
+    ;
 
-NUM_REAL
-    : ('0' .. '9')+ (('.' ('0' .. '9')+ (EXPONENT)?)? | EXPONENT)
+LPAREN:
+    '('
     ;
 
-WS
-    : [ \t\r\n] -> skip
+RPAREN:
+    ')'
     ;
+
+MULT: '*';
+DIV: '/';
+ADD: '+';
+SUBT: '-';
+EQ: '=';
+GT: '>';
+LT: '<';
+GTE: '>=';
+LTE: '<=';
+NEQ: '<>';
+DELIM: ',';
+
+ID: ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')* ;
+STRING_LITERAL: '\'' ('\'\'' | ~ ('\''))* '\'';
+NUM: ('0'..'9')+ | ('0'..'9')+'.'('0'..'9')+;
+WS : [ \t\r\n]+ -> skip ;
+COMMENT_1
+   : '{*' .*? '*}' -> skip
+   ;
+COMMENT_2
+   : '{' .*? '}' -> skip
+   ;
 
-COMMENT: '{' ~[\r\n]*'}'->skip;
-fragment EXPONENT
-    : ('E') ('+' | '-')? ('0'..'9')+;
