@@ -260,6 +260,16 @@ public interface MiniPascalListener extends ParseTreeListener {
 	 */
 	void exitWriteLn(MiniPascalParser.WriteLnContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MiniPascalParser#write}.
+	 * @param ctx the parse tree
+	 */
+	void enterWrite(MiniPascalParser.WriteContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiniPascalParser#write}.
+	 * @param ctx the parse tree
+	 */
+	void exitWrite(MiniPascalParser.WriteContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code exprLine}
 	 * labeled alternative in {@link MiniPascalParser#line}.
 	 * @param ctx the parse tree
@@ -471,18 +481,6 @@ public interface MiniPascalListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAddExpr(MiniPascalParser.AddExprContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code equationExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterEquationExpr(MiniPascalParser.EquationExprContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code equationExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitEquationExpr(MiniPascalParser.EquationExprContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code orExpr}
 	 * labeled alternative in {@link MiniPascalParser#expr}.

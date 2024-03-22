@@ -309,6 +309,18 @@ public class MiniPascalBaseListener implements MiniPascalListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWrite(MiniPascalParser.WriteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWrite(MiniPascalParser.WriteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprLine(MiniPascalParser.ExprLineContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -544,18 +556,6 @@ public class MiniPascalBaseListener implements MiniPascalListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAddExpr(MiniPascalParser.AddExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEquationExpr(MiniPascalParser.EquationExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEquationExpr(MiniPascalParser.EquationExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

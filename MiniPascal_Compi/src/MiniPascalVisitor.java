@@ -163,6 +163,12 @@ public interface MiniPascalVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWriteLn(MiniPascalParser.WriteLnContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MiniPascalParser#write}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWrite(MiniPascalParser.WriteContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprLine}
 	 * labeled alternative in {@link MiniPascalParser#line}.
 	 * @param ctx the parse tree
@@ -288,13 +294,6 @@ public interface MiniPascalVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAddExpr(MiniPascalParser.AddExprContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code equationExpr}
-	 * labeled alternative in {@link MiniPascalParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEquationExpr(MiniPascalParser.EquationExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code orExpr}
 	 * labeled alternative in {@link MiniPascalParser#expr}.

@@ -18,20 +18,18 @@ program:
     PROGRAM identifier ';' varBlock functionDecs block '.';
 
 varBlock:
-
     | VAR varDecs
     ;
 
-
 varDecs:
+    //nothing
     | varDec varDecs
     ;
 
 varDec:
-    ID ':' type=(BOOLEAN | REAL) ':=' expr ';'                    #initDec
-    | ID ':' type=(BOOLEAN | REAL) ';'                           #normDec
+    ID ':' type=(BOOLEAN | INTEGER | STRING | CHAR) ':=' expr ';'                    #initDec
+    | ID ':' type=(BOOLEAN | INTEGER | STRING | CHAR) ';'                           #normDec
     ;
-
 
 functionDecs:
     | funcOrProcDec functionDecs
@@ -43,7 +41,7 @@ funcOrProcDec:
     ;
 
 funcDec:
-    FUNCTION ID LPAREN (formalParameterList)? RPAREN ':' type=(REAL | BOOLEAN) ';' varBlock block ';'
+    FUNCTION ID LPAREN (formalParameterList)? RPAREN ':' type=(INTEGER | BOOLEAN | STRING | CHAR) ';' varBlock block ';'
     ;
 
 procDec:
@@ -63,8 +61,10 @@ variableList:
     ;
 
 variableType:
-    REAL
+    INTEGER
     | BOOLEAN
+    | STRING
+    | CHAR
     ;
 
 functionCall:
@@ -97,6 +97,7 @@ statement:
     | caseStatement
     | readLn
     | writeLn
+    | write
     | eval_break
     | eval_continue
     ;
@@ -117,6 +118,9 @@ writeLn:
     'writeln' LPAREN ( line DELIM?)+ RPAREN ';'
     ;
 
+write:
+    'write' LPAREN (line DELIM?)+ RPAREN ';'
+    ;
 line:
     expr                                #exprLine
     | STRING_LITERAL                    #strLine
@@ -136,7 +140,7 @@ whileLoop:
     ;
 
 forLoop:
-    FOR varForAssign TO element DO loopBlock?
+    FOR varForAssign (TO|DOWNTO) element DO loopBlock?
     ;
 
 varForAssign:
@@ -148,6 +152,7 @@ loopBlock:
     ;
 
 loopStatements:
+    //nothing
     | loopStatement loopStatements
     ;
 
@@ -192,8 +197,7 @@ caseBlock:
     ;
 
 expr:
-    type=(SQRT | LN | EXP | SIN | COS) LPAREN expr RPAREN   #equationExpr
-    | SUBT expr                                             #unaryExpr
+    SUBT expr                                             #unaryExpr
     | NOT expr                                              #notExpr
     | lEx=expr op=(MULT | DIV | MOD) rEx=expr               #multExpr
     | lEx=expr op=(ADD | SUBT) rEx=expr                     #addExpr
@@ -215,6 +219,8 @@ element:
     | (TRUE | FALSE)                                #boolElement
     | NUM                                           #realElement
     ;
+
+//Might?? cause some issues. Idk though
 
 
 identifier:
@@ -372,27 +378,15 @@ MOD:
     M O D
     ;
 
-SQRT:           //square root function
-    S Q R T
-    ;
+STRING:
+    S T R I N G
+;
 
-LN:             //natural log function
-    L N
-    ;
+CHAR:
+    C H A R
+;
 
-EXP:            //exponent function
-    E X P
-    ;
-
-SIN:            //sine funciton
-    S I N
-    ;
-
-COS:            //cosine function
-    C O S
-    ;
-
-REAL:
+INTEGER:
     I N T E G E R
     ;
 
@@ -411,6 +405,9 @@ DO:
 TO:
     T O
     ;
+DOWNTO:
+    D O W N T O
+;
 
 BREAK:
     B R E A K

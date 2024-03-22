@@ -2,32 +2,26 @@ import org.antlr.v4.gui.TreeViewer;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        if (args.length == 0) {
+            System.err.println("Uso: java Main <ruta_del_archivo>");
+            return;
+        }
 
-        String inputFile = null;
-        if ( args.length>0 ) inputFile = args[0];
-        InputStream is = System.in;
-        if ( inputFile!=null ) is = new FileInputStream(inputFile);
-        ANTLRInputStream input = new ANTLRInputStream(is);
+        String inputFile = args[0];
+        MiniPascalParser parser = getParser(inputFile);
+        ParseTree tree = parser.start(); // Asegúrate de que 'start' sea el nombre correcto del punto de entrada de tu gramática
 
-
-        MiniPascalLexer lexer = new MiniPascalLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        MiniPascalParser parser = new MiniPascalParser(tokens);
-        ParseTree tree = parser.start();
-
+        // Interpreta el árbol de análisis generado
         InterpretVisitor visitor = new InterpretVisitor();
         visitor.visit(tree);
-        String fileName = args[0];
-        parser = getParser(fileName);
-        ParseTree antlrAST = parser.program();
-        showParseTree(parser, antlrAST);
+
+        // Muestra el árbol de análisis
+        showParseTree(parser, tree);
     }
 
     private static void showParseTree(MiniPascalParser parser, ParseTree tree) {
@@ -35,18 +29,10 @@ public class Main {
         viewer.open();
     }
 
-    private static MiniPascalParser getParser(String fileName) {
-        MiniPascalParser parser;
-
-        try {
-            CharStream input = CharStreams.fromFileName(fileName);
-            MiniPascalLexer lexer = new MiniPascalLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            parser = new MiniPascalParser(tokens);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return parser;
+    private static MiniPascalParser getParser(String fileName) throws IOException {
+        CharStream input = CharStreams.fromFileName(fileName);
+        MiniPascalLexer lexer = new MiniPascalLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        return new MiniPascalParser(tokens);
     }
 }
