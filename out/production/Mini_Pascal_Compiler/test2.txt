@@ -1,0 +1,27 @@
+{Test recursivo}
+{Output: 'El factorial de 5 e : 120.0'}
+
+program TestRecursionFactorial;
+
+var
+result : Integer;
+a : Integer;
+
+function factorial(a : Integer) : Integer;
+
+begin
+
+    if(a = 1) then
+        result := 1;
+    else
+        result := a * factorial(a - 1);
+
+    factorial := result;
+end;
+
+begin
+
+    a := factorial(5);
+    writeln('The factorial of 5 is : ', a);
+
+end.

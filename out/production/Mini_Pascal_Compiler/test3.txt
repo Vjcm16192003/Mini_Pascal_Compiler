@@ -1,0 +1,39 @@
+program ReadLine;
+
+var
+
+e1 : Integer;
+e2 : Integer;
+e3 : Integer;
+e4 : Integer;
+
+
+begin
+
+writeln('Bienvenidos a la clase de fisica! Vamos a calcular algunas notas.');
+writeln('Cual fue tu nota en el examen 1?: ');
+readln(e1);
+writeln('Cual fue tu nota en el examen 2?: ');
+readln(e2);
+writeln('Cual fue tu nota en el examen 3?: ');
+readln(e3);
+writeln('');
+writeln('Vamos a multiplicar las notas por 10');
+
+e1 := e1 * 10;
+e2 := e2 * 10;
+e3 := e3 * 10;
+
+writeln('Examen 1: ', e1);
+writeln('');
+writeln('Examen 2: ', e2);
+writeln('');
+writeln('Examen 3: ', e3);
+writeln('');
+
+e4 := (e1 + e2 + e3)/3;
+
+writeln('Resultado: ',e4);
+
+
+end.
